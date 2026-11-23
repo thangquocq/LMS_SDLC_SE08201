@@ -33,11 +33,8 @@ Các file đã thêm để deploy:
 Mở PowerShell, chạy lệnh dưới, copy kết quả (dạng `base64:....`):
 
 ```powershell
-"base64:" + [Convert]::ToBase64String([System.Security.Cryptography.RandomNumberGenerator]::GetBytes(32))
+$b = New-Object byte[] 32; [Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($b); "base64:" + [Convert]::ToBase64String($b)
 ```
-
-> Nếu lệnh trên báo lỗi (PowerShell cũ), dùng lệnh này:
-> `$b = New-Object byte[] 32; [Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($b); "base64:" + [Convert]::ToBase64String($b)`
 
 ## Bước 4. Tạo web trên Render
 
