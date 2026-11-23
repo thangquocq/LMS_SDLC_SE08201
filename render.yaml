@@ -37,7 +37,7 @@ services:
       - key: DB_PASSWORD
         sync: false
       - key: MYSQL_ATTR_SSL_CA
-        value: /etc/ssl/certs/ca-certificates.crt
+        value: /var/www/html/docker/aiven-ca.pem
       - key: SESSION_DRIVER
         value: file
       - key: CACHE_STORE

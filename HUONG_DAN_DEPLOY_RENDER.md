@@ -78,7 +78,7 @@ Mỗi lần `git push` lên nhánh đã chọn, Render tự build và deploy l�
 |---|---|
 | Log báo `SQLSTATE[HY000] [2002]` / `Connection refused` | Sai `DB_HOST`/`DB_PORT`, hoặc service Aiven chưa Running |
 | Log báo `Access denied` | Sai `DB_USERNAME`/`DB_PASSWORD` |
-| Log báo lỗi SSL khi kết nối DB | Kiểm tra biến `MYSQL_ATTR_SSL_CA=/etc/ssl/certs/ca-certificates.crt` |
+| Log báo `SSL routines::certificate verify failed` | Tải `ca.pem` ở trang Overview của Aiven, thay file `LMS_SDLC_SE08201/docker/aiven-ca.pem`, kiểm tra biến `MYSQL_ATTR_SSL_CA=/var/www/html/docker/aiven-ca.pem` |
 | Trang báo `500 Server Error` | Tạm đặt `APP_DEBUG=true` trên Render để xem lỗi, sửa xong đặt lại `false` |
 | `No application encryption key` | Thiếu hoặc sai `APP_KEY` (phải có tiền tố `base64:`) |
 | Giao diện mất CSS, link chuyển về `http://` | Kiểm tra `APP_URL` bắt đầu bằng `https://` |
