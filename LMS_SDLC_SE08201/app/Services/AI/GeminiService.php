@@ -38,14 +38,17 @@ class GeminiService
             throw new \Exception('Chưa cấu hình API Key AI (GEMINI_API_KEY hoặc VILAO_API_KEY) trong .env');
         }
 
+        // Gemini quá tải + chuyển sang Vilao có thể mất hơn 120 giây (giới hạn mặc định của XAMPP)
+        @set_time_limit(240);
+
         // Chuẩn hóa danh sách dạng bài được yêu cầu (mặc định: trắc nghiệm nhiều lựa chọn)
-        $allowed = ['mcq', 'true_false', 'fill_blank', 'code_reading'];
+        $allowed = ['mcq', 'true_false', 'fill_blank']; // AI không sinh dạng Đọc code
         $types = array_values(array_intersect(array_map('strtolower', $types), $allowed));
         if (empty($types)) {
             $types = ['mcq'];
         }
         $typesList = implode(', ', $types);
-        $difficultyLine = $difficulty ? "Độ khó mong muốn (theo thang Bloom): {$difficulty}.\n" : '';
+        $difficultyLine = $this->buildDifficultyLine($difficulty, $count);
 
         $systemInstruction = "Bạn là một giáo sư đại học chuyên ngành khắt khe. Nhiệm vụ của bạn là tạo ra $count câu hỏi ôn tập dựa trên chủ đề được giao, phân bổ xen kẽ trong CÁC DẠNG BÀI sau: {$typesList}.
 BẮT BUỘC TUÂN THỦ CÁC QUY TẮC SAU:
@@ -93,20 +96,63 @@ BẮT BUỘC TUÂN THỦ CÁC QUY TẮC SAU:
                     ],
                 ];
 
-                $geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/{$this->geminiModel}:generateContent";
-                $response = Http::timeout(25)->withHeaders([
-                    'Content-Type' => 'application/json',
-                    'x-goog-api-key' => $this->apiKey,
-                ])->post($geminiUrl, $payload);
+                // Google hay quá tải tạm thời (503/429): thử lại model chính 1 lần,
+                // rồi lần lượt chuyển sang các model dự phòng trong GEMINI_FALLBACK_MODELS.
+                $fallbackModels = array_filter(array_map('trim', explode(',', (string) env(
+                    'GEMINI_FALLBACK_MODELS',
+                    'gemini-3.5-flash-lite,gemini-3.1-flash-lite,gemini-3.8-flash'
+                ))));
+                $models = array_values(array_unique(array_merge([$this->geminiModel], $fallbackModels)));
 
-                if ($response->successful()) {
-                    $textResult = (string) ($response->json('candidates.0.content.parts.0.text') ?? '');
-                    if ($textResult !== '') {
-                        return $this->parseAndNormalizeQuestions($textResult);
+                foreach ($models as $index => $model) {
+                    $attempts = $index === 0 ? 2 : 1;
+                    for ($try = 1; $try <= $attempts; $try++) {
+                        $geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent";
+                        try {
+                            $response = Http::timeout(30)->withHeaders([
+                                'Content-Type' => 'application/json',
+                                'x-goog-api-key' => $this->apiKey,
+                            ])->post($geminiUrl, $payload);
+                        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+                            // Hết thời gian chờ / mất kết nối -> chuyển sang model kế tiếp
+                            $lastError = "Gemini ({$model}) timeout";
+                            Log::warning("Gemini ({$model}) timeout: " . $e->getMessage());
+                            break;
+                        }
+
+                        if ($response->successful()) {
+                            // Model Gemini 3.x có thể chia câu trả lời thành nhiều "parts"
+                            // (kèm phần suy nghĩ thought=true) -> ghép mọi phần văn bản, bỏ phần suy nghĩ.
+                            $textResult = '';
+                            foreach ((array) $response->json('candidates.0.content.parts', []) as $part) {
+                                if (! empty($part['thought'])) {
+                                    continue;
+                                }
+                                $textResult .= (string) ($part['text'] ?? '');
+                            }
+                            $finishReason = (string) $response->json('candidates.0.finishReason', '');
+                            if ($finishReason !== '' && $finishReason !== 'STOP') {
+                                Log::warning("Gemini ({$model}) dừng với finishReason={$finishReason}.");
+                            }
+                            if ($textResult !== '') {
+                                return $this->parseAndNormalizeQuestions($textResult);
+                            }
+                            $lastError = "Gemini ({$model}) trả về nội dung rỗng";
+                            break;
+                        }
+
+                        $status = $response->status();
+                        $lastError = "Gemini ({$model}) HTTP {$status}";
+                        Log::warning("Gemini API non-200 ({$status}) với model {$model}, lần thử {$try}.");
+
+                        // Chỉ thử lại khi lỗi tạm thời; lỗi khác (404 model, 400...) chuyển model luôn
+                        if (! in_array($status, [429, 500, 503], true)) {
+                            break;
+                        }
+                        if ($try < $attempts) {
+                            usleep(1500000);
+                        }
                     }
-                } else {
-                    Log::warning('Gemini API non-200 (' . $response->status() . '), falling back to Vilao AI.');
-                    $lastError = 'Gemini HTTP ' . $response->status();
                 }
             } catch (\Throwable $e) {
                 Log::warning('Gemini Service warning, falling back to Vilao AI: ' . $e->getMessage());
@@ -117,7 +163,7 @@ BẮT BUỘC TUÂN THỦ CÁC QUY TẮC SAU:
         // 2. Dự phòng tự động sang Vilao AI (OpenAI-compatible API)
         if (! empty($this->vilaoApiKey)) {
             try {
-                $response = Http::timeout(35)->withHeaders([
+                $response = Http::timeout(90)->withHeaders([
                     'Authorization' => 'Bearer ' . $this->vilaoApiKey,
                     'Content-Type' => 'application/json',
                 ])->post($this->vilaoBaseUrl . '/chat/completions', [
@@ -150,6 +196,35 @@ BẮT BUỘC TUÂN THỦ CÁC QUY TẮC SAU:
     /**
      * Làm sạch chuỗi JSON trả về từ AI và chuẩn hóa các trường câu hỏi trắc nghiệm.
      */
+    /**
+     * Chuyển mức độ khó giảng viên chọn (Nhận biết / Thông hiểu / Vận dụng / Trộn)
+     * thành chỉ dẫn rõ ràng cho AI.
+     */
+    private function buildDifficultyLine(?string $difficulty, int $count): string
+    {
+        $levels = [
+            'nhan_biet' => 'NHẬN BIẾT: nhớ và nhận ra khái niệm, định nghĩa, cú pháp, sự kiện cơ bản.',
+            'thong_hieu' => 'THÔNG HIỂU: giải thích, so sánh, diễn giải ý nghĩa; hiểu vì sao và như thế nào.',
+            'van_dung' => 'VẬN DỤNG: áp dụng kiến thức vào tình huống, bài toán hoặc đoạn code cụ thể.',
+        ];
+
+        $key = strtolower(trim((string) $difficulty));
+
+        if (isset($levels[$key])) {
+            return "Độ khó: TẤT CẢ câu hỏi ở mức {$levels[$key]}\n";
+        }
+
+        // Mặc định / "mix": chia đều 3 mức
+        $base = intdiv($count, 3);
+        $rest = $count % 3;
+        $nb = $base + ($rest > 0 ? 1 : 0);
+        $th = $base + ($rest > 1 ? 1 : 0);
+        $vd = $base;
+
+        return "Độ khó: TRỘN đều 3 mức — khoảng {$nb} câu {$levels['nhan_biet']} "
+            . "Khoảng {$th} câu {$levels['thong_hieu']} Khoảng {$vd} câu {$levels['van_dung']}\n";
+    }
+
     private function parseAndNormalizeQuestions(string $rawText): array
     {
         $cleaned = preg_replace('/<thought>[\s\S]*?<\/thought>/i', '', $rawText);

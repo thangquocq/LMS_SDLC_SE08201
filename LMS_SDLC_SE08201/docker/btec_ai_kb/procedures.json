@@ -1,0 +1,316 @@
+[
+  {
+    "procedure_id": "PROC-01",
+    "title": "Đăng ký tư vấn tuyển sinh",
+    "owner_hint": "Website đăng ký / tuyển sinh.",
+    "suggested_steps": [
+      "Khai ngành, cơ sở, liên lạc",
+      "gửi biểu mẫu",
+      "kiểm tra phản hồi",
+      "đề nghị danh mục hồ sơ và mức thu riêng theo đợt."
+    ],
+    "source_refs": [
+      "S02",
+      "S04"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-02",
+    "title": "Hoàn tất nhập học",
+    "owner_hint": "Bộ phận tuyển sinh.",
+    "suggested_steps": [
+      "Nộp phiếu/giấy tờ chứng thực",
+      "nhận kết quả xét tuyển",
+      "xác minh tiếng Anh",
+      "nhận thông báo học phí",
+      "thanh toán chính thức",
+      "nhận FAP/lịch học."
+    ],
+    "source_refs": [
+      "S02",
+      "S03",
+      "S06"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-03",
+    "title": "Nộp học phí học kỳ",
+    "owner_hint": "FAP/email + Phòng Hành chính.",
+    "suggested_steps": [
+      "Đọc thông báo của kỳ",
+      "kiểm tra số công nợ",
+      "chuyển khoản đúng đơn vị nhận",
+      "lưu biên lai",
+      "đối chiếu số dư."
+    ],
+    "source_refs": [
+      "S01",
+      "S06"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-04",
+    "title": "Phản ánh chưa ghi nhận học phí",
+    "owner_hint": "Phòng Hành chính / DVSV.",
+    "suggested_steps": [
+      "Chụp biên lai, ghi thời gian chuyển, tên chủ tài khoản, MSSV, học kỳ, số tiền",
+      "gửi đầu mối chính thức."
+    ],
+    "source_refs": [
+      "S01",
+      "S08"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-05",
+    "title": "Xin khôi phục điểm danh",
+    "owner_hint": "FAP Online Service.",
+    "suggested_steps": [
+      "Gửi trong 48 giờ sau kết thúc ca; khai môn/lớp/giờ, lý do và minh chứng",
+      "chờ xét; chú ý giới hạn 1 lần/môn/học kỳ."
+    ],
+    "source_refs": [
+      "S01"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-06",
+    "title": "Đề nghị phúc tra kết quả",
+    "owner_hint": "FAP / Phòng Đào tạo.",
+    "suggested_steps": [
+      "Chụp thông báo điểm, syllabus và bằng chứng sai sót",
+      "gửi đơn trong 07 ngày từ công bố điểm",
+      "theo dõi phản hồi."
+    ],
+    "source_refs": [
+      "S01"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-07",
+    "title": "Nộp Final Report",
+    "owner_hint": "CMS.",
+    "suggested_steps": [
+      "Xem Brief/syllabus",
+      "hoàn thành mốc Part 1",
+      "kiểm tra frontsheet và file",
+      "gửi trước deadline",
+      "kiểm tra xác nhận trên CMS."
+    ],
+    "source_refs": [
+      "S01"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-08",
+    "title": "Second Chance",
+    "owner_hint": "CMS / giảng viên.",
+    "suggested_steps": [
+      "Khi Final Report Fail, xem thông báo, đối chiếu lỗi cần sửa",
+      "hoàn thiện và gửi trong thời gian quy định sổ tay (03 ngày sau buổi cuối)",
+      "lưu ý tối đa Pass."
+    ],
+    "source_refs": [
+      "S01"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-09",
+    "title": "Xin gia hạn Assignment",
+    "owner_hint": "Giảng viên / Đào tạo / DVSV.",
+    "suggested_steps": [
+      "Liên hệ càng sớm càng tốt, mô tả lý do, mốc deadline, minh chứng và đề nghị xác nhận bằng văn bản; chưa có quyền tự động gia hạn."
+    ],
+    "source_refs": [
+      "S01"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-10",
+    "title": "Đăng ký học lại",
+    "owner_hint": "FAP / Phòng Đào tạo.",
+    "suggested_steps": [
+      "Tra môn trượt, lịch mở lớp, phí học lại",
+      "đăng ký trước hạn",
+      "thanh toán",
+      "kiểm tra có tên trong danh sách lớp."
+    ],
+    "source_refs": [
+      "S01"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-11",
+    "title": "Xin bảo lưu",
+    "owner_hint": "FAP Online Service.",
+    "suggested_steps": [
+      "Kiểm tra thời gian mở đơn trong FAP (thường thông báo trước kỳ)",
+      "chuẩn bị lý do/minh chứng",
+      "xin phê duyệt",
+      "đối chiếu khoản phí được bảo lưu."
+    ],
+    "source_refs": [
+      "S01",
+      "S07"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-12",
+    "title": "Xin học trở lại sau thôi học",
+    "owner_hint": "DVSV / Đào tạo.",
+    "suggested_steps": [
+      "Liên hệ trước kỳ mới khoảng 02 tuần theo sổ tay",
+      "nộp đơn ngoài hệ thống",
+      "xác minh kết quả cũ và công nợ",
+      "nhận quyết định xếp lớp."
+    ],
+    "source_refs": [
+      "S01"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-13",
+    "title": "Chuyển chuyên ngành hoặc cơ sở",
+    "owner_hint": "FAP / Đào tạo / CTSV.",
+    "suggested_steps": [
+      "Hỏi điều kiện kỳ, môn chuyển đổi, học bổng và mức thu cơ sở mới",
+      "nộp đơn đúng hạn",
+      "chỉ chuyển khi được phê duyệt."
+    ],
+    "source_refs": [
+      "S01",
+      "S08"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-14",
+    "title": "Xin xác nhận sinh viên/hoãn nghĩa vụ",
+    "owner_hint": "FAP / CTSV.",
+    "suggested_steps": [
+      "Chọn dịch vụ phù hợp, nêu mục đích và cơ quan nhận, cung cấp giấy tờ yêu cầu",
+      "nhận giấy xác nhận theo thông báo."
+    ],
+    "source_refs": [
+      "S01",
+      "S08"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-15",
+    "title": "Làm lại thẻ / sửa thông tin",
+    "owner_hint": "FAP Online Service / DVSV.",
+    "suggested_steps": [
+      "Chọn đúng dịch vụ, xác minh thông tin cũ - mới, tải tài liệu chứng minh, nộp phí nếu có; kiểm tra kết quả."
+    ],
+    "source_refs": [
+      "S01"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-16",
+    "title": "Xin thôi học / hỏi hoàn phí",
+    "owner_hint": "FAP / Đào tạo / tài chính.",
+    "suggested_steps": [
+      "Trước khi nộp đơn, yêu cầu văn bản tính hoàn/bảo lưu khoản đã đóng cho khóa mình; gửi đơn rồi chờ quyết định và đối soát."
+    ],
+    "source_refs": [
+      "S01",
+      "S07"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-17",
+    "title": "Báo lỗi tài khoản, Wi-Fi, CMS",
+    "owner_hint": "DVSV / Hành chính / Đào tạo.",
+    "suggested_steps": [
+      "Ghi MSSV, tên hệ thống, thời điểm, thông báo lỗi, ảnh chụp; yêu cầu IT hỗ trợ; đặc biệt báo trước deadline bài tập."
+    ],
+    "source_refs": [
+      "S01",
+      "S08"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  },
+  {
+    "procedure_id": "PROC-18",
+    "title": "Yêu cầu quyền dữ liệu cá nhân",
+    "owner_hint": "Kênh dữ liệu chính thức / DPO.",
+    "suggested_steps": [
+      "Nêu quyền muốn thực hiện, danh tính, dữ liệu liên quan và phương án liên hệ; đối chiếu thời hạn tiếp nhận theo trang quy định 2026."
+    ],
+    "source_refs": [
+      "S09"
+    ],
+    "status": "draft_instruction_from_compilation",
+    "officially_approved_workflow": false,
+    "requires_human_review": true,
+    "last_compiled_on": "2026-11-04"
+  }
+]

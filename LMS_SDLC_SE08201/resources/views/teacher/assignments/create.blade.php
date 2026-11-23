@@ -60,11 +60,12 @@
 
         {{-- Khu vực câu hỏi Quiz --}}
         <div id="quizSection" class="hidden rounded-md border border-blue-200 bg-blue-50/40 p-4">
-            <div class="mb-3 flex items-center justify-between">
+            <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
                 <h3 class="text-sm font-bold text-[#1e4f8f]">Bộ câu hỏi trắc nghiệm</h3>
-                <div class="flex gap-2">
-                    <button type="button" onclick="openAiModal()" class="flex items-center gap-1 rounded-lg bg-blue-100 px-3 py-1.5 text-xs font-bold text-[#1e4f8f] hover:bg-blue-200">AI Sinh Câu Hỏi</button>
-                    <button type="button" onclick="addQuestion()" class="rounded-lg bg-[#1e4f8f] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#163c6d]">+ Thêm câu hỏi</button>
+                <div class="flex flex-wrap justify-end gap-2">
+                    <button type="button" onclick="openAiModal()" class="flex items-center gap-1 whitespace-nowrap rounded-lg bg-blue-100 px-3 py-1.5 text-xs font-bold text-[#1e4f8f] hover:bg-blue-200">AI Sinh Câu Hỏi</button>
+                    <button type="button" onclick="addQuestion()" class="whitespace-nowrap rounded-lg bg-[#1e4f8f] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#163c6d]">+ Thêm câu hỏi</button>
+                    <button type="button" onclick="clearAllQuestions()" class="whitespace-nowrap rounded-lg bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-600 hover:bg-rose-100">Xóa hết câu hỏi</button>
                 </div>
             </div>
             <div id="questionList" class="space-y-4">
@@ -93,10 +94,12 @@
 
                             <div class="choice-fields {{ $qtype==='fill_blank' ? 'hidden' : '' }}">
                                 <div class="mt-2 grid gap-2 sm:grid-cols-2">
-                                    <input data-name="option_a" name="questions[{{ $index }}][option_a]" type="text" value="{{ $q['option_a'] ?? '' }}" placeholder="Đáp án A" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
-                                    <input data-name="option_b" name="questions[{{ $index }}][option_b]" type="text" value="{{ $q['option_b'] ?? '' }}" placeholder="Đáp án B" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
-                                    <input data-name="option_c" name="questions[{{ $index }}][option_c]" type="text" value="{{ $q['option_c'] ?? '' }}" placeholder="Đáp án C" class="opt-c w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
-                                    <input data-name="option_d" name="questions[{{ $index }}][option_d]" type="text" value="{{ $q['option_d'] ?? '' }}" placeholder="Đáp án D" class="opt-d w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
+                                    @foreach(['a', 'b', 'c', 'd'] as $opt)
+                                    <div class="flex items-center gap-2 {{ $opt === 'c' ? 'opt-c' : ($opt === 'd' ? 'opt-d' : '') }}">
+                                        <span class="w-5 shrink-0 text-sm font-semibold text-slate-600">{{ strtoupper($opt) }}.</span>
+                                        <input data-name="option_{{ $opt }}" name="questions[{{ $index }}][option_{{ $opt }}]" type="text" value="{{ $q['option_'.$opt] ?? '' }}" placeholder="Đáp án {{ strtoupper($opt) }}" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
+                                    </div>
+                                    @endforeach
                                 </div>
                                 <div class="mt-2 flex items-center gap-2 text-sm">
                                     <label class="font-medium text-slate-600">Đáp án đúng:</label>
@@ -114,7 +117,10 @@
                                 @error('questions.'.$index.'.correct_text') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
                             </div>
 
-                            <textarea data-name="explanation" name="questions[{{ $index }}][explanation]" rows="1" placeholder="Giải thích đáp án (tùy chọn)" class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-600 focus:border-[#1e4f8f] outline-none">{{ $q['explanation'] ?? '' }}</textarea>
+                            <div class="mt-2 flex items-start gap-2 text-sm">
+                                <label class="shrink-0 pt-2 font-medium text-slate-600">Giải thích:</label>
+                                <textarea data-name="explanation" name="questions[{{ $index }}][explanation]" rows="1" placeholder="Giải thích vì sao đáp án đúng (tùy chọn)" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-600 focus:border-[#1e4f8f] outline-none">{{ $q['explanation'] ?? '' }}</textarea>
+                            </div>
                         </div>
                     @endforeach
                 @endif
@@ -147,10 +153,22 @@
                   class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#1e4f8f] outline-none"></textarea>
         <div class="choice-fields">
             <div class="mt-2 grid gap-2 sm:grid-cols-2">
-                <input data-name="option_a" type="text" placeholder="Đáp án A" class="rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
-                <input data-name="option_b" type="text" placeholder="Đáp án B" class="rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
-                <input data-name="option_c" type="text" placeholder="Đáp án C" class="opt-c rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
-                <input data-name="option_d" type="text" placeholder="Đáp án D" class="opt-d rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
+                <div class="flex items-center gap-2">
+                    <span class="w-5 shrink-0 text-sm font-semibold text-slate-600">A.</span>
+                    <input data-name="option_a" type="text" placeholder="Đáp án A" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-5 shrink-0 text-sm font-semibold text-slate-600">B.</span>
+                    <input data-name="option_b" type="text" placeholder="Đáp án B" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
+                </div>
+                <div class="opt-c flex items-center gap-2">
+                    <span class="w-5 shrink-0 text-sm font-semibold text-slate-600">C.</span>
+                    <input data-name="option_c" type="text" placeholder="Đáp án C" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
+                </div>
+                <div class="opt-d flex items-center gap-2">
+                    <span class="w-5 shrink-0 text-sm font-semibold text-slate-600">D.</span>
+                    <input data-name="option_d" type="text" placeholder="Đáp án D" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
+                </div>
             </div>
             <div class="mt-2 flex items-center gap-2 text-sm">
                 <label class="font-medium text-slate-600">Đáp án đúng:</label>
@@ -162,7 +180,10 @@
         <div class="fillblank-fields hidden mt-2">
             <input data-name="correct_text" type="text" placeholder="Đáp án đúng (nhiều đáp án cách nhau bằng dấu |)" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1e4f8f]">
         </div>
-        <textarea data-name="explanation" rows="1" placeholder="Giải thích đáp án (tùy chọn)" class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-600 focus:border-[#1e4f8f] outline-none"></textarea>
+        <div class="mt-2 flex items-start gap-2 text-sm">
+            <label class="shrink-0 pt-2 font-medium text-slate-600">Giải thích:</label>
+            <textarea data-name="explanation" rows="1" placeholder="Giải thích vì sao đáp án đúng (tùy chọn)" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-600 focus:border-[#1e4f8f] outline-none"></textarea>
+        </div>
     </div>
 </template>
 
@@ -181,6 +202,14 @@
     function addQuestion() {
         const tpl = document.getElementById('questionTemplate');
         questionList.appendChild(tpl.content.cloneNode(true));
+        renumber();
+    }
+
+    function clearAllQuestions() {
+        const items = questionList.querySelectorAll('.question-item');
+        if (!items.length) return;
+        if (!confirm(`Xóa hết ${items.length} câu hỏi? Thao tác này không thể hoàn tác.`)) return;
+        items.forEach(item => item.remove());
         renumber();
     }
 
@@ -306,18 +335,16 @@
                     <label class="flex items-center gap-2"><input type="checkbox" class="ai-type" value="mcq" checked> Trắc nghiệm</label>
                     <label class="flex items-center gap-2"><input type="checkbox" class="ai-type" value="true_false"> Đúng/Sai</label>
                     <label class="flex items-center gap-2"><input type="checkbox" class="ai-type" value="fill_blank"> Điền khuyết</label>
-                    <label class="flex items-center gap-2"><input type="checkbox" class="ai-type" value="code_reading"> Đọc code</label>
                 </div>
             </div>
 
             <div>
-                <label class="mb-1 block text-sm font-semibold text-slate-700">Độ khó (thang Bloom)</label>
+                <label class="mb-1 block text-sm font-semibold text-slate-700">Độ khó</label>
                 <select id="aiDifficulty" class="w-full rounded-md border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-[#1e4f8f]">
-                    <option value="">Tự động (xen kẽ)</option>
-                    <option value="Nhớ (Remember)">Nhớ (Remember)</option>
-                    <option value="Hiểu (Understand)">Hiểu (Understand)</option>
-                    <option value="Vận dụng (Apply)">Vận dụng (Apply)</option>
-                    <option value="Phân tích (Analyze)">Phân tích (Analyze)</option>
+                    <option value="nhan_biet">Nhận biết</option>
+                    <option value="thong_hieu">Thông hiểu</option>
+                    <option value="van_dung">Vận dụng</option>
+                    <option value="mix" selected>Trộn</option>
                 </select>
             </div>
 

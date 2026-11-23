@@ -1,0 +1,697 @@
+HỒ SƠ TRA CỨU CÔNG KHAI
+BTEC FPTNỘI QUY, QUY CHẾVÀ QUY TRÌNH SINH VIÊN
+Tuyển sinh  •  Nhập học  •  Học phí  •  Đào tạo  •  Thi cử  •  Học vụ  •  Dịch vụ hỗ trợ  •  Bảo vệ dữ liệu
+MỤC
+ | THÔNG TIN
+ | 
+Phạm vi
+ | Cao đẳng Anh Quốc BTEC FPT và nguồn Pearson có liên quan (được phân loại riêng)
+ | 
+Thời điểm rà soát
+ | Ngày 04 tháng 11 năm 2026
+ | 
+Loại tài liệu
+ | Bản tổng hợp nghiên cứu có dẫn nguồn, không phải văn bản ban hành của trường
+ | 
+Nguyên tắc
+ | Ưu tiên văn bản chính thức; không suy đoán quy định nội bộ chưa công khai
+ | 
+
+LƯU Ý KIỂM CHỨNG  Các mức phí, địa chỉ, ưu đãi và hiệu lực có thể thay đổi theo cơ sở, khóa nhập học, học kỳ và quyết định mới. Khi thực hiện giao dịch, cần đối chiếu thông báo gửi trực tiếp qua FAP/email và xác nhận bằng văn bản từ nhà trường.
+
+MỤC LỤC THEO ĐẦU MỤC
+01   Phạm vi, phương pháp và cách đọc tài liệu
+02   Nhà trường, chương trình và cơ cấu tiếp nhận
+03   Tuyển sinh: đối tượng, điều kiện và tiếng Anh
+04   Quy trình đăng ký, xét tuyển và nhập học
+05   Học phí công bố và phương thức thanh toán
+06   Học bổng, ưu đãi, hỗ trợ tài chính
+07   Niên khóa, lớp học và nội quy học tập
+08   Điểm danh, chuyên cần và xử lý vắng học
+09   Assignment, thời hạn nộp và second chance
+10   Thi cử, chấm điểm, phúc tra và tốt nghiệp
+11   Học lại, học thêm, bảo lưu, thôi học, chuyển ngành/cơ sở
+12   Hoàn trả, bảo lưu và chuyển học phí (văn bản lịch sử)
+13   Hệ thống số và dịch vụ một cửa
+14   Hỗ trợ người học, y tế, hành chính, ký túc xá và cơ sở vật chất
+15   Khen thưởng, kỷ luật và nghĩa vụ người học
+16   Hoạt động sinh viên, quan hệ doanh nghiệp và việc làm
+17   Bảo vệ dữ liệu cá nhân và bảo mật thông tin
+18   Chính sách Pearson: tham chiếu, không đồng nhất quy chế của BTEC FPT
+19   Sổ tay quy trình thao tác theo tình huống
+20   Danh bạ liên hệ và tuyến hỗ trợ
+21   Mục chưa đủ nguồn / câu hỏi cần xác nhận
+22   Danh mục nguồn công khai và liên kết gốc
+Các ký hiệu [S01]…[S16] dẫn đến danh mục nguồn ở cuối tài liệu. “Công bố trên trang” không đồng nghĩa là mức phí/chính sách còn hiệu lực tại thời điểm từng sinh viên giao dịch.
+1. PHẠM VI, PHƯƠNG PHÁP VÀ CÁCH ĐỌC TÀI LIỆU
+Bản này hệ thống hóa các quy định và hướng dẫn tìm được từ các website chính thức của BTEC FPT, tài liệu tài chính của Tổ chức Giáo dục FPT, và trang hướng dẫn chính thức của Pearson. Nội dung được diễn giải lại để dễ tra cứu; để xử lý tranh chấp hay quyền lợi cá nhân, phải ưu tiên bản quyết định, thông báo và điều khoản áp dụng cho sinh viên đó.
+1.1. Bốn mức độ nguồn
+Mức
+ | Ý nghĩa
+ | Cách sử dụng
+ | 
+A – trực tiếp
+ | Sổ tay BTEC FPT, quy chế tuyển sinh, trang phòng ban, quy định dữ liệu BTEC FPT
+ | Dùng làm nguồn chính; chú ý năm phát hành.
+ | 
+B – tài chính hệ thống
+ | Quyết định tài chính của Công ty TNHH Giáo dục FPT, có phụ lục BTEC
+ | Dùng cho đúng niên khóa ghi trên quyết định; không tự gia hạn sang 2026.
+ | 
+C – Pearson
+ | Yêu cầu chung đối với cơ sở triển khai BTEC
+ | Chỉ là chuẩn tham chiếu; không coi là hướng dẫn thao tác riêng của BTEC FPT.
+ | 
+D – hướng dẫn thực hiện
+ | Checklist và các bước tổng hợp do người biên soạn hệ thống lại
+ | Để tham khảo và chuẩn bị; các bước chưa có chứng cứ được ghi là “đề xuất”.
+ | 
+
+1.2. Mốc thời gian cần chú ý
+Sổ tay BTEC FPT được tìm thấy có số phiên bản ver.BTEC.9.2024, nên các con số trong đó được ghi gắn với phiên bản 09/2024.
+Quyết định tài chính 08/QĐ-CTGDFPT ban hành 12/01/2024 áp dụng năm học 2024–2025: chỉ dùng như văn bản lịch sử.
+Trang học phí BTEC FPT đang hiển thị mức giá và học bổng có nhắc năm 2025/2026; nguồn này cần được đối chiếu bảng thu của khóa, kỳ học hiện tại.
+Chính sách dữ liệu cá nhân BTEC FPT đăng ngày 29/09/2026 là nguồn mới hơn về vấn đề quyền riêng tư.
+Nguồn đối chiếu: [S01], [S06], [S07], [S09].
+2. NHÀ TRƯỜNG, CHƯƠNG TRÌNH VÀ CƠ CẤU TIẾP NHẬN
+BTEC FPT được giới thiệu là chương trình liên kết giữa FPT Education và Pearson (Vương quốc Anh), đào tạo theo định hướng ứng dụng và chuẩn Pearson BTEC Higher National Diploma. Quy chế tuyển sinh nêu bậc cao đẳng; FAQ công bố văn bằng BTEC HND Level 5. Không nhầm với quy chế đào tạo đại học chính quy của Đại học FPT hoặc hệ cao đẳng FPT Polytechnic phổ thông.
+2.1. Ngành học và cơ sở
+Các nhóm học được nêu trong sổ tay 2024: lập trình máy tính; quản trị kinh doanh; thiết kế đồ họa; kỹ thuật/công nghệ bán dẫn.
+Website hiện giới thiệu kỹ thuật phần mềm, thiết kế đồ họa, quản trị, marketing, logistics, công nghệ bán dẫn và thể thao điện tử (Esports); tên, chỉ tiêu và cơ sở mở lớp cần kiểm tra ở thông báo tuyển sinh của đợt đăng ký.
+BTEC FPT công khai bốn địa bàn: Hà Nội, TP. Hồ Chí Minh, Đà Nẵng, Cần Thơ.
+2.2. Trách nhiệm của các đầu mối
+Đầu mối
+ | Công việc được công bố
+ | 
+Phòng Đào tạo
+ | Đăng ký học vụ, bảo lưu, học lại; lịch học, điểm danh, lịch thi, kết quả, chương trình và quy định đào tạo.
+ | 
+Phòng Công tác sinh viên / Dịch vụ sinh viên
+ | Xác nhận sinh viên; hoãn nghĩa vụ quân sự; chuyển cơ sở; BHYT; nhà ở, ký túc xá; câu lạc bộ, sự kiện và hỗ trợ tra cứu.
+ | 
+Phòng Hành chính / Dịch vụ
+ | Cơ sở vật chất, kết nối Wi-Fi, thu học phí, đồng phục và dây đeo thẻ.
+ | 
+Bộ phận tuyển sinh
+ | Tư vấn ngành, xét tuyển, hồ sơ nhập học, hướng dẫn đóng đợt đầu, giải đáp ưu đãi theo từng chiến dịch.
+ | 
+
+Nguồn đối chiếu: [S01], [S02], [S08], [S11], [S15].
+3. TUYỂN SINH: ĐỐI TƯỢNG, ĐIỀU KIỆN VÀ TIẾNG ANH
+3.1. Phương thức và điều kiện học vấn
+Trang Quy chế tuyển sinh của BTEC FPT công bố xét tuyển dựa trên hồ sơ THPT, tuyển sinh trên phạm vi toàn quốc.
+Đối tượng bao gồm người tốt nghiệp THPT; hoặc người có bằng trung cấp kèm giấy tờ chứng minh hoàn thành chương trình giáo dục phổ thông/đủ khối lượng kiến thức văn hóa THPT theo các phương án được trang tuyển sinh liệt kê.
+Trường có thể kết thúc xét tuyển sớm khi đã đủ chỉ tiêu; hạn bổ sung hồ sơ không có một ngày cố định áp dụng cho mọi cơ sở.
+3.2. Điều kiện tiếng Anh và giai đoạn dự bị
+Trang quy chế tuyển sinh ghi mốc IELTS 5.5 hoặc hoàn thành Summit 1 tại FPT Polytechnic, hoặc trình độ tương đương. Cùng lúc, trang học phí và FAQ lại nêu người chưa đủ chuẩn tiếng Anh có thể làm bài kiểm tra đầu vào, được xếp học các level dự bị trước khi vào chuyên ngành. Do đó không nên hiểu rằng mọi thí sinh chưa có IELTS 5.5 đều bị loại ngay khỏi khâu đăng ký; cần xác nhận cách áp dụng theo kỳ tuyển sinh và lộ trình được phân.
+Có chứng chỉ đủ điều kiện: đề nghị xác minh miễn chương trình tiếng Anh dự bị và xếp lớp chuyên ngành.
+Chưa đủ điều kiện: tham gia kiểm tra đánh giá tiếng Anh đầu vào, học theo level được xếp và hoàn thành yêu cầu trước chương trình chính khóa.
+Sổ tay 2024 đề cập các mức FUN, TN1, TN2, TN3, SM1 (mỗi level khoảng 2 tháng).
+LƯU Ý KIỂM CHỨNG  Trang tuyển sinh và trang học phí có cách diễn đạt điều kiện tiếng Anh khác nhau. Không tự xác nhận quyền miễn học hoặc nghĩa vụ học level cho một cá nhân khi chưa có thông báo xếp lớp.
+Nguồn đối chiếu: [S01], [S02], [S06], [S11].
+4. QUY TRÌNH ĐĂNG KÝ, XÉT TUYỂN VÀ NHẬP HỌC
+4.1. Hồ sơ BTEC FPT được công bố
+01 phiếu đăng ký học theo mẫu của BTEC FPT; có thể khai trên cổng thông tin/nhận mẫu từ văn phòng tuyển sinh.
+01 bản sao chứng thực CMND/CCCD (kiểm tra yêu cầu định danh hiện hành khi nộp).
+Bản sao có chứng thực bằng tốt nghiệp THPT, hoặc giấy chứng nhận tốt nghiệp tạm thời và bổ sung bằng sau khi có; đối tượng trung cấp nộp thêm các giấy tờ văn hóa THPT thích hợp.
+Chứng chỉ IELTS tối thiểu 5.5, giấy chứng nhận Summit 1 hoặc tài liệu tương đương nếu thuộc diện áp dụng/đề nghị miễn tiếng Anh. Cần hỏi lại cách tiếp nhận với thí sinh học dự bị tiếng Anh.
+Tự chuẩn bị máy tính xách tay phục vụ học tập; không mặc định có chính sách cấp laptop.
+4.2. Các bước thực hiện
+Truy cập trang đăng ký trực tuyến hoặc liên hệ tuyển sinh ở cơ sở muốn học, lựa chọn ngành/cơ sở và cung cấp thông tin liên lạc.
+Chuẩn bị giấy tờ cá nhân, học vấn và minh chứng tiếng Anh; điền đầy đủ biểu mẫu đăng ký. Phiếu online có mục tải ảnh CCCD hai mặt và bằng/bảng điểm.
+Nộp hồ sơ qua website theo quy định hoặc trực tiếp tại văn phòng tuyển sinh; giữ lại mã hồ sơ, email hoặc thông tin xác nhận.
+Chờ tư vấn/xét duyệt và nhận hướng dẫn nhập học chính thức; BTEC FPT ghi mục tiêu liên hệ tư vấn trong vòng 48 giờ, đây không phải cam kết thời hạn ra quyết định tuyển sinh.
+Đối chiếu bảng học phí, ưu đãi được duyệt bằng văn bản; nhận thông tin thanh toán trực tiếp từ nhà trường trước khi chuyển tiền.
+Hoàn tất các giấy tờ gốc/bản chứng thực còn thiếu theo thông báo; nhận tài khoản học tập, lịch định hướng, kiểm tra tiếng Anh nếu có và lịch học kỳ đầu.
+4.3. Những chi tiết trên phiếu điện tử
+Phiếu đăng ký online công khai yêu cầu thông tin định danh, liên hệ học sinh và người bảo trợ, cơ sở/ngành dự tuyển, trường đã tốt nghiệp, địa chỉ nhận kết quả; có mục tải ảnh mặt trước và sau CCCD, bằng THPT hoặc bảng điểm và xác nhận tính trung thực. Tài liệu này không thay thế yêu cầu nộp bản chứng thực hoặc bản cứng nếu cơ sở gửi thông báo riêng.
+Nguồn đối chiếu: [S02], [S03], [S04], [S05].
+5. HỌC PHÍ CÔNG BỐ VÀ PHƯƠNG THỨC THANH TOÁN
+5.1. Mức đang được hiển thị trên trang học bổng - học phí BTEC FPT
+Cơ sở
+ | Chuyên ngành / học kỳ
+ | Tiếng Anh dự bị / level
+ | 
+Hà Nội
+ | 15.600.000 đồng
+ | 10.350.000 đồng
+ | 
+TP. Hồ Chí Minh
+ | 15.600.000 đồng
+ | 10.350.000 đồng
+ | 
+Đà Nẵng
+ | 12.480.000 đồng
+ | 8.280.000 đồng
+ | 
+Cần Thơ
+ | 12.480.000 đồng
+ | 8.280.000 đồng
+ | 
+
+Trang chính thức mô tả học phí chuyên ngành nộp đầu mỗi học kỳ; chương trình chính khóa gồm 6 học kỳ, mỗi học kỳ khoảng 4 tháng. Học phí tiếng Anh thu theo level nếu cần học dự bị. Trang này cũng nêu các chi phí học cụ, thi cuối kỳ và cấp bằng đã bao gồm, nhưng không tính phí học lại. Các mức trên là số website hiển thị khi tra cứu, không được bảo đảm là bảng thu ràng buộc cho mọi khóa nhập học 2026.
+5.2. Vướng mắc về “đợt nộp đầu tiên”
+Trang học phí BTEC FPT hiện mô tả đợt đầu tạm thu tương đương 01 level tiếng Anh; tuy nhiên phụ lục tài chính năm học 2024–2025 ghi lần đóng đầu tương đương 02 mức tiếng Anh. Đây là tài liệu khác thời kỳ. Cần yêu cầu cơ sở gửi phiếu báo thu nêu rõ số tiền được yêu cầu trong đợt hiện tại, kể cả trường hợp được miễn tiếng Anh.
+5.3. Quy trình nộp học phí có thể kiểm chứng
+Nhận thông báo học phí hoặc công nợ từ hệ thống FAP, email chính thức hoặc Phòng Hành chính/Bộ phận tuyển sinh.
+Kiểm tra học kỳ/level, số tiền, học bổng, hạn nộp và người thụ hưởng. Không sử dụng tài khoản cung cấp qua tin nhắn cá nhân chưa xác minh.
+Thực hiện chuyển khoản theo hướng dẫn mới nhất của trường; trang học phí công khai BTEC FPT không nhận tiền mặt.
+Lưu biên lai giao dịch, nội dung chuyển khoản, ảnh chụp màn hình trạng thái thành công.
+Tra cứu FAP/xác nhận công nợ đã cập nhật; nếu không khớp, liên hệ bộ phận tài chính và gửi minh chứng.
+5.4. Tài khoản được đăng trên trang BTEC FPT (để đối chiếu, không thay thế thông báo thu mới)
+Cơ sở
+ | Ngân hàng / tên người thụ hưởng theo trang
+ | Số tài khoản trên website
+ | 
+Hà Nội
+ | TPBank / TRUONG CAO DANG FPT POLYTECHNIC
+ | 13136969806
+ | 
+TP. HCM
+ | TPBank / TRUNG TAM FPT POLYTECHNIC TPHCM
+ | 67689996802
+ | 
+Đà Nẵng
+ | TPBank / TRUNG TAM FPT POLYTECHNIC DA NANG
+ | 79795557204
+ | 
+Cần Thơ
+ | TPBank / TRUNG TAM FPT POLYTECHNIC CAN THO
+ | 23939396768
+ | 
+
+LƯU Ý KIỂM CHỨNG  Trang web hướng dẫn nội dung chuyển khoản có cụm “BTEC 2025” dù thời điểm rà soát là 2026. Vì vậy hãy lấy đúng mẫu nội dung, chủ tài khoản và số tiền trong thông báo nhập học/học phí gửi trực tiếp cho mình, không sao chép nguyên mẫu 2025.
+Nguồn đối chiếu: [S01], [S06], [S07], [S08].
+6. HỌC BỔNG, ƯU ĐÃI, HỖ TRỢ TÀI CHÍNH
+6.1. Chính sách ưu đãi trên trang tuyển sinh
+BTEC FPT từng công bố các mức học bổng 10%, 20%, 30%, 50%, 70% với tiêu chí dựa trên điểm môn học, tổng điểm tổ hợp thi THPT hoặc thành tích cá nhân; mức 20% trở lên trong bảng công bố còn yêu cầu vượt phỏng vấn. Một số chiến dịch có ưu đãi tiếng Anh đầu vào, có thể không được cộng dồn với học bổng khác.
+Mức được nêu
+ | Minh họa điều kiện công bố (không phải xét duyệt tự động)
+ | 
+10%
+ | Điểm một môn xét theo tiêu chí trang học bổng từ 6,5; có trường hợp đăng ký theo nhóm cùng trường THPT.
+ | 
+20%
+ | Một môn từ 7,0; hoặc tổ hợp thi THPT từ 19; hoặc thành tích được công nhận; kèm phỏng vấn.
+ | 
+30%
+ | Một môn từ 7,5; hoặc tổ hợp từ 21; hoặc thành tích tương ứng; kèm phỏng vấn.
+ | 
+50%
+ | Một môn từ 8,5; hoặc tổ hợp từ 23; hoặc giải/đóng góp nổi bật; kèm phỏng vấn.
+ | 
+70%
+ | Một môn từ 9,0; hoặc tổ hợp từ 25; hoặc giải thưởng cấp cao theo mô tả; kèm phỏng vấn.
+ | 
+
+LƯU Ý KIỂM CHỨNG  Trang học bổng nêu hạn áp dụng đến 31/10/2026 hoặc khi hết suất. Tại ngày 04/11/2026, thời hạn ghi trên trang ĐÃ QUA; không được coi đây là ưu đãi đang mở. Muốn xét đợt mới, phải yêu cầu quyết định/campaign đang hiệu lực và chính sách duy trì học bổng từng kỳ.
+6.2. Hỗ trợ tài chính và điều kiện duy trì
+Quy chế tuyển sinh đề cập một quyết định riêng về học bổng và hỗ trợ học phí của chương trình BTEC; bản quyết định này không được xác minh đầy đủ trong các trang đã tra.
+Văn bản tài chính chung năm 2024–2025 nói đến khả năng trả chậm học phí cho từng hệ đủ điều kiện, nhưng không thể suy ra BTEC FPT mặc nhiên có gói này năm 2026.
+Việc chuyển ngành/chuyên ngành có thể ảnh hưởng quyền bảo lưu học bổng theo quy định tại từng thời điểm; nên hỏi trước khi nộp đơn.
+Nguồn đối chiếu: [S02], [S06], [S07].
+7. NIÊN KHÓA, LỚP HỌC VÀ NỘI QUY HỌC TẬP
+Sổ tay BTEC 2024 nêu 03 học kỳ mỗi năm: Spring (tháng 01), Summer (tháng 05), Fall (tháng 09); lịch chính xác, nghỉ lễ, nghỉ giữa kỳ theo lịch đào tạo hằng năm.
+Lộ trình tiêu chuẩn khối chuyên ngành là 06 học kỳ, tối đa 09 học kỳ chuyên ngành, chưa kể giai đoạn dự bị tiếng Anh theo sổ tay.
+Sổ tay mô tả quy mô phân lớp nguyên tắc 30 ± 5 người/lớp; nhà trường tổ chức theo chuyên ngành và đợt nhập học.
+Sinh viên phải theo dõi FAP để nắm lịch học, phòng, thi; đề cương môn học thông tin tiêu chí dự thi và đánh giá.
+Cần có mặt đúng giờ, ăn mặc lịch sự, làm bài tập theo tiến độ, không chơi game/làm việc riêng/ngủ trong giờ; nếu muốn ra ngoài trong giờ cần có sự đồng ý của giảng viên và không quá thời gian giới hạn sổ tay nêu (15 phút).
+7.1. Kế hoạch học kỳ và đăng ký học thêm
+Sổ tay cho phép sinh viên có đủ điều kiện học thêm môn so với kế hoạch, nhưng tổng tải học tối đa 05 môn/học kỳ. Việc đăng ký bổ sung và nghĩa vụ tài chính phải hoàn tất trước khi môn bắt đầu. Chế độ học lại và học thêm phụ thuộc môn mở, điều kiện tiên quyết và thông báo FAP.
+Nguồn đối chiếu: [S01].
+8. ĐIỂM DANH, CHUYÊN CẦN VÀ XỬ LÝ VẮNG HỌC
+Tình huống
+ | Quy định sổ tay phiên bản 09/2024
+ | 
+Điểm danh đầu buổi
+ | Thực hiện trong 15 phút đầu ca; vắng tại thời điểm điểm danh bị ghi vắng.
+ | 
+Khôi phục điểm danh
+ | Đăng ký trên FAP trong vòng 48 giờ từ khi kết thúc ca; giới hạn 01 lần/môn/học kỳ.
+ | 
+Vắng quá ngưỡng
+ | Vắng trên 20% tổng thời lượng môn học, không đủ điều kiện thi hoặc công nhận kết quả; phải học lại.
+ | 
+Lý do đặc biệt
+ | Có thể gửi giải trình và minh chứng (ốm đau, tai nạn...) để nhà trường xem xét; không mặc nhiên được chấp thuận.
+ | 
+Dự thi / công nhận môn
+ | Phải tham gia ít nhất 80% thời lượng học tập theo điều kiện chương trình và đề cương.
+ | 
+
+8.1. Quy trình tra cứu và phản ánh điểm danh
+Xem nhật ký chuyên cần trên FAP ngay sau ca; đối chiếu lịch học và thời điểm lớp điểm danh.
+Nếu cần phản ánh, chọn dịch vụ khôi phục điểm danh, ghi rõ môn, lớp, ca, ngày và lý do trong 48 giờ.
+Đính kèm minh chứng hợp lý nếu hệ thống cho phép; theo dõi phản hồi của Phòng Đào tạo.
+Lưu ý đã dùng hết lượt 01 lần/môn/học kỳ thì không tự giả định có lượt khác. Trường hợp bất khả kháng nên liên hệ trực tiếp phòng đào tạo.
+Nguồn đối chiếu: [S01], [S08].
+9. ASSIGNMENT, THỜI HẠN NỘP VÀ SECOND CHANCE
+Phương thức đánh giá ở các môn chuyên ngành của BTEC FPT tập trung vào bài Assignment (ASM), thường chia thành các phần tiến độ và báo cáo cuối. Quy định môn cụ thể vẫn phải căn cứ Assignment Brief và syllabus đang giao cho sinh viên.
+9.1. Thuật ngữ và mốc quan trọng
+Thuật ngữ
+ | Ý nghĩa thực hành
+ | 
+ASM / Assignment
+ | Bài tập lớn chứng minh năng lực theo yêu cầu đầu ra; phải từ Pass để đạt môn.
+ | 
+Assignment Brief
+ | Đề bài, nhiệm vụ và tiêu chí đánh giá cụ thể.
+ | 
+Part 1 / Part 2
+ | Các mốc nộp trong quá trình, thường gắn với Learning Outcomes.
+ | 
+Final Report
+ | Bản nộp cuối dùng để đánh giá kết quả cuối môn.
+ | 
+Frontsheet
+ | Thông tin sinh viên, cam kết tính trung thực và các trường được yêu cầu.
+ | 
+Second Chance
+ | Nộp điều chỉnh lại khi Final Report bị Fail; điểm cao nhất trong lần này là Pass.
+ | 
+CMS
+ | Hệ thống tiếp nhận Assignment và thông báo kết quả chấm.
+ | 
+
+9.2. Quy định nộp bài cụ thể từ sổ tay 2024
+Giảng viên hướng dẫn yêu cầu và các mốc nộp từ buổi đầu; sinh viên có trách nhiệm xem syllabus/brief và CMS.
+Sổ tay ghi chỉ được nộp Final Report nếu đã nộp ASM Part 1.
+Sổ tay mô tả tối đa 02 lần nộp Final Report/môn: lần chính và second chance nếu trượt.
+Second chance theo sổ tay là 03 ngày từ sau buổi học cuối cùng để chỉnh sửa và nộp; kết quả lần này không được vượt Pass.
+Đến hạn phải đưa tệp lên CMS đúng định dạng và deadline. Trường hợp xin gia hạn phải hỏi giảng viên/Phòng Đào tạo và tuân thủ hướng dẫn mới; sổ tay chỉ nêu đây là nhóm yêu cầu có thể gửi qua cơ chế một cửa, không công bố một quyền gia hạn tự động.
+9.3. Tính trung thực học thuật và việc sử dụng AI
+Nguồn Pearson yêu cầu các cơ sở triển khai BTEC có chính sách chống đạo văn, gian lận đánh giá, giải quyết khiếu nại, bao gồm cả vấn đề sử dụng AI trong sản phẩm đánh giá. Người học nên tự thực hiện nội dung, ghi nguồn tư liệu, làm rõ phần được phép dùng công cụ và xác nhận trực tiếp với giảng viên xem loại công cụ AI nào được sử dụng. Chưa tìm được bản quy định AI riêng của BTEC FPT để có thể khẳng định một tỷ lệ AI cho phép hoặc mức xử phạt cụ thể.
+Nguồn đối chiếu: [S01], [S13].
+10. THI CỬ, CHẤM ĐIỂM, PHÚC TRA VÀ TỐT NGHIỆP
+10.1. Thi và đánh giá
+Để được thi/được công nhận môn, sinh viên đáp ứng đồng thời yêu cầu đề cương và chuyên cần.
+Với ngoại ngữ, sổ tay sử dụng thang điểm 10; nếu không đạt kỳ thi kết thúc môn, sinh viên có 01 lần thi lại theo quy định.
+Với chuyên ngành và môn bổ trợ, dùng thang chữ F (Fail), P (Pass), M (Merit), D (Distinction); sổ tay có thể gọi M là khá và D là giỏi.
+Thi tiếng Anh và các bài đánh giá khác phải theo nội quy kỳ thi được phổ biến trước từng kỳ, không suy diễn danh sách vật dụng được đem vào phòng thi nếu chưa có thông báo.
+10.2. Phúc tra
+Sau khi Phòng Đào tạo công bố điểm thi hoặc Assignment trên FAP, sổ tay 2024 cho sinh viên 07 ngày gửi kiến nghị/phúc tra. Sau mốc này và nếu không có yêu cầu, kết quả được coi là cuối cùng theo sổ tay. Hãy ghi lại ngày công bố để không lỡ thời hạn.
+10.3. Điều kiện và xếp loại tốt nghiệp
+Phải hoàn thành đủ các môn/tín chỉ theo chương trình và những yêu cầu bắt buộc khác.
+Không đang chịu kỷ luật đình chỉ học tập trở lên hoặc đang bị truy cứu trách nhiệm hình sự theo các trường hợp sổ tay nêu.
+Sổ tay 2024 đưa ví dụ quy đổi điểm P/M/D tương ứng 4/6/8 điểm mỗi tín chỉ và ngưỡng điểm tốt nghiệp P: 420–599; M: 600–839; D: từ 840 (áp dụng theo phạm vi bảng minh họa được công bố, chủ yếu môn level 5).
+Mẫu bảng trong sổ tay có lưu ý chỉ các môn level 5 được dùng cho xếp loại; cần yêu cầu bảng chính thức cho đúng ngành và phiên bản chương trình của sinh viên.
+Nguồn đối chiếu: [S01].
+11. HỌC LẠI, HỌC THÊM, BẢO LƯU, THÔI HỌC, CHUYỂN NGÀNH/CƠ SỞ
+11.1. Học lại và cải thiện điểm
+Người học không đạt môn vì bất cứ lý do nào phải đăng ký học lại cho đến khi đạt yêu cầu. Sổ tay 2024 cho phép học cải thiện môn đã đạt nhưng kết quả cũ sẽ bị hủy khi đăng ký học lại cải thiện. Mức phí tùy môn và văn bản tài chính áp dụng.
+11.2. Bảo lưu kết quả học tập
+Bảo lưu là việc giữ kết quả các môn đã đạt trong thời gian được phép tạm dừng chương trình.
+Sổ tay 2024 cho phép tạm dừng vì việc cá nhân, nghĩa vụ quân sự, điều trị bệnh dài ngày...; không quá 02 học kỳ liên tiếp.
+Thời gian bảo lưu vẫn được tính vào giới hạn tối đa hoàn thành chương trình.
+Dịch vụ bảo lưu trên FAP mở theo khung riêng được thông báo, sổ tay nêu tiếp nhận trước khi mỗi kỳ bắt đầu khoảng 01 tuần; phải kiểm tra lịch và thời hạn thực tế qua bản tin FAP.
+11.3. Thôi học và học trở lại
+Sổ tay công bố dịch vụ thôi học trực tuyến; người đã thôi học muốn học lại có thể làm đơn nhập học trở lại ngoài hệ thống, gửi trước học kỳ mới khoảng 02 tuần. Việc được chấp thuận, công nhận môn, nghĩa vụ tài chính và mức phí phát sinh cần được nhà trường xác nhận. Sổ tay còn nêu các trường hợp buộc thôi học: quá thời gian tối đa, bị kỷ luật mức buộc thôi học hoặc không hoàn thành nghĩa vụ tài chính.
+11.4. Chuyển ngành, chuyên ngành hoặc cơ sở
+Sổ tay nêu đăng ký một số thủ tục học vụ trên FAP trước học kỳ; sinh viên được chuyển ngành/chuyên ngành từ học kỳ chuyên ngành đầu tiên, không áp dụng trong giai đoạn tiếng Anh.
+Sổ tay 2024 ghi chuyển cơ sở không thu phí chuyển cơ sở, nhưng cơ sở mới có thể áp dụng học phí khác; hãy xác minh chính sách hiệu lực.
+Thay đổi ngành có thể làm mất một số học bổng/ưu đãi; chuyển chuyên ngành trong cùng phạm vi có thể có cơ chế bảo lưu khác. Chuyển trước khi được duyệt dễ gây lệch kế hoạch học tập.
+Nguồn đối chiếu: [S01], [S07], [S08].
+12. HOÀN TRẢ, BẢO LƯU VÀ CHUYỂN HỌC PHÍ - CHỈ THAM CHIẾU VĂN BẢN 2024–2025
+LƯU Ý KIỂM CHỨNG  Mục này trích lược quy định chung theo Quyết định 08/QĐ-CTGDFPT (niên khóa 2024–2025). Không có đủ căn cứ khẳng định các tỷ lệ/điều kiện dưới đây tiếp tục áp dụng với sinh viên BTEC FPT năm 2026.
+Tình huống theo quyết định năm 2024–2025
+ | Nội dung được công bố
+ | 
+Thôi học trước ngày bắt đầu khóa/kỳ
+ | Hoàn khoảng 80% học phí thực nộp, trừ phí bản quyền nếu có theo công thức quy định.
+ | 
+Thôi học trong 02 tuần đầu
+ | Hoàn khoảng 50% học phí thực nộp, trừ phí bản quyền nếu có.
+ | 
+Thôi học sau 02 tuần
+ | Không hoàn trả học phí đã đóng theo quy định lịch sử.
+ | 
+Bảo lưu đã được duyệt
+ | Khoản học phí đủ điều kiện có thể được giữ để trừ khi nhập học lại.
+ | 
+Phần học phí nộp dư
+ | Tự động chuyển kỳ tiếp theo; nếu vượt học phí toàn khóa thì có cơ chế hoàn phần dư.
+ | 
+Nhà trường không mở lớp/ngành
+ | Văn bản quy định hoàn các khoản phí thực nộp sau khi trừ phần đã sử dụng, tùy tình huống.
+ | 
+
+12.1. Mẫu câu hỏi cần hỏi phòng tài chính
+“Em thuộc khóa ..., chương trình ..., kỳ ..., đã đóng ... đồng ngày ...; xin cung cấp chính sách hoàn/bảo lưu phí hiện đang áp dụng cho khóa của em, điều kiện hồ sơ, cách tính từng khoản và thời hạn xử lý, kèm căn cứ quyết định.”
+Nguồn đối chiếu: [S07].
+13. HỆ THỐNG SỐ VÀ DỊCH VỤ MỘT CỬA
+13.1. Hệ thống được công bố trong sổ tay
+Hệ thống
+ | Vai trò
+ | 
+FAP - fap.fpi.edu.vn
+ | Tin tức, thời khóa biểu, lịch thi, điểm, tiến độ, học lại, đánh giá giảng viên, dịch vụ trực tuyến.
+ | 
+CMS - hệ thống btec.edu.vn
+ | Giáo trình/học liệu môn, nộp Assignment, xem kết quả chấm.
+ | 
+EOS
+ | Thi trực tuyến, trắc nghiệm, bài viết theo kỳ thi.
+ | 
+FLM
+ | Tài nguyên học liệu.
+ | 
+HNGlobal - hnglobal.highernationals.com
+ | Tài nguyên/học liệu và diễn đàn cho chương trình Pearson theo quyền truy cập được cấp.
+ | 
+
+13.2. Cơ chế “một cửa”
+Sổ tay BTEC FPT công bố sinh viên có thể yêu cầu dịch vụ qua FAP hoặc trực tiếp tại Phòng Dịch vụ sinh viên để được tiếp nhận và nhận kết quả. Các loại yêu cầu mẫu được nêu gồm: khôi phục điểm danh, khiếu nại điểm, đổi lịch học, gia hạn ASM, chuyển cơ sở/chuyên ngành, hỗ trợ Wi-Fi, lỗi hệ thống, công nợ, phí dịch vụ, hoàn số dư.
+13.3. Thao tác chuẩn bị khi tạo đơn
+Đăng nhập FAP bằng tài khoản được trường cấp; xem News và mục Online Service/đơn dịch vụ.
+Chọn đúng loại đơn, đọc điều kiện và khoảng mở đăng ký; nhập thông tin chính xác và đính kèm minh chứng.
+Kiểm tra có phí phát sinh, số dư ví/công nợ (nếu hệ thống hiển thị) trước khi xác nhận.
+Lưu mã đơn, ảnh chụp thao tác và thời điểm gửi; theo dõi tiến độ và phản hồi.
+Nếu phát sinh lỗi hoặc quá thời hạn xử lý được hẹn, gửi email/call Phòng Dịch vụ sinh viên và mô tả rõ tình trạng.
+Nguồn đối chiếu: [S01], [S08], [S09].
+14. HỖ TRỢ NGƯỜI HỌC, Y TẾ, HÀNH CHÍNH, NHÀ Ở VÀ CƠ SỞ VẬT CHẤT
+14.1. Các nhóm dịch vụ có nguồn công khai
+Thủ tục sinh viên: xin xác nhận sinh viên, đổi thông tin, làm lại thẻ, đăng ký bảo lưu, thôi học và tiếp nhận bổ sung giấy tờ học vụ.
+Tư vấn học vụ: giải thích lịch học, điểm danh, thi, điểm, học lại, xếp lớp và quy định đào tạo.
+Bảo hiểm y tế và y tế: sổ tay 2024 mô tả ít nhất 01 đợt hỗ trợ mua BHYT mỗi năm; thuốc thông dụng hỗ trợ miễn phí tùy nhu cầu và điều kiện thực tế.
+Hỗ trợ hoãn nghĩa vụ quân sự; hỗ trợ tìm nhà ở/ký túc xá; tư vấn kênh tra cứu và hoạt động đoàn - hội/CLB.
+Phòng Hành chính hỗ trợ Wi-Fi, cơ sở vật chất, đồng phục, dây đeo thẻ và vấn đề thu học phí.
+14.2. Điều gì chưa được chứng minh chỉ bằng bài giới thiệu?
+Các trang công khai chỉ mô tả loại dịch vụ và đầu mối, không đưa ra thời hạn cấp từng giấy, biểu mẫu có giá trị pháp lý cho tất cả cơ sở, chỉ tiêu ký túc xá, quy trình khiếu nại 02 cấp hay mức hỗ trợ y tế/điều trị cụ thể. Không nên tự bổ sung các cam kết này vào “nội quy trường”.
+Nguồn đối chiếu: [S01], [S08].
+15. KHEN THƯỞNG, KỶ LUẬT VÀ NGHĨA VỤ NGƯỜI HỌC
+15.1. Khen thưởng theo sổ tay 2024
+“Hiệp sĩ BTEC”: đề cập sinh viên xuất sắc nhất ngành tại cơ sở theo thành tích; phần điều kiện có tối thiểu 02 điểm M trở lên, xét môn học lần đầu và không vi phạm nội quy trong học kỳ.
+“Sinh viên xuất sắc”: vinh danh nhóm sinh viên đứng đầu theo ngành/học kỳ, với yêu cầu kèm thành tích và rèn luyện.
+“Sinh viên hoạt động phong trào xuất sắc” và “Câu lạc bộ xuất sắc”: căn cứ đóng góp hoạt động, sự kiện và kết quả rèn luyện.
+15.2. Hình thức kỷ luật được liệt kê
+Hình thức
+ | Tính chất theo sổ tay
+ | 
+Khiển trách
+ | Vi phạm lần đầu, mức độ nhẹ.
+ | 
+Cảnh cáo
+ | Tái phạm hoặc vi phạm thường xuyên/tương đối nghiêm trọng.
+ | 
+Đình chỉ học tập có thời hạn
+ | Vi phạm nghiêm trọng hoặc tiếp tục vi phạm trong thời gian bị cảnh cáo.
+ | 
+Buộc thôi học
+ | Vi phạm rất nghiêm trọng, tiếp tục vi phạm sau cảnh cáo hoặc trường hợp hình sự liên quan.
+ | 
+
+Bảng không phải “khung xử phạt cố định” gắn với từng hành vi cụ thể. Sổ tay cho biết các vi phạm quy chế thi sẽ được phổ biến trước kỳ thi; cần có thông báo/văn bản hiện hành để biết tình huống cụ thể, thẩm quyền và cơ chế xem xét.
+Nguồn đối chiếu: [S01].
+16. HOẠT ĐỘNG SINH VIÊN, QUAN HỆ DOANH NGHIỆP VÀ VIỆC LÀM
+BTEC FPT công khai hệ thống hoạt động ngoại khóa, câu lạc bộ và sự kiện phát triển kỹ năng, thuyết trình, phản biện, làm việc nhóm. Sổ tay 2024 giới thiệu workshop, fieldtrip và cơ hội tiếp xúc doanh nghiệp; người học được hỗ trợ tư vấn nghề nghiệp, viết CV, chuẩn bị phỏng vấn và cập nhật thông tin tuyển dụng qua email/kênh CTSV và quan hệ doanh nghiệp.
+16.1. Phạm vi hỗ trợ theo nguồn công khai
+Kết nối sinh viên với workshop, hội thảo, tham quan doanh nghiệp và hoạt động rèn luyện.
+Hỗ trợ định hướng vị trí công việc và kỹ năng tìm việc.
+Giới thiệu thông tin tuyển dụng qua các kênh của trường/cơ sở.
+Không đồng nhất “giới thiệu việc làm” với bảo đảm có việc làm hoặc cam kết một mức lương nhất định cho mọi sinh viên.
+Nguồn đối chiếu: [S01], [S08], [S15].
+17. BẢO VỆ DỮ LIỆU CÁ NHÂN VÀ BẢO MẬT THÔNG TIN
+17.1. Quy định được công bố ngày 29/09/2026
+Văn bản đăng trên website BTEC FPT đặt phạm vi áp dụng với người học, phụ huynh/người bảo trợ, nhà giáo, nhân viên, ứng viên, cựu người học và các bên liên quan. Chính sách trình bày thông tin thu thập, mục đích xử lý, chia sẻ trong hệ sinh thái, quyền yêu cầu và trách nhiệm bảo mật tài khoản.
+Người học có quyền được thông tin, đồng ý/không đồng ý theo trường hợp pháp luật, tiếp cận/chỉnh sửa dữ liệu, yêu cầu xóa hoặc phản đối/hạn chế/rút đồng ý; việc xóa có ngoại lệ theo nghĩa vụ lưu trữ.
+Trang quy định yêu cầu chủ thể tự bảo mật mật khẩu, OTP, thiết bị và đăng xuất khỏi hệ thống khi không còn sử dụng.
+Dữ liệu có thể được xử lý nhằm cung cấp dịch vụ giáo dục, hỗ trợ giao tiếp, phân tích chất lượng, an ninh và hoạt động khác được thông báo.
+Nguyên tắc về đồng ý của người chưa thành niên được phân chia theo nhóm tuổi; người học từ đủ 16 tuổi được nêu có quyền tự quyết định sự đồng ý; trường hợp tài chính/người bảo trợ có thể yêu cầu xác nhận thêm.
+Quy định có phần về xử lý dữ liệu bằng AI, chuyển dữ liệu ra nước ngoài, DPO và ứng phó rò rỉ thông tin.
+17.2. Thời hạn trả lời yêu cầu dữ liệu được trang 2026 công bố
+Loại yêu cầu
+ | Thời hạn trong bài công bố
+ | 
+Xác nhận nhận yêu cầu và hướng dẫn thủ tục
+ | Trong 02 ngày làm việc.
+ | 
+Rút đồng ý / hạn chế / phản đối
+ | 12 ngày; trường hợp phối hợp bên thứ ba 18 ngày.
+ | 
+Xem / chỉnh sửa / yêu cầu chỉnh sửa
+ | 08 ngày; có bên thứ ba 12 ngày.
+ | 
+Xóa dữ liệu
+ | 18 ngày; có bên thứ ba 25 ngày.
+ | 
+
+Trang 2026 cho phép gia hạn một lần với lý do thông báo theo giới hạn ghi trong chính sách. Thời hạn là phát biểu từ văn bản công bố của trường, không phải cam kết độc lập của người biên soạn.
+17.3. Lưu ý cần làm rõ về văn bản
+LƯU Ý KIỂM CHỨNG  Bài công bố 29/09/2026 có chi tiết điều khoản chuyển tiếp nhắc hạn 25/03/2026 (sớm hơn ngày đăng bài). Đây có thể là kế thừa từ quyết định trước đó; khi cần căn cứ pháp lý nên lấy bản quyết định và phụ lục gốc được trường đính kèm, kiểm tra ngày hiệu lực và phiên bản.
+Nguồn đối chiếu: [S09], [S10].
+18. CHÍNH SÁCH PEARSON: THAM CHIẾU, KHÔNG ĐỒNG NHẤT QUY CHẾ CỦA BTEC FPT
+Pearson yêu cầu các cơ sở triển khai chương trình BTEC phải thiết lập và duy trì các chính sách chất lượng riêng. Từ trang “BTEC Centre Policies”, những nhóm chính sách quan trọng gồm: đăng ký và chứng nhận người học, đánh giá, kiểm định nội bộ, học từ xa/hỗn hợp, chống đạo văn và gian lận (kể cả AI), phúc tra/khiếu nại, bình đẳng, bảo vệ người học, an toàn sức khỏe, điều chỉnh hợp lý, công nhận học tập trước và phương án ứng phó sự cố.
+Tuy nhiên, Pearson nói chính sách chi tiết có thể để trên website hoặc mạng nội bộ của cơ sở. Vì thế không thể suy ra BTEC FPT đã công khai toàn bộ quy định nội bộ, hạn giải quyết khiếu nại, hoặc chế tài AI trên website công cộng. Để dùng làm căn cứ xử lý cần xin chính sách của cơ sở, không chỉ trích danh sách yêu cầu Pearson.
+18.1. Những tài liệu nên đề nghị trường cung cấp
+Academic Integrity / Plagiarism / AI Use Policy (chống đạo văn, nguồn trích dẫn, công cụ AI).
+Assessment & Internal Verification, Assignment Extension và Resubmission Policy.
+Student Appeal and Complaint Procedure (trình tự, thời hạn, người phê duyệt).
+Reasonable Adjustment / Special Consideration (khi người học có tình huống đặc biệt).
+Recognition of Prior Learning / Credit Transfer (công nhận môn và tín chỉ đã học).
+Nguồn đối chiếu: [S13].
+19. SỔ TAY QUY TRÌNH THAO TÁC THEO TÌNH HUỐNG
+Đây là phần tổng hợp thao tác thực tế từ các mục dịch vụ đã công bố. Các bước không được tài liệu gốc quy định chi tiết được ghi là hướng dẫn chuẩn bị, không phải điều khoản bắt buộc.
+19.01. Đăng ký tư vấn tuyển sinh
+Đầu mối: Website đăng ký / tuyển sinh.
+Trình tự: Khai ngành, cơ sở, liên lạc → gửi biểu mẫu → kiểm tra phản hồi → đề nghị danh mục hồ sơ và mức thu riêng theo đợt.
+Căn cứ: [S02][S04]
+19.02. Hoàn tất nhập học
+Đầu mối: Bộ phận tuyển sinh.
+Trình tự: Nộp phiếu/giấy tờ chứng thực → nhận kết quả xét tuyển → xác minh tiếng Anh → nhận thông báo học phí → thanh toán chính thức → nhận FAP/lịch học.
+Căn cứ: [S02][S03][S06]
+19.03. Nộp học phí học kỳ
+Đầu mối: FAP/email + Phòng Hành chính.
+Trình tự: Đọc thông báo của kỳ → kiểm tra số công nợ → chuyển khoản đúng đơn vị nhận → lưu biên lai → đối chiếu số dư.
+Căn cứ: [S01][S06]
+19.04. Phản ánh chưa ghi nhận học phí
+Đầu mối: Phòng Hành chính / DVSV.
+Trình tự: Chụp biên lai, ghi thời gian chuyển, tên chủ tài khoản, MSSV, học kỳ, số tiền → gửi đầu mối chính thức.
+Căn cứ: [S01][S08]
+19.05. Xin khôi phục điểm danh
+Đầu mối: FAP Online Service.
+Trình tự: Gửi trong 48 giờ sau kết thúc ca; khai môn/lớp/giờ, lý do và minh chứng → chờ xét; chú ý giới hạn 1 lần/môn/học kỳ.
+Căn cứ: [S01]
+19.06. Đề nghị phúc tra kết quả
+Đầu mối: FAP / Phòng Đào tạo.
+Trình tự: Chụp thông báo điểm, syllabus và bằng chứng sai sót → gửi đơn trong 07 ngày từ công bố điểm → theo dõi phản hồi.
+Căn cứ: [S01]
+19.07. Nộp Final Report
+Đầu mối: CMS.
+Trình tự: Xem Brief/syllabus → hoàn thành mốc Part 1 → kiểm tra frontsheet và file → gửi trước deadline → kiểm tra xác nhận trên CMS.
+Căn cứ: [S01]
+19.08. Second Chance
+Đầu mối: CMS / giảng viên.
+Trình tự: Khi Final Report Fail, xem thông báo, đối chiếu lỗi cần sửa → hoàn thiện và gửi trong thời gian quy định sổ tay (03 ngày sau buổi cuối) → lưu ý tối đa Pass.
+Căn cứ: [S01]
+19.09. Xin gia hạn Assignment
+Đầu mối: Giảng viên / Đào tạo / DVSV.
+Trình tự: Liên hệ càng sớm càng tốt, mô tả lý do, mốc deadline, minh chứng và đề nghị xác nhận bằng văn bản; chưa có quyền tự động gia hạn.
+Căn cứ: [S01]
+19.10. Đăng ký học lại
+Đầu mối: FAP / Phòng Đào tạo.
+Trình tự: Tra môn trượt, lịch mở lớp, phí học lại → đăng ký trước hạn → thanh toán → kiểm tra có tên trong danh sách lớp.
+Căn cứ: [S01]
+19.11. Xin bảo lưu
+Đầu mối: FAP Online Service.
+Trình tự: Kiểm tra thời gian mở đơn trong FAP (thường thông báo trước kỳ) → chuẩn bị lý do/minh chứng → xin phê duyệt → đối chiếu khoản phí được bảo lưu.
+Căn cứ: [S01][S07]
+19.12. Xin học trở lại sau thôi học
+Đầu mối: DVSV / Đào tạo.
+Trình tự: Liên hệ trước kỳ mới khoảng 02 tuần theo sổ tay → nộp đơn ngoài hệ thống → xác minh kết quả cũ và công nợ → nhận quyết định xếp lớp.
+Căn cứ: [S01]
+19.13. Chuyển chuyên ngành hoặc cơ sở
+Đầu mối: FAP / Đào tạo / CTSV.
+Trình tự: Hỏi điều kiện kỳ, môn chuyển đổi, học bổng và mức thu cơ sở mới → nộp đơn đúng hạn → chỉ chuyển khi được phê duyệt.
+Căn cứ: [S01][S08]
+19.14. Xin xác nhận sinh viên/hoãn nghĩa vụ
+Đầu mối: FAP / CTSV.
+Trình tự: Chọn dịch vụ phù hợp, nêu mục đích và cơ quan nhận, cung cấp giấy tờ yêu cầu → nhận giấy xác nhận theo thông báo.
+Căn cứ: [S01][S08]
+19.15. Làm lại thẻ / sửa thông tin
+Đầu mối: FAP Online Service / DVSV.
+Trình tự: Chọn đúng dịch vụ, xác minh thông tin cũ - mới, tải tài liệu chứng minh, nộp phí nếu có; kiểm tra kết quả.
+Căn cứ: [S01]
+19.16. Xin thôi học / hỏi hoàn phí
+Đầu mối: FAP / Đào tạo / tài chính.
+Trình tự: Trước khi nộp đơn, yêu cầu văn bản tính hoàn/bảo lưu khoản đã đóng cho khóa mình; gửi đơn rồi chờ quyết định và đối soát.
+Căn cứ: [S01][S07]
+19.17. Báo lỗi tài khoản, Wi-Fi, CMS
+Đầu mối: DVSV / Hành chính / Đào tạo.
+Trình tự: Ghi MSSV, tên hệ thống, thời điểm, thông báo lỗi, ảnh chụp; yêu cầu IT hỗ trợ; đặc biệt báo trước deadline bài tập.
+Căn cứ: [S01][S08]
+19.18. Yêu cầu quyền dữ liệu cá nhân
+Đầu mối: Kênh dữ liệu chính thức / DPO.
+Trình tự: Nêu quyền muốn thực hiện, danh tính, dữ liệu liên quan và phương án liên hệ; đối chiếu thời hạn tiếp nhận theo trang quy định 2026.
+Căn cứ: [S09]
+20. DANH BẠ LIÊN HỆ VÀ TUYẾN HỖ TRỢ
+Thông tin mới trên chân trang website chính thức và trang phòng ban có thể khác địa chỉ trong Sổ tay 2024, nhất là khi đổi cơ sở. Bảng dưới ưu tiên địa chỉ công bố trên website ở thời điểm rà soát; số của Phòng DVSV/Đào tạo là số tổng đài cấp cơ sở theo trang phòng ban.
+Cơ sở
+ | Địa chỉ công khai trên website
+ | Tổng đài cơ sở / Tư vấn
+ | 
+Hà Nội
+ | Tòa FPT BTEC, 13 phố Phan Tây Nhạc, phường Xuân Phương, Hà Nội
+ | 024 7309 9588 / 098 109 05 13
+ | 
+TP. HCM
+ | Tòa GenPacific, Lô 3 đường 16, Công viên Phần mềm Quang Trung, phường Trung Mỹ Tây
+ | 028 7309 9679 / 035 385 21 38
+ | 
+Đà Nẵng
+ | 66 Võ Văn Tần, phường Thanh Khê, Đà Nẵng
+ | 023 6730 3868 / 078 865 36 88
+ | 
+Cần Thơ
+ | Đường số 22, phường Cái Răng, Cần Thơ
+ | 029 2730 3386 / 096 705 76 05
+ | 
+
+Đầu mối toàn hệ thống theo website: btecfpt@fe.edu.vn; hotline tuyển sinh: 0329 605 828. Trang phòng ban đăng giờ liên hệ từ 8:00–17:30 thứ Hai đến thứ Sáu, 8:00–12:00 thứ Bảy (cần kiểm tra trước khi đến).
+20.1. Email hỗ trợ nêu trong sổ tay và trang phòng ban
+Bộ phận / cơ sở
+ | Email để đối chiếu
+ | 
+Đào tạo Hà Nội
+ | Academic.btec.hn@fe.edu.vn (sổ tay 2024)
+ | 
+Đào tạo TP. HCM
+ | Academic.btec.hcm@fe.edu.vn (sổ tay 2024)
+ | 
+Đào tạo Đà Nẵng
+ | Academic.btec.dn@fe.edu.vn (sổ tay 2024)
+ | 
+Đào tạo Cần Thơ
+ | Academic.btec.ct@fe.edu.vn (sổ tay 2024)
+ | 
+CTSV/DVSV Hà Nội
+ | sro.btec.hn@fe.edu.vn
+ | 
+CTSV/DVSV TP. HCM
+ | sro.btec.hcm@fe.edu.vn
+ | 
+CTSV/DVSV Đà Nẵng
+ | sro.btec.dn@fe.edu.vn
+ | 
+CTSV/DVSV Cần Thơ
+ | sro.btec.ct@fe.edu.vn
+ | 
+Hành chính Hà Nội
+ | accounting.btec.hn@fe.edu.vn (sổ tay 2024)
+ | 
+Hành chính TP. HCM
+ | accounting.btec.hcm@fe.edu.vn (sổ tay 2024)
+ | 
+Hành chính Đà Nẵng
+ | accounting.btec.dn@fe.edu.vn (sổ tay 2024)
+ | 
+Hành chính Cần Thơ
+ | accounting.btec.ct@fe.edu.vn (sổ tay 2024)
+ | 
+Tuyển sinh Hà Nội
+ | btec.tshn@fe.edu.vn
+ | 
+Tuyển sinh HCM
+ | btec.tshcm@fe.edu.vn
+ | 
+Tuyển sinh Đà Nẵng
+ | btec.tsdn@fe.edu.vn
+ | 
+Tuyển sinh Cần Thơ
+ | btec.tsct@fe.edu.vn
+ | 
+
+LƯU Ý KIỂM CHỨNG  Email theo sổ tay 2024 có thể đã được thay đổi; khi gửi thông tin cá nhân nhạy cảm, cần xác minh email còn được cơ sở sử dụng qua website/FAP hoặc tổng đài chính thức.
+Nguồn đối chiếu: [S01], [S02], [S08], [S15].
+21. MỤC CHƯA ĐỦ NGUỒN / CÂU HỎI CẦN XÁC NHẬN
+Các đầu mục sau có liên quan trực tiếp đến quyền lợi sinh viên nhưng chưa thể khẳng định đã có văn bản hoàn chỉnh công khai, còn hiệu lực riêng cho BTEC FPT năm 2026. Không điền bằng suy đoán hoặc lấy quy chế Đại học FPT/FPT Polytechnic của hệ khác để thay thế.
+Nội dung cần hỏi
+ | Lý do chưa kết luận từ nguồn công khai
+ | 
+Quy chế đào tạo cập nhật sau 09/2024
+ | Đã tìm được sổ tay 2024; chưa xác minh được bản thay thế toàn văn.
+ | 
+Biểu phí 2026–2027 theo khóa và mức nộp đầu tiên
+ | Trang web có giá tham khảo; quyết định tài chính tải được là 2024–2025.
+ | 
+Quy trình gia hạn học phí/đóng chậm cho BTEC
+ | Văn bản chung nhắc khả năng trả chậm nhưng không xác lập quyền chung cho mọi sinh viên BTEC.
+ | 
+Chính sách hoàn tiền hiện hành
+ | Có quy định lịch sử 2024–2025; cần bản áp dụng cho khóa học/ngày giao dịch.
+ | 
+Tính hợp lệ và mức phí tuyển sinh/nhập học
+ | Các nội dung trên website và văn bản cũ chưa thống nhất; cần thông báo chính thức của cơ sở.
+ | 
+Nội quy phòng thi chi tiết
+ | Sổ tay nêu được thông báo trước kỳ thi; chưa tìm được bộ nội quy cập nhật đầy đủ.
+ | 
+Khung xử lý đạo văn / AI / collusion
+ | Pearson yêu cầu có chính sách; không tìm được bản nội bộ BTEC FPT công bố toàn văn.
+ | 
+Gia hạn ASM, ngoại lệ deadline, ốm đau
+ | Sổ tay có liệt kê yêu cầu nhưng chưa công bố toàn bộ điều kiện / mẫu xử lý.
+ | 
+Quy trình khiếu nại học vụ và học phí nhiều cấp
+ | Mới có kênh FAP/DVSV; chưa có sơ đồ thẩm quyền và hạn phúc quyết đầy đủ.
+ | 
+Miễn tiếng Anh và chuyển đổi tín chỉ từng khóa
+ | Có chuẩn và hướng dự bị; phải chờ kết quả xét duyệt cá nhân.
+ | 
+Quy trình kỷ luật và quyền giải trình/kháng nghị
+ | Sổ tay liệt kê mức kỷ luật, chưa có quy trình chi tiết đầy đủ.
+ | 
+Hạn xử lý từng loại Online Service
+ | Có danh mục dịch vụ, chưa có SLA cho mọi yêu cầu.
+ | 
+Chính sách hỗ trợ sinh viên đặc biệt/khuyết tật
+ | Pearson yêu cầu có chính sách cơ sở; văn bản BTEC FPT riêng chưa thấy.
+ | 
+Chỉ tiêu phòng ở/ký túc xá, giá và điều kiện xét
+ | Website chỉ nêu hỗ trợ tìm kiếm nhà ở/đầu mối.
+ | 
+Cấp bằng, nhận chứng chỉ và thủ tục liên thông cụ thể
+ | Nguồn giới thiệu chương trình; thủ tục hành chính từng ngành/cơ sở chưa công bố đầy đủ.
+ | 
+
+21.1. Cách xin văn bản có căn cứ
+Gửi email tới Phòng Đào tạo/CTSV của cơ sở, nêu rõ mã sinh viên, khóa, ngành, kỳ học và thủ tục cần thực hiện.
+Đề nghị tên quyết định, số văn bản, ngày ký, ngày hiệu lực, đối tượng áp dụng, phụ lục mức phí và đường dẫn tải (nếu có).
+Yêu cầu xác nhận thứ tự ưu tiên khi sổ tay, thông báo FAP và bảng phí không giống nhau.
+Lưu bằng chứng văn bản trả lời trong email/FAP để dùng khi cần đối chiếu quyền lợi.
+22. DANH MỤC NGUỒN CÔNG KHAI VÀ LIÊN KẾT GỐC
+Danh mục dưới đây giúp người đọc mở trực tiếp nguồn; ký hiệu [S..] được nhắc trong từng chương. Nguồn chỉ được dùng theo phạm vi trường/cơ sở và phiên bản của chính nó.
+[S01] Sổ tay sinh viên BTEC FPT ver.BTEC.9.2024. https://btec.fpt.edu.vn/wp-content/uploads/2024/08/So-tay-BTEC.pdf
+BTEC FPT | PDF | quy chế, FAP, học vụ, tài chính và CTSV
+[S02] Quy chế tuyển sinh BTEC FPT. https://btec.fpt.edu.vn/quy-che-tuyen-sinh/
+BTEC FPT | xét tuyển và hồ sơ
+[S03] Phiếu đăng ký học online. https://btec.fpt.edu.vn/phieu-dang-ky/
+BTEC FPT | biểu mẫu online
+[S04] Đăng ký trực tuyến. https://btec.fpt.edu.vn/dang-ky-truc-tuyen/
+BTEC FPT | tư vấn đăng ký
+[S05] Hướng dẫn nhập học. https://btec.fpt.edu.vn/huong-dan-nhap-hoc/
+BTEC FPT | trang hướng dẫn/liên hệ
+[S06] Học bổng - học phí BTEC FPT. https://btec.fpt.edu.vn/hoc-bong-hoc-phi-btec-fpt/
+BTEC FPT | học phí và chiến dịch học bổng; có nội dung thời hạn 2026
+[S07] Quyết định 08/QĐ-CTGDFPT - Tài chính 2024–2025. https://daihoc.fpt.edu.vn/wp-content/uploads/2024/08/QD-08-CTGDFPT-Ban-hanh-Quy-dinh-tai-chinh-nam-hoc-2024-2025-cho-sv-cac-he-dao-tao-thuoc-he-thong-giao-duc-FPT-BHL-1.pdf
+FPT Education | PDF | tài chính lịch sử, phụ lục hệ BTEC trang 27
+[S08] Thông tin các phòng ban BTEC FPT. https://btec.fpt.edu.vn/thong-tin-cac-phong-ban-btec/
+BTEC FPT | vai trò các đầu mối và tổng đài
+[S09] Quy định bảo vệ dữ liệu cá nhân (29/09/2026). https://btec.fpt.edu.vn/quy-dinh-bao-ve-du-lieu-ca-nhan/
+BTEC FPT | quy định đăng năm 2026
+[S10] Chính sách bảo mật thông tin (12/06/2021). https://btec.fpt.edu.vn/chinh-sach-bao-mat/
+BTEC FPT | văn bản chính sách trước đây
+[S11] Câu hỏi thường gặp. https://btec.fpt.edu.vn/cau-hoi-thuong-gap/
+BTEC FPT | chương trình/tiếng Anh/văn bằng
+[S12] Trang thông báo tuyển sinh có nội dung năm 2026. https://btec.fpt.edu.vn/tuyen-sinh-cao-dang-anh-quoc-btec-fpt-2025/
+BTEC FPT | trang giới thiệu tuyển sinh/marketing
+[S13] Pearson - BTEC Centre Policies. https://support.pearson.com/uk/articles/en_US/Knowledge/BTEC-Centre-Policies
+Pearson | chuẩn chính sách cho cơ sở đào tạo BTEC, không phải quy định riêng FPT
+[S14] Thông tin giới thiệu hoạt động CTSV. https://btec.fpt.edu.vn/phong-cong-tac-sinh-vien-noi-truyen-lua-va-giu-nhiet-cho-sinh-vien/
+BTEC FPT | hoạt động hỗ trợ
+[S15] Trang chủ BTEC FPT. https://btec.fpt.edu.vn/
+BTEC FPT | danh mục ngành, tin 2026, địa chỉ
+[S16] Sổ tay BTEC - trang truy cập. https://btec.fpt.edu.vn/so-tay-btec/
+BTEC FPT | đầu mục sổ tay
+KẾT LUẬN
+Các nguồn công khai hiện đủ để hình thành hướng dẫn khá sâu về tuyển sinh, nhập học, chi phí theo trang giới thiệu, lộ trình học tập, chuyên cần, Assignment, kiểm tra - đánh giá, bảo lưu, đăng ký dịch vụ và liên hệ hỗ trợ. Tuy nhiên, không có căn cứ để gọi đây là “toàn bộ quy định nội bộ BTEC FPT đang hiệu lực”: nhiều quyết định và biểu mẫu chi tiết có thể chỉ công bố cho người học trên FAP, gửi qua email hoặc áp dụng theo khóa. Bản tổng hợp này nên được dùng như bản đồ tra cứu và danh sách kiểm chứng, không phải văn bản pháp quy của trường.
+Hoàn thành rà soát nguồn công khai: 04/11/2026. Người biên soạn không đại diện BTEC FPT hoặc Pearson.

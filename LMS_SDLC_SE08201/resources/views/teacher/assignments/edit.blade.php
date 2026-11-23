@@ -115,6 +115,7 @@
             <div class="mb-3 flex items-center justify-end gap-2">
                 <button type="button" onclick="openAiModal()" class="flex items-center gap-1.5 rounded-lg bg-amber-100 px-3 py-1.5 text-xs font-bold text-amber-600 hover:bg-amber-200 transition-colors">Tạo bằng AI</button>
                 <button type="button" onclick="addQuestion()" class="flex items-center gap-1.5 rounded-lg bg-[#1e4f8f] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#163c6d] transition-colors">+ Thêm câu hỏi</button>
+                <button type="button" onclick="clearAllQuestions()" class="flex items-center gap-1.5 rounded-lg bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-600 hover:bg-rose-100 transition-colors">Xóa hết câu hỏi</button>
             </div>
             
             <div id="questionList" class="space-y-4">
@@ -173,8 +174,9 @@
                             @error('questions.'.$index.'.correct_text') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
                         </div>
 
-                        <div class="ml-10 mt-2">
-                            <input type="text" name="questions[{{ $index }}][explanation]" value="{{ $explanation }}" placeholder="Giải thích đáp án (tùy chọn)" class="w-full rounded-md border border-slate-200 px-2 py-1 text-xs text-slate-600 outline-none focus:border-[#1e4f8f]">
+                        <div class="ml-10 mt-2 flex items-center gap-2 text-sm">
+                            <label class="shrink-0 font-medium text-slate-600">Giải thích:</label>
+                            <input type="text" name="questions[{{ $index }}][explanation]" value="{{ $explanation }}" placeholder="Giải thích vì sao đáp án đúng (tùy chọn)" class="w-full rounded-md border border-slate-200 px-2 py-1 text-xs text-slate-600 outline-none focus:border-[#1e4f8f]">
                         </div>
                     </div>
                 @endforeach
@@ -230,8 +232,9 @@
                     <input type="text" name="questions[${i}][correct_text]" placeholder="Đáp án đúng (nhiều đáp án cách nhau bằng dấu |)" class="w-full rounded-md border border-slate-200 px-2 py-1.5 text-sm outline-none focus:border-[#1e4f8f]">
                 </div>
 
-                <div class="ml-10 mt-2">
-                    <input type="text" name="questions[${i}][explanation]" placeholder="Giải thích đáp án (tùy chọn)" class="w-full rounded-md border border-slate-200 px-2 py-1 text-xs text-slate-600 outline-none focus:border-[#1e4f8f]">
+                <div class="ml-10 mt-2 flex items-center gap-2 text-sm">
+                    <label class="shrink-0 font-medium text-slate-600">Giải thích:</label>
+                    <input type="text" name="questions[${i}][explanation]" placeholder="Giải thích vì sao đáp án đúng (tùy chọn)" class="w-full rounded-md border border-slate-200 px-2 py-1 text-xs text-slate-600 outline-none focus:border-[#1e4f8f]">
                 </div>
             </div>
         `;
@@ -267,6 +270,14 @@
             if (optC) optC.classList.remove('hidden');
             if (optD) optD.classList.remove('hidden');
         }
+    }
+
+    function clearAllQuestions() {
+        const items = document.querySelectorAll('#questionList .question-item');
+        if (!items.length) return;
+        if (!confirm(`Xóa hết ${items.length} câu hỏi? Các câu hỏi sẽ bị xóa khi bạn bấm "Cập nhật bài tập".`)) return;
+        items.forEach(item => item.remove());
+        updateQuestionIndexes();
     }
 
     function updateQuestionIndexes() {
@@ -461,18 +472,16 @@
                     <label class="flex items-center gap-2"><input type="checkbox" class="ai-type" value="mcq" checked> Trắc nghiệm</label>
                     <label class="flex items-center gap-2"><input type="checkbox" class="ai-type" value="true_false"> Đúng/Sai</label>
                     <label class="flex items-center gap-2"><input type="checkbox" class="ai-type" value="fill_blank"> Điền khuyết</label>
-                    <label class="flex items-center gap-2"><input type="checkbox" class="ai-type" value="code_reading"> Đọc code</label>
                 </div>
             </div>
 
             <div>
-                <label class="mb-1 block text-sm font-semibold text-slate-700">Độ khó (thang Bloom)</label>
+                <label class="mb-1 block text-sm font-semibold text-slate-700">Độ khó</label>
                 <select id="aiDifficulty" class="w-full rounded-md border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-[#1e4f8f]">
-                    <option value="">Tự động (xen kẽ)</option>
-                    <option value="Nhớ (Remember)">Nhớ (Remember)</option>
-                    <option value="Hiểu (Understand)">Hiểu (Understand)</option>
-                    <option value="Vận dụng (Apply)">Vận dụng (Apply)</option>
-                    <option value="Phân tích (Analyze)">Phân tích (Analyze)</option>
+                    <option value="nhan_biet">Nhận biết</option>
+                    <option value="thong_hieu">Thông hiểu</option>
+                    <option value="van_dung">Vận dụng</option>
+                    <option value="mix" selected>Trộn</option>
                 </select>
             </div>
 

@@ -37,11 +37,9 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         // Xóa thông báo lỗi tĩnh của Laravel nếu có để tránh trùng lặp
-        const staticAlerts = document.querySelectorAll('.bg-emerald-50, .bg-rose-50');
-        staticAlerts.forEach(alert => {
-            if (alert.textContent.includes('✓') || alert.textContent.includes('⚠️')) {
-                alert.style.display = 'none';
-            }
+        // Chỉ ẩn khung flash có đánh dấu data-flash (không đụng tới đáp án đúng, nhãn "✓ Có mặt"...)
+        document.querySelectorAll('[data-flash]').forEach(alert => {
+            alert.style.display = 'none';
         });
 
         // Tự động hiện Toast từ session của Laravel

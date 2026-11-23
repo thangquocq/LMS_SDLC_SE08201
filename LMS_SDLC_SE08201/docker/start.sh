@@ -49,6 +49,12 @@ else
     php artisan db:seed --class=SubjectMaterialsSeeder --force || true
 fi
 
+# Tài liệu cho trợ lý BTEC (storage bị xóa mỗi lần khởi động lại -> chép lại từ bản trong image)
+echo "==> Nạp tài liệu trợ lý BTEC"
+mkdir -p storage/btec_ai_kb
+cp -f docker/btec_ai_kb/* storage/btec_ai_kb/ || true
+php artisan db:seed --class=BtecPolicyRuleSeeder --force || true
+
 # KHÔNG chạy config:cache: các service AI đọc key trực tiếp bằng env(),
 # khi config bị cache thì env() trả về rỗng -> AI báo thiếu API key.
 php artisan route:cache || true

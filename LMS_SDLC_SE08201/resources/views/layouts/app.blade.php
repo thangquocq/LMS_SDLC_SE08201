@@ -246,13 +246,13 @@
         <main class="flex-1 p-4 md:p-6 max-w-[1440px] w-full mx-auto">
             {{-- Flash messages --}}
             @if (session('success'))
-                <div class="mb-4 flex items-start gap-2.5 rounded-md border border-emerald-200 bg-emerald-50/80 px-3.5 py-2.5 text-xs font-medium text-emerald-900">
+                <div data-flash class="mb-4 flex items-start gap-2.5 rounded-md border border-emerald-200 bg-emerald-50/80 px-3.5 py-2.5 text-xs font-medium text-emerald-900">
                     <svg class="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                     <span>{{ session('success') }}</span>
                 </div>
             @endif
             @if (session('error'))
-                <div class="mb-4 flex items-start gap-2.5 rounded-md border border-rose-200 bg-rose-50/80 px-3.5 py-2.5 text-xs font-medium text-rose-900">
+                <div data-flash class="mb-4 flex items-start gap-2.5 rounded-md border border-rose-200 bg-rose-50/80 px-3.5 py-2.5 text-xs font-medium text-rose-900">
                     <svg class="h-4 w-4 text-rose-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                     <span>{{ session('error') }}</span>
                 </div>

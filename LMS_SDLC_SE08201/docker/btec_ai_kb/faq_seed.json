@@ -1,0 +1,378 @@
+[
+  {
+    "faq_id": "FAQ-001",
+    "topic_id": "T03",
+    "student_question": "Em có cần IELTS 5.5 mới được đăng ký học BTEC không?",
+    "source_ref_candidates": [
+      "S02",
+      "S06",
+      "S11"
+    ],
+    "answer_guidance": "Giải thích các lộ trình đầu vào theo nguồn áp dụng; không tự xác nhận miễn học tiếng Anh.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-002",
+    "topic_id": "T04",
+    "student_question": "Hồ sơ nhập học BTEC FPT gồm những gì?",
+    "source_ref_candidates": [
+      "S02",
+      "S03",
+      "S05"
+    ],
+    "answer_guidance": "Liệt kê hồ sơ từ nguồn được duyệt và chỉ đúng đầu mối tuyển sinh.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-003",
+    "topic_id": "T04",
+    "student_question": "Em nộp hồ sơ online như thế nào?",
+    "source_ref_candidates": [
+      "S03",
+      "S04"
+    ],
+    "answer_guidance": "Chỉ liên kết biểu mẫu chính thức và quy trình xác nhận.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-004",
+    "topic_id": "T05",
+    "student_question": "Học phí BTEC FPT hiện tại bao nhiêu?",
+    "source_ref_candidates": [
+      "S06"
+    ],
+    "answer_guidance": "Bắt buộc hỏi cơ sở, khóa và kỳ; tuyệt đối không sử dụng mức lịch sử như giá hiện hành.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-005",
+    "topic_id": "T05",
+    "student_question": "Chuyển khoản rồi mà FAP chưa ghi nhận thì làm sao?",
+    "source_ref_candidates": [
+      "S01",
+      "S08"
+    ],
+    "answer_guidance": "Hướng dẫn lưu chứng từ và liên hệ đầu mối; không yêu cầu gửi số tài khoản cá nhân vào chat.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-006",
+    "topic_id": "T05",
+    "student_question": "Em có thể đóng học phí muộn không?",
+    "source_ref_candidates": [
+      "S01",
+      "S06"
+    ],
+    "answer_guidance": "Không cam kết quyền gia hạn; cần thông báo đang hiệu lực và liên hệ tài chính.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-007",
+    "topic_id": "T06",
+    "student_question": "BTEC FPT có học bổng nào?",
+    "source_ref_candidates": [
+      "S06"
+    ],
+    "answer_guidance": "Điều kiện và mức ưu đãi gắn thời điểm; chỉ nêu chương trình còn hiệu lực.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-008",
+    "topic_id": "T06",
+    "student_question": "Học bổng của em có bị mất khi học lại không?",
+    "source_ref_candidates": [
+      "S06",
+      "S01"
+    ],
+    "answer_guidance": "Chỉ kết luận khi có điều khoản áp dụng cho khóa của sinh viên.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-009",
+    "topic_id": "T07",
+    "student_question": "Em muốn xem thời khóa biểu ở đâu?",
+    "source_ref_candidates": [
+      "S01"
+    ],
+    "answer_guidance": "Hướng dẫn tra trên FAP; không tự truy cập tài khoản.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-010",
+    "topic_id": "T08",
+    "student_question": "Vắng học quá nhiều có bị cấm thi không?",
+    "source_ref_candidates": [
+      "S01"
+    ],
+    "answer_guidance": "Khi viện dẫn tỷ lệ trong sổ tay 2024, luôn ghi rõ phiên bản và yêu cầu đối chiếu quy định mới.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-011",
+    "topic_id": "T08",
+    "student_question": "Điểm danh sai thì yêu cầu sửa ở đâu?",
+    "source_ref_candidates": [
+      "S01"
+    ],
+    "answer_guidance": "Hướng dẫn dịch vụ FAP, thời hạn chỉ theo sổ tay xác minh.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-012",
+    "topic_id": "T09",
+    "student_question": "Assignment nộp muộn có được tính điểm không?",
+    "source_ref_candidates": [
+      "S01"
+    ],
+    "answer_guidance": "Đối chiếu quy định và hướng dẫn giảng viên; không tự cho phép nộp muộn.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-013",
+    "topic_id": "T09",
+    "student_question": "Second Chance là gì?",
+    "source_ref_candidates": [
+      "S01"
+    ],
+    "answer_guidance": "Giải thích khái niệm và giới hạn theo sổ tay cụ thể, tránh coi như quyền tự động.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-014",
+    "topic_id": "T09",
+    "student_question": "Có thể sử dụng AI làm Assignment không?",
+    "source_ref_candidates": [
+      "S01",
+      "S13"
+    ],
+    "answer_guidance": "Phân biệt hỗ trợ học tập hợp pháp với gian lận; yêu cầu policy của từng môn/cơ sở.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-015",
+    "topic_id": "T10",
+    "student_question": "Em muốn phúc tra điểm Assignment thì làm sao?",
+    "source_ref_candidates": [
+      "S01"
+    ],
+    "answer_guidance": "Nêu thủ tục, thời hạn nếu nguồn đang hiệu lực; nếu không rõ thì chuyển phòng Đào tạo.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-016",
+    "topic_id": "T10",
+    "student_question": "Thi trượt có được thi lại không?",
+    "source_ref_candidates": [
+      "S01"
+    ],
+    "answer_guidance": "Nêu lựa chọn học lại/đánh giá lại tùy loại môn; phải xác minh quy định áp dụng.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-017",
+    "topic_id": "T10",
+    "student_question": "Điều kiện xét tốt nghiệp là gì?",
+    "source_ref_candidates": [
+      "S01"
+    ],
+    "answer_guidance": "Đối chiếu chương trình và khóa; phân biệt yêu cầu của trường và Pearson.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-018",
+    "topic_id": "T11",
+    "student_question": "Em muốn bảo lưu học kỳ, phải làm gì?",
+    "source_ref_candidates": [
+      "S01",
+      "S07"
+    ],
+    "answer_guidance": "Hướng dẫn thao tác tạo đơn FAP, không cam kết phê duyệt hay bảo lưu tiền.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-019",
+    "topic_id": "T11",
+    "student_question": "Em có thể chuyển cơ sở học từ Hà Nội vào TP.HCM không?",
+    "source_ref_candidates": [
+      "S01",
+      "S08"
+    ],
+    "answer_guidance": "Hỏi điều kiện, chứng chỉ, học bổng và chính sách học phí trước khi nộp đơn.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-020",
+    "topic_id": "T11",
+    "student_question": "Em muốn đăng ký học lại môn thì làm sao?",
+    "source_ref_candidates": [
+      "S01"
+    ],
+    "answer_guidance": "Hướng dẫn tra lớp và phí trên FAP; không bịa lịch mở lớp.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-021",
+    "topic_id": "T12",
+    "student_question": "Nếu thôi học có được hoàn tiền không?",
+    "source_ref_candidates": [
+      "S07"
+    ],
+    "answer_guidance": "Văn bản tài chính 2024–2025 không chứng minh quyền hoàn phí hiện hành; chuyển tài chính.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-022",
+    "topic_id": "T13",
+    "student_question": "Không đăng nhập FAP được thì liên hệ ai?",
+    "source_ref_candidates": [
+      "S01",
+      "S08"
+    ],
+    "answer_guidance": "Hướng dẫn thử kiểm tra thông tin không nhạy cảm, sau đó gửi ticket IT.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-023",
+    "topic_id": "T13",
+    "student_question": "CMS không cho nộp bài thì phải làm sao?",
+    "source_ref_candidates": [
+      "S01",
+      "S08"
+    ],
+    "answer_guidance": "Hướng dẫn chụp lỗi, ghi mốc deadline và báo ngay giảng viên/IT.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-024",
+    "topic_id": "T14",
+    "student_question": "Em muốn giấy xác nhận sinh viên để hoãn nghĩa vụ quân sự?",
+    "source_ref_candidates": [
+      "S01",
+      "S08"
+    ],
+    "answer_guidance": "Chỉ đúng dịch vụ và đầu mối, không tự hứa thời hạn giải quyết.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-025",
+    "topic_id": "T15",
+    "student_question": "Đi học muộn có bị kỷ luật không?",
+    "source_ref_candidates": [
+      "S01"
+    ],
+    "answer_guidance": "Trình bày quy định được công bố, không suy diễn hình thức kỷ luật cho cá nhân.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-026",
+    "topic_id": "T16",
+    "student_question": "Trường có hỗ trợ thực tập và việc làm không?",
+    "source_ref_candidates": [
+      "S08",
+      "S14"
+    ],
+    "answer_guidance": "Giới thiệu đúng phạm vi dịch vụ công khai và kênh liên hệ.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-027",
+    "topic_id": "T17",
+    "student_question": "Em muốn xóa dữ liệu cá nhân thì gửi cho ai?",
+    "source_ref_candidates": [
+      "S09"
+    ],
+    "answer_guidance": "Điều hướng đến chính sách và đầu mối chính thức; xác minh danh tính ngoài chatbot.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-028",
+    "topic_id": "T18",
+    "student_question": "Pearson có thể xem xét khiếu nại học vụ của em không?",
+    "source_ref_candidates": [
+      "S13"
+    ],
+    "answer_guidance": "Không đồng nhất chính sách Pearson với quy trình kháng nghị riêng BTEC FPT.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-029",
+    "topic_id": "T19",
+    "student_question": "Em muốn làm lại thẻ sinh viên thì vào đâu?",
+    "source_ref_candidates": [
+      "S01"
+    ],
+    "answer_guidance": "Tra thủ tục FAP, giấy tờ và phí theo thông báo hiện hành.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  },
+  {
+    "faq_id": "FAQ-030",
+    "topic_id": "T20",
+    "student_question": "Phòng Đào tạo cơ sở Cần Thơ liên hệ như thế nào?",
+    "source_ref_candidates": [
+      "S08",
+      "S15"
+    ],
+    "answer_guidance": "Lấy danh bạ đã kiểm chứng gần nhất; không dùng email 2024 khi chưa xác minh.",
+    "answer_text": null,
+    "approval_status": "awaiting_fact_check",
+    "is_production_ready": false
+  }
+]

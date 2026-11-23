@@ -1,0 +1,251 @@
+[
+  {
+    "topic_id": "T01",
+    "name": "PHẠM VI, PHƯƠNG PHÁP VÀ CÁCH ĐỌC TÀI LIỆU",
+    "risk": "low",
+    "source_refs": [
+      "S01",
+      "S06",
+      "S07",
+      "S09"
+    ],
+    "category": "reference"
+  },
+  {
+    "topic_id": "T02",
+    "name": "NHÀ TRƯỜNG, CHƯƠNG TRÌNH VÀ CƠ CẤU TIẾP NHẬN",
+    "risk": "medium",
+    "source_refs": [
+      "S01",
+      "S02",
+      "S08",
+      "S11",
+      "S15"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T03",
+    "name": "TUYỂN SINH: ĐỐI TƯỢNG, ĐIỀU KIỆN VÀ TIẾNG ANH",
+    "risk": "medium",
+    "source_refs": [
+      "S01",
+      "S02",
+      "S06",
+      "S11"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T04",
+    "name": "QUY TRÌNH ĐĂNG KÝ, XÉT TUYỂN VÀ NHẬP HỌC",
+    "risk": "medium",
+    "source_refs": [
+      "S02",
+      "S03",
+      "S04",
+      "S05"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T05",
+    "name": "HỌC PHÍ CÔNG BỐ VÀ PHƯƠNG THỨC THANH TOÁN",
+    "risk": "high",
+    "source_refs": [
+      "S01",
+      "S06",
+      "S07",
+      "S08"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T06",
+    "name": "HỌC BỔNG, ƯU ĐÃI, HỖ TRỢ TÀI CHÍNH",
+    "risk": "high",
+    "source_refs": [
+      "S02",
+      "S06",
+      "S07"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T07",
+    "name": "NIÊN KHÓA, LỚP HỌC VÀ NỘI QUY HỌC TẬP",
+    "risk": "medium",
+    "source_refs": [
+      "S01"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T08",
+    "name": "ĐIỂM DANH, CHUYÊN CẦN VÀ XỬ LÝ VẮNG HỌC",
+    "risk": "high",
+    "source_refs": [
+      "S01",
+      "S08"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T09",
+    "name": "ASSIGNMENT, THỜI HẠN NỘP VÀ SECOND CHANCE",
+    "risk": "high",
+    "source_refs": [
+      "S01",
+      "S13"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T10",
+    "name": "THI CỬ, CHẤM ĐIỂM, PHÚC TRA VÀ TỐT NGHIỆP",
+    "risk": "high",
+    "source_refs": [
+      "S01"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T11",
+    "name": "HỌC LẠI, HỌC THÊM, BẢO LƯU, THÔI HỌC, CHUYỂN NGÀNH/CƠ SỞ",
+    "risk": "high",
+    "source_refs": [
+      "S01",
+      "S07",
+      "S08"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T12",
+    "name": "HOÀN TRẢ, BẢO LƯU VÀ CHUYỂN HỌC PHÍ - CHỈ THAM CHIẾU VĂN BẢN 2024–2025",
+    "risk": "high",
+    "source_refs": [
+      "S07"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T13",
+    "name": "HỆ THỐNG SỐ VÀ DỊCH VỤ MỘT CỬA",
+    "risk": "medium",
+    "source_refs": [
+      "S01",
+      "S08",
+      "S09"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T14",
+    "name": "HỖ TRỢ NGƯỜI HỌC, Y TẾ, HÀNH CHÍNH, NHÀ Ở VÀ CƠ SỞ VẬT CHẤT",
+    "risk": "medium",
+    "source_refs": [
+      "S01",
+      "S08"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T15",
+    "name": "KHEN THƯỞNG, KỶ LUẬT VÀ NGHĨA VỤ NGƯỜI HỌC",
+    "risk": "high",
+    "source_refs": [
+      "S01"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T16",
+    "name": "HOẠT ĐỘNG SINH VIÊN, QUAN HỆ DOANH NGHIỆP VÀ VIỆC LÀM",
+    "risk": "medium",
+    "source_refs": [
+      "S01",
+      "S08",
+      "S15"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T17",
+    "name": "BẢO VỆ DỮ LIỆU CÁ NHÂN VÀ BẢO MẬT THÔNG TIN",
+    "risk": "high",
+    "source_refs": [
+      "S09",
+      "S10"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T18",
+    "name": "CHÍNH SÁCH PEARSON: THAM CHIẾU, KHÔNG ĐỒNG NHẤT QUY CHẾ CỦA BTEC FPT",
+    "risk": "low",
+    "source_refs": [
+      "S13"
+    ],
+    "category": "reference"
+  },
+  {
+    "topic_id": "T19",
+    "name": "SỔ TAY QUY TRÌNH THAO TÁC THEO TÌNH HUỐNG",
+    "risk": "medium",
+    "source_refs": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S06",
+      "S07",
+      "S08",
+      "S09"
+    ],
+    "category": "procedure"
+  },
+  {
+    "topic_id": "T20",
+    "name": "DANH BẠ LIÊN HỆ VÀ TUYẾN HỖ TRỢ",
+    "risk": "medium",
+    "source_refs": [
+      "S01",
+      "S02",
+      "S08",
+      "S15"
+    ],
+    "category": "policy_summary"
+  },
+  {
+    "topic_id": "T21",
+    "name": "MỤC CHƯA ĐỦ NGUỒN / CÂU HỎI CẦN XÁC NHẬN",
+    "risk": "low",
+    "source_refs": [],
+    "category": "reference"
+  },
+  {
+    "topic_id": "T22",
+    "name": "DANH MỤC NGUỒN CÔNG KHAI VÀ LIÊN KẾT GỐC",
+    "risk": "low",
+    "source_refs": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "S15",
+      "S16"
+    ],
+    "category": "reference"
+  }
+]
