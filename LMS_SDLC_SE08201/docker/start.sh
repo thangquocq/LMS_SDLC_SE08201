@@ -12,6 +12,26 @@ sed -ri "s/<VirtualHost \*:[0-9]+>/<VirtualHost *:${PORT}>/" /etc/apache2/sites-
 mkdir -p storage/app/public storage/framework/cache/data storage/framework/sessions \
          storage/framework/views storage/logs bootstrap/cache
 
+# Cắt khoảng trắng / xuống dòng thừa do copy-paste trong biến kết nối DB
+for v in DB_HOST DB_PORT DB_DATABASE DB_USERNAME; do
+    eval "val=\${$v:-}"
+    export "$v=$(printf '%s' "$val" | tr -d '[:space:]')"
+done
+
+echo "==> DB_HOST='${DB_HOST}' (dai ${#DB_HOST} ky tu), DB_PORT='${DB_PORT}'"
+# Chờ tối đa ~60 giây cho tên miền database tra được
+i=0
+until getent hosts "$DB_HOST" >/dev/null 2>&1; do
+    i=$((i+1))
+    if [ "$i" -ge 12 ]; then
+        echo "!! Khong tra duoc ten mien DB_HOST. Kiem tra lai gia tri DB_HOST tren Render."
+        break
+    fi
+    echo "   ...cho DNS cua database ($i/12)"
+    sleep 5
+done
+getent hosts "$DB_HOST" || true
+
 php artisan storage:link --force >/dev/null 2>&1 || true
 php artisan config:clear >/dev/null 2>&1 || true
 
