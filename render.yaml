@@ -1,0 +1,66 @@
+# Cấu hình deploy LMS lên Render (gói Free). Database MySQL dùng dịch vụ ngoài (Aiven).
+services:
+  - type: web
+    name: lms-smart-ai
+    runtime: docker
+    plan: free
+    rootDir: LMS_SDLC_SE08201
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /up
+    envVars:
+      - key: APP_NAME
+        value: LMS
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: APP_TIMEZONE
+        value: Asia/Ho_Chi_Minh
+      - key: APP_LOCALE
+        value: vi
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: MYSQL_ATTR_SSL_CA
+        value: /etc/ssl/certs/ca-certificates.crt
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: FILESYSTEM_DISK
+        value: local
+      - key: MAIL_MAILER
+        value: log
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.1-flash-lite
+      - key: GEMINI_EMBED_MODEL
+        value: gemini-embedding-001
+      - key: HF_API_TOKEN
+        sync: false
+      - key: VILAO_API_KEY
+        sync: false
+      - key: VILAO_BASE_URL
+        value: https://api.vilao.ai/v1
+      - key: VILAO_MODEL
+        value: vgpt/gpt-6.1-sol
+      - key: ML_SERVICE_ENABLED
+        value: "false"

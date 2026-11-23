@@ -16,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // Tin cậy proxy của nền tảng hosting (Render, Railway...) để Laravel nhận đúng HTTPS
+        $middleware->trustProxies(at: '*');
+
         // Alias middleware phân quyền theo role (ADMIN / TEACHER / STUDENT)
         $middleware->alias([
             'role' => CheckRole::class,
