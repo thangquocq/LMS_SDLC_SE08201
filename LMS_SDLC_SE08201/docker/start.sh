@@ -29,7 +29,8 @@ else
     php artisan db:seed --class=SubjectMaterialsSeeder --force || true
 fi
 
-php artisan config:cache
+# KHÔNG chạy config:cache: các service AI đọc key trực tiếp bằng env(),
+# khi config bị cache thì env() trả về rỗng -> AI báo thiếu API key.
 php artisan route:cache || true
 php artisan view:cache || true
 
