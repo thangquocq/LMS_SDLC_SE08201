@@ -112,7 +112,7 @@ class SupportAcademicOrchestrator
 
         // Nếu bộ nhận diện nhanh chưa khớp -> dùng LLM Structured Intent Router (Zero-PII: chỉ gửi câu hỏi thuần, không gửi dữ liệu cá nhân)
         if (empty($intents)) {
-            $routed = app(SupportIntentRouterService::class)->classify($text);
+            $routed = app(SupportIntentRouterService::class)->classify($text, $actor);
             if ($routed !== null) {
                 if (! empty($routed['asks_other_person'])) {
                     $this->auth->logDeniedAttempt($actor, 'other_user_private_data', 'LLM Router detected unauthorized other-user private request');

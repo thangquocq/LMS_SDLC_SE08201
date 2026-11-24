@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Log;
 // ( Đăng thêm ) Service kết nối Google Gemini AI (có dự phòng Vilao AI) để sinh câu hỏi trắc nghiệm
 class GeminiService
 {
+    /** Số ký tự tài liệu tối đa đưa vào prompt (dùng chung cho Gemini và Vilao). */
+    public const MAX_DOCUMENT_CHARS = 30000;
+
     private string $apiKey;
     private string $geminiModel;
     private string $vilaoApiKey;
@@ -34,7 +37,7 @@ class GeminiService
         array $types = ['mcq'],
         ?string $difficulty = null
     ): array {
-        if (empty($this->apiKey) && empty($this->vilaoApiKey)) {
+        if (empty($this->apiKey) && empty($this->vilaoProviders())) {
             throw new \Exception('Chưa cấu hình API Key AI (GEMINI_API_KEY hoặc VILAO_API_KEY) trong .env');
         }
 
@@ -64,7 +67,16 @@ BẮT BUỘC TUÂN THỦ CÁC QUY TẮC SAU:
 
         $userPrompt = "Chủ đề: $topic\nSố lượng câu hỏi: $count\nCác dạng bài yêu cầu: {$typesList}.\n{$difficultyLine}\n";
         if ($documentText) {
-            $userPrompt .= "TÀI LIỆU THAM KHẢO:\n```\n" . mb_substr($documentText, 0, 15000) . "\n```\n";
+            // Cùng một nội dung tài liệu cho cả Gemini lẫn Vilao dự phòng.
+            $docPart = mb_substr($documentText, 0, self::MAX_DOCUMENT_CHARS);
+            if (mb_strlen($documentText) > self::MAX_DOCUMENT_CHARS) {
+                // Cắt ở ranh giới đoạn gần nhất để không làm gãy câu cuối.
+                $cut = mb_strrpos($docPart, "\n");
+                if ($cut !== false && $cut > self::MAX_DOCUMENT_CHARS * 0.8) {
+                    $docPart = mb_substr($docPart, 0, $cut);
+                }
+            }
+            $userPrompt .= "TÀI LIỆU THAM KHẢO (chỉ được dùng nội dung này):\n```\n" . $docPart . "\n```\n";
         }
         $userPrompt .= "Hãy sinh ra danh sách $count câu hỏi dưới dạng mảng JSON theo đúng cấu trúc trên.";
 
@@ -160,14 +172,14 @@ BẮT BUỘC TUÂN THỦ CÁC QUY TẮC SAU:
             }
         }
 
-        // 2. Dự phòng tự động sang Vilao AI (OpenAI-compatible API)
-        if (! empty($this->vilaoApiKey)) {
+        // 2. Dự phòng tự động sang Vilao AI (OpenAI-compatible API), thử lần lượt từng key/model đã cấu hình
+        foreach ($this->vilaoProviders() as $provider) {
             try {
                 $response = Http::timeout(90)->withHeaders([
-                    'Authorization' => 'Bearer ' . $this->vilaoApiKey,
+                    'Authorization' => 'Bearer ' . $provider['key'],
                     'Content-Type' => 'application/json',
                 ])->post($this->vilaoBaseUrl . '/chat/completions', [
-                    'model' => $this->vilaoModel,
+                    'model' => $provider['model'],
                     'messages' => [
                         ['role' => 'system', 'content' => $systemInstruction],
                         ['role' => 'user', 'content' => $userPrompt],
@@ -177,7 +189,7 @@ BẮT BUỘC TUÂN THỦ CÁC QUY TẮC SAU:
                 ]);
 
                 if (! $response->successful()) {
-                    Log::error('Vilao Quiz AI Error: ' . $response->body());
+                    Log::error('Vilao Quiz AI Error (model=' . $provider['model'] . '): ' . mb_substr($response->body(), 0, 300));
                     throw new \Exception('Không thể kết nối dịch vụ AI (' . $response->status() . ')');
                 }
 
@@ -191,6 +203,32 @@ BẮT BUỘC TUÂN THỦ CÁC QUY TẮC SAU:
         }
 
         throw new \Exception($lastError ?: 'Không thể kết nối đến dịch vụ AI');
+    }
+
+    /**
+     * Danh sách key/model Vilao theo thứ tự: VILAO_API_KEY → DEEPSEEK_KEY_MAIN → OPENAI_API_KEY (bỏ key trùng).
+     * Một key bị từ chối (403: chưa đăng ký model) thì tự chuyển sang key kế tiếp.
+     */
+    private function vilaoProviders(): array
+    {
+        $candidates = [
+            [$this->vilaoApiKey, $this->vilaoModel],
+            [env('DEEPSEEK_KEY_MAIN'), env('DEEPSEEK_MODEL_MAIN') ?: env('DEEPSEEK_MODEL') ?: 'vgpt/gpt-6-sol'],
+            [env('OPENAI_API_KEY'), env('OPENAI_MODEL') ?: 'vgpt/gpt-6.1-sol'],
+        ];
+
+        $providers = [];
+        $seen = [];
+        foreach ($candidates as [$key, $model]) {
+            $key = trim((string) $key);
+            if ($key === '' || in_array($key, $seen, true)) {
+                continue;
+            }
+            $seen[] = $key;
+            $providers[] = ['key' => $key, 'model' => (string) $model];
+        }
+
+        return $providers;
     }
 
     /**

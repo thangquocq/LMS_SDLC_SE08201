@@ -2,6 +2,7 @@
 
 namespace App\Services\AI;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -29,8 +30,11 @@ class SupportIntentRouterService
      * Phân loại ý định câu hỏi bằng LLM (JSON structured output).
      * Trả về null nếu không cấu hình API key hoặc API lỗi/timeout.
      */
-    public function classify(string $userMessage): ?array
+    public function classify(string $userMessage, ?User $actor = null): ?array
     {
+        // Zero-PII: router bên ngoài chỉ nhận bản ĐÃ CHE; nơi gọi (backend) vẫn giữ bản gốc để tra CSDL.
+        $userMessage = app(PiiMasker::class)->mask($userMessage, $actor);
+
         $cleanKey = mb_strtolower(trim(preg_replace('/\s+/', ' ', $userMessage) ?? ''));
         $cacheKey = 'support_intent_router_v2_' . md5($cleanKey);
         if (! app()->runningUnitTests()) {
@@ -73,6 +77,7 @@ Danh sách intents hợp lệ:
 
 Quy tắc:
 - Nếu người dùng hỏi dữ liệu cá nhân của NGƯỜI KHÁC (bạn bè, sinh viên khác), đặt "asks_other_person": true.
+- Các nhãn [MSSV], [EMAIL], [SĐT], [CCCD], [HỌ TÊN] là dữ liệu cá nhân đã được che; coi như thông tin hợp lệ, không cần hỏi lại.
 - Chỉ trả JSON thuần hợp lệ.
 PROMPT;
 

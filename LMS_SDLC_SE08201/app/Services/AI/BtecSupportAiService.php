@@ -227,7 +227,7 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
             $contents[] = [
                 'role' => $msg->role === 'assistant' ? 'model' : 'user',
                 'parts' => [
-                    ['text' => $msg->message]
+                    ['text' => $this->maskPii((string) $msg->message)]
                 ]
             ];
         }
@@ -235,7 +235,7 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
         $contents[] = [
             'role' => 'user',
             'parts' => [
-                ['text' => $userMessage]
+                ['text' => $this->maskPii($userMessage)]
             ]
         ];
 
@@ -477,7 +477,7 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
             $contents[] = [
                 'role' => $msg->role === 'assistant' ? 'model' : 'user',
                 'parts' => [
-                    ['text' => $msg->message]
+                    ['text' => $this->maskPii((string) $msg->message)]
                 ]
             ];
         }
@@ -485,7 +485,7 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
         $contents[] = [
             'role' => 'user',
             'parts' => [
-                ['text' => $userMessage]
+                ['text' => $this->maskPii($userMessage)]
             ]
         ];
 
@@ -683,6 +683,12 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
     /**
      * Gọi Vilao AI (OpenAI-compatible: DeepSeek / GPT) cho BTEC AI Support.
      */
+    /** Zero-PII: che email/SĐT/MSSV/CCCD/họ tên trước khi gửi nội dung ra AI bên ngoài. */
+    private function maskPii(string $text): string
+    {
+        return app(PiiMasker::class)->mask($text);
+    }
+
     private function vilaoBaseUrl(): string
     {
         return rtrim((string) (env('OPENAI_BASE_URL') ?: env('VILAO_BASE_URL') ?: 'https://api.vilao.ai/v1'), '/');
@@ -729,10 +735,10 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
         foreach ($recentMessages as $msg) {
             $messages[] = [
                 'role' => $msg->role === 'assistant' ? 'assistant' : 'user',
-                'content' => (string) $msg->message,
+                'content' => $this->maskPii((string) $msg->message),
             ];
         }
-        $messages[] = ['role' => 'user', 'content' => $userMessage];
+        $messages[] = ['role' => 'user', 'content' => $this->maskPii($userMessage)];
 
         foreach ($providers as $provider) {
             try {
@@ -791,10 +797,10 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
         foreach ($recentMessages as $msg) {
             $messages[] = [
                 'role' => $msg->role === 'assistant' ? 'assistant' : 'user',
-                'content' => (string) $msg->message,
+                'content' => $this->maskPii((string) $msg->message),
             ];
         }
-        $messages[] = ['role' => 'user', 'content' => $userMessage];
+        $messages[] = ['role' => 'user', 'content' => $this->maskPii($userMessage)];
 
         foreach ($providers as $provider) {
             $fullText = '';

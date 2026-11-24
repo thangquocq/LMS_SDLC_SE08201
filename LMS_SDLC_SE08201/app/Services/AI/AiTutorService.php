@@ -513,10 +513,34 @@ NHIỆM VỤ & PHONG CÁCH RIÊNG CỦA CHẾ ĐỘ NÀY:
                     ];
                     return $messages;
                 } else {
+                    // Trích chữ thật từ Word/PDF/mã nguồn trong backend (không gửi byte nhị phân cho AI).
                     $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-                    $textContent = file_get_contents($filePath);
-                    $truncatedContent = mb_substr($textContent, 0, 15000);
-                    $fileBlock = "\n\n📎 [HỌC TRÒ ĐÍNH KÈM TỆP: {$fileName}]\n```{$ext}\n{$truncatedContent}\n```\n";
+                    $extractor = app(DocumentTextExtractor::class);
+                    $textContent = '';
+                    $readError = null;
+
+                    if ($extractor->canExtract($ext)) {
+                        try {
+                            $textContent = $extractor->extract($filePath, $ext);
+                        } catch (\Throwable $e) {
+                            $readError = $e->getMessage();
+                            Log::warning("AI Tutor: khong doc duoc tep {$fileName}: " . $readError);
+                        }
+                    } else {
+                        $readError = "định dạng .{$ext} chưa được hỗ trợ (chỉ đọc được ảnh, Word .docx, PDF có chữ và tệp văn bản/mã nguồn)";
+                    }
+
+                    if (trim($textContent) !== '') {
+                        $truncatedContent = mb_substr($textContent, 0, 15000);
+                        $note = mb_strlen($textContent) > 15000 ? "\n[... tệp dài, chỉ trích 15.000 ký tự đầu ...]" : '';
+                        $lang = $extractor->isPlainText($ext) ? $ext : 'text';
+                        $fileBlock = "\n\n📎 [HỌC TRÒ ĐÍNH KÈM TỆP: {$fileName}]\n```{$lang}\n{$truncatedContent}{$note}\n```\n";
+                    } else {
+                        // Không đọc được -> nói thẳng cho AI để nó báo lại học trò, KHÔNG đoán nội dung tệp.
+                        $reason = $readError ?: ($ext === 'pdf' ? 'PDF dạng ảnh scan, không có lớp chữ' : 'tệp không có nội dung văn bản');
+                        $fileBlock = "\n\n📎 [HỌC TRÒ ĐÍNH KÈM TỆP: {$fileName}] — HỆ THỐNG KHÔNG ĐỌC ĐƯỢC NỘI DUNG ({$reason}). "
+                            . "Hãy báo cho học trò biết và đề nghị gửi lại dạng ảnh chụp, .docx, PDF có chữ hoặc dán trực tiếp nội dung. TUYỆT ĐỐI không đoán nội dung tệp.\n";
+                    }
                     $userPrompt = $fileBlock . "\n" . $userPrompt;
                 }
             }
@@ -988,11 +1012,26 @@ NHIỆM VỤ & PHONG CÁCH RIÊNG CỦA CHẾ ĐỘ NÀY:
                 $systemText = is_string($m['content']) ? $m['content'] : '';
                 continue;
             }
-            $text = is_string($m['content']) ? $m['content'] : ($m['content'][0]['text'] ?? '');
-            if ($text !== '') {
+            // Giữ cả ảnh đính kèm khi rớt sang Gemini (chuyển data URI base64 -> inline_data).
+            $parts = [];
+            if (is_string($m['content'])) {
+                if ($m['content'] !== '') {
+                    $parts[] = ['text' => $m['content']];
+                }
+            } else {
+                foreach ((array) $m['content'] as $piece) {
+                    if (($piece['type'] ?? '') === 'text' && ($piece['text'] ?? '') !== '') {
+                        $parts[] = ['text' => $piece['text']];
+                    } elseif (($piece['type'] ?? '') === 'image_url'
+                        && preg_match('#^data:([\w/+.-]+);base64,(.+)$#s', (string) ($piece['image_url']['url'] ?? ''), $img)) {
+                        $parts[] = ['inline_data' => ['mime_type' => $img[1], 'data' => $img[2]]];
+                    }
+                }
+            }
+            if (! empty($parts)) {
                 $contents[] = [
                     'role' => ($m['role'] === 'assistant') ? 'model' : 'user',
-                    'parts' => [['text' => $text]],
+                    'parts' => $parts,
                 ];
             }
         }

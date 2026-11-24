@@ -195,6 +195,41 @@
 <script>
     let qIndex = {{ count(old('questions', $assignment->questions)) }};
 
+    // Hiển thị đoạn trích tài liệu AI đã đọc để giảng viên xác nhận đúng tài liệu trước khi giao bài
+    function showAiDocumentInfo(doc) {
+        document.getElementById('aiDocInfo')?.remove();
+        if (!doc) return;
+        const box = document.createElement('div');
+        box.id = 'aiDocInfo';
+        box.className = 'mb-4 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm text-slate-700';
+        const head = document.createElement('div');
+        head.className = 'flex items-start justify-between gap-2 font-semibold text-blue-800';
+        const title = document.createElement('span');
+        title.textContent = `📄 AI đã đọc "${doc.name}" (${Number(doc.used_chars).toLocaleString('vi-VN')} / ${Number(doc.chars).toLocaleString('vi-VN')} ký tự)`;
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.className = 'text-blue-500 hover:text-blue-700';
+        close.textContent = '✕';
+        close.onclick = () => box.remove();
+        head.append(title, close);
+        const excerpt = document.createElement('p');
+        excerpt.className = 'mt-2 whitespace-pre-line text-xs text-slate-600 max-h-32 overflow-y-auto';
+        excerpt.textContent = 'Đoạn đầu tài liệu: ' + doc.excerpt + (doc.chars > 400 ? '…' : '');
+        box.append(head, excerpt);
+        if (doc.truncated) {
+            const warn = document.createElement('p');
+            warn.className = 'mt-2 text-xs font-medium text-amber-700';
+            warn.textContent = '⚠ Tài liệu dài: AI chỉ dùng phần đầu. Nếu cần nội dung phía sau, hãy tách tài liệu thành nhiều phần và sinh câu hỏi cho từng phần.';
+            box.append(warn);
+        }
+        box.append(Object.assign(document.createElement('p'), {
+            className: 'mt-2 text-xs text-slate-500',
+            textContent: 'Vui lòng kiểm tra lại từng câu hỏi trước khi giao bài.'
+        }));
+        const list = document.getElementById('questionList');
+        list.parentNode.insertBefore(box, list);
+    }
+
     function addQuestion() {
         const i = qIndex;
         const tpl = `
@@ -373,6 +408,7 @@
                     }
                 });
                 closeAiModal();
+                showAiDocumentInfo(result.document);
                 showToast(`Đã sinh thành công ${result.data.length} câu hỏi!`, 'success');
             } else {
                 showToast('Lỗi: ' + result.message, 'error');

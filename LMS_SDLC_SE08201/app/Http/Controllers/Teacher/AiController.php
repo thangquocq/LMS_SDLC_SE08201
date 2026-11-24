@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Services\AI\DocumentTextExtractor;
 use App\Services\AI\GeminiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -11,10 +12,12 @@ use Illuminate\Support\Facades\Log;
 class AiController extends Controller
 {
     private GeminiService $geminiService;
+    private DocumentTextExtractor $extractor;
 
-    public function __construct(GeminiService $geminiService)
+    public function __construct(GeminiService $geminiService, DocumentTextExtractor $extractor)
     {
         $this->geminiService = $geminiService;
+        $this->extractor = $extractor;
     }
 
     public function generate(Request $request)
@@ -34,39 +37,59 @@ class AiController extends Controller
         $difficulty = $request->input('difficulty');
         $documentText = null;
         $inlineData = null;
+        $documentInfo = null;
 
         if ($request->hasFile('document')) {
             $file = $request->file('document');
-            $extension = $file->getClientOriginalExtension();
+            $extension = strtolower($file->getClientOriginalExtension());
             $path = $file->getRealPath();
 
+            // Trích chữ ngay trong backend để CẢ Gemini lẫn Vilao dự phòng đều nhận được nội dung tài liệu.
             try {
-                if ($extension === 'txt') {
-                    $documentText = file_get_contents($path);
-                } elseif ($extension === 'pdf') {
-                    // Send PDF as inlineData directly to Gemini
-                    $inlineData = [
-                        'mimeType' => 'application/pdf',
-                        'data' => base64_encode(file_get_contents($path))
-                    ];
-                } elseif ($extension === 'docx') {
-                    // Extract raw text from docx xml
-                    $documentText = $this->extractTextFromDocx($path);
-                }
-            } catch (\Exception $e) {
+                $documentText = $this->extractor->extract($path, $extension);
+            } catch (\Throwable $e) {
                 Log::error('AI Document Read Error: ' . $e->getMessage());
                 return response()->json([
                     'success' => false,
-                    'message' => 'Không thể đọc file tài liệu: ' . $e->getMessage()
+                    'message' => 'Không thể đọc file tài liệu: ' . $e->getMessage(),
                 ], 422);
             }
+
+            // Đã đính kèm tệp mà không đọc được chữ -> dừng, KHÔNG tự sinh quiz chỉ từ chủ đề.
+            if (! $this->extractor->isUsable($documentText)) {
+                $hint = $extension === 'pdf'
+                    ? ' Có thể đây là PDF dạng ảnh scan (không có lớp chữ). Vui lòng dùng PDF có chữ chọn được, hoặc file Word/TXT.'
+                    : ' Tệp gần như không có nội dung văn bản.';
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không trích được nội dung từ tài liệu "' . $file->getClientOriginalName() . '".' . $hint,
+                ], 422);
+            }
+
+            // PDF vẫn gửi kèm bản gốc cho Gemini (đọc được bảng/hình); Vilao dùng phần chữ đã trích.
+            if ($extension === 'pdf') {
+                $inlineData = [
+                    'mimeType' => 'application/pdf',
+                    'data' => base64_encode(file_get_contents($path)),
+                ];
+            }
+
+            $totalChars = mb_strlen($documentText);
+            $documentInfo = [
+                'name' => $file->getClientOriginalName(),
+                'chars' => $totalChars,
+                'used_chars' => min($totalChars, GeminiService::MAX_DOCUMENT_CHARS),
+                'truncated' => $totalChars > GeminiService::MAX_DOCUMENT_CHARS,
+                'excerpt' => mb_substr($documentText, 0, 400),
+            ];
         }
 
         try {
             $questions = $this->geminiService->generateQuestions($topic, $count, $documentText, $inlineData, $types, $difficulty);
             return response()->json([
                 'success' => true,
-                'data' => $questions
+                'data' => $questions,
+                'document' => $documentInfo,
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -74,27 +97,5 @@ class AiController extends Controller
                 'message' => 'Lỗi kết nối AI: ' . $e->getMessage()
             ], 500);
         }
-    }
-
-    /**
-     * Hàm bóc tách chữ từ file DOCX (ZIP -> word/document.xml)
-     */
-    private function extractTextFromDocx(string $filePath): string
-    {
-        $zip = new \ZipArchive();
-        $text = '';
-        if ($zip->open($filePath) === true) {
-            $xmlIndex = $zip->locateName('word/document.xml');
-            if ($xmlIndex !== false) {
-                $xmlData = $zip->getFromIndex($xmlIndex);
-                $xml = new \DOMDocument();
-                $xml->loadXML($xmlData, LIBXML_NOENT | LIBXML_XINCLUDE | LIBXML_NOERROR | LIBXML_NOWARNING);
-                $text = strip_tags($xml->saveXML());
-            }
-            $zip->close();
-        } else {
-            throw new \Exception('Không thể giải nén file DOCX');
-        }
-        return $text;
     }
 }
