@@ -500,6 +500,17 @@ class BtecRagService
         'liên hệ' => ['tổng đài', 'danh bạ', 'đầu mối'], 'email' => ['email hỗ trợ', 'danh bạ'],
         'quên mật khẩu' => ['lỗi tài khoản', 'báo lỗi'], 'không đăng nhập' => ['lỗi tài khoản', 'báo lỗi'],
         'không cho' => ['báo lỗi'], 'bị lỗi' => ['báo lỗi'],
+        // Hỏi danh mục ngành / cơ sở của trường (mục 2.1), không phải thủ tục chuyển ngành (11.4)
+        'bao nhiêu ngành' => ['ngành học', 'nhóm học'], 'bao nhiêu chuyên ngành' => ['ngành học', 'nhóm học'],
+        'ngành nào' => ['ngành học', 'nhóm học'], 'những ngành' => ['ngành học', 'nhóm học'],
+        'các ngành' => ['ngành học', 'nhóm học'], 'chuyên ngành nào' => ['ngành học', 'nhóm học'],
+        'ngành gì' => ['ngành học', 'nhóm học'], 'đào tạo ngành' => ['ngành học', 'nhóm học'],
+        'bao nhiêu cơ sở' => ['địa bàn', 'ngành học và cơ sở'], 'cơ sở nào' => ['địa bàn', 'ngành học và cơ sở'],
+    ];
+
+    /** Lỗi chính tả hay gặp trong câu hỏi (regex trên chữ thường). */
+    private const TYPOS = [
+        '/\bnghành\b/u' => 'ngành', '/\bnghanh\b/u' => 'nganh', '/\bngàng\b/u' => 'ngành',
     ];
 
     /** Chữ thường + bỏ dấu tiếng Việt. */
@@ -651,6 +662,8 @@ class BtecRagService
     /** Đặc trưng câu hỏi: từ có nghĩa + cụm 2 từ (ít nhất 1 từ có nghĩa) + từ đồng nghĩa. */
     private function queryFeatures(string $query): array
     {
+        // Sửa lỗi chính tả phổ biến của sinh viên trước khi so khớp ("nghành" -> "ngành")
+        $query = preg_replace(array_keys(self::TYPOS), array_values(self::TYPOS), mb_strtolower($query)) ?? $query;
         $mode = self::isPlain($query) ? 'f' : 'a';
         $stop = $mode === 'f' ? self::STOP_WORDS_PLAIN : self::STOP_WORDS;
         // Từ dừng, âm tiết 1 ký tự, số 1 chữ số ("1 kỳ") đều không mang nghĩa chủ đề; giữ số như "20" (20%)
