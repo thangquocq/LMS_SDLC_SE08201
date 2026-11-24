@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libpng-dev libjpeg62-turbo-dev libfreetype6-dev libzip-dev libxml2-dev libicu-dev \
         unzip git ca-certificates \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j"$(nproc)" pdo_mysql gd zip intl bcmath exif \
+    && docker-php-ext-install -j"$(nproc)" pdo_mysql gd zip intl bcmath exif opcache \
     && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
 
@@ -19,6 +19,17 @@ RUN { \
       echo 'memory_limit=256M'; \
       echo 'max_execution_time=300'; \
     } > /usr/local/etc/php/conf.d/lms.ini
+
+# OPcache: giữ mã PHP đã biên dịch trong RAM, không phải đọc/dịch lại hàng trăm file Laravel mỗi request
+# (code trong container không đổi sau khi build nên tắt kiểm tra thời gian sửa file cho nhanh nhất)
+RUN { \
+      echo 'opcache.enable=1'; \
+      echo 'opcache.memory_consumption=96'; \
+      echo 'opcache.interned_strings_buffer=16'; \
+      echo 'opcache.max_accelerated_files=20000'; \
+      echo 'opcache.validate_timestamps=0'; \
+      echo 'opcache.save_comments=1'; \
+    } > /usr/local/etc/php/conf.d/opcache.ini
 
 # Apache trỏ vào thư mục public/ của Laravel
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
