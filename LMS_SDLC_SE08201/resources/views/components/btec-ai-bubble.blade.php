@@ -578,6 +578,14 @@
                         conversation_id: currentConversationId
                     })
                 });
+                // Phiên đăng nhập hết hạn (server khởi động lại / deploy mới): 419 CSRF, 401, hoặc bị chuyển về trang đăng nhập
+                if (res.status === 419 || res.status === 401 || res.redirected || !(res.headers.get('content-type') || '').includes('application/json')) {
+                    const expired = res.status === 419 || res.status === 401 || res.redirected;
+                    contentEl.innerHTML = expired
+                        ? '<span class="text-amber-700 font-semibold">Phiên đăng nhập đã hết hạn. Vui lòng tải lại trang (F5) rồi hỏi lại nhé!</span>'
+                        : '<span class="text-rose-600 font-semibold">Máy chủ đang gặp sự cố (mã ' + res.status + '). Vui lòng thử lại sau giây lát.</span>';
+                    return;
+                }
                 const data = await res.json();
                 if (data.status === 'ok' || data.success) {
                     currentConversationId = data.conversation_id;

@@ -38,8 +38,9 @@ services:
         sync: false
       - key: MYSQL_ATTR_SSL_CA
         value: /var/www/html/docker/aiven-ca.pem
+      # Lưu phiên đăng nhập trong MySQL (bảng sessions): không bị đăng xuất mỗi lần Render deploy/ngủ dậy
       - key: SESSION_DRIVER
-        value: file
+        value: database
       - key: CACHE_STORE
         value: file
       - key: QUEUE_CONNECTION
