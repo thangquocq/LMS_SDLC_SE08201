@@ -38,9 +38,10 @@ services:
         sync: false
       - key: MYSQL_ATTR_SSL_CA
         value: /var/www/html/docker/aiven-ca.pem
-      # Lưu phiên đăng nhập trong MySQL (bảng sessions): không bị đăng xuất mỗi lần Render deploy/ngủ dậy
+      # Lưu phiên đăng nhập trong cookie đã mã hoá: không bị đăng xuất mỗi lần Render deploy/ngủ dậy.
+      # KHÔNG dùng "database": bảng `sessions` của dự án là bảng BUỔI HỌC (ClassSession), không phải bảng session của Laravel.
       - key: SESSION_DRIVER
-        value: database
+        value: cookie
       - key: CACHE_STORE
         value: file
       - key: QUEUE_CONNECTION
