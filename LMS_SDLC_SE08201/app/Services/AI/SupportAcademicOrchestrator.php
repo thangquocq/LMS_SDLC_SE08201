@@ -95,6 +95,12 @@ class SupportAcademicOrchestrator
         if (preg_match('/\b(xem|tra|tim)\b.*\b(thoi khoa bieu|tkb|lich hoc|lich thi|bang diem|diem danh)\b.*\bo dau\b/u', $norm)) {
             return ['handled' => false, 'context_state' => $state];
         }
+        // Hỏi QUY CHẾ chấm điểm ("bao nhiêu điểm thì qua môn", "thang điểm", "điểm liệt") là câu hỏi sổ tay,
+        // không phải đọc bảng điểm cá nhân -> sang RAG. Trừ khi hỏi kết quả của chính mình ("em qua môn chưa", "điểm của em").
+        if (preg_match('/\b(qua mon|dat mon|truot mon|rot mon|diem toi thieu|diem san|diem liet|diem dat|thang diem|cach tinh diem|xep loai|pass|merit|distinction)\b/u', $norm)
+            && ! preg_match('/\b(cua em|cua toi|cua minh|diem em|em (?:da |co )?(?:qua|dat|truot|rot)|(?:qua|dat) (?:mon )?chua|(?:truot|rot) mon nao|em duoc (?:may|bao nhieu) diem)\b/u', $norm)) {
+            return ['handled' => false, 'context_state' => $state];
+        }
 
         // Nhận diện các ý định học vụ nội bộ (hỗ trợ đa ý định trong cùng 1 câu)
         $intents = $this->detectAcademicIntents($norm, $state);
@@ -1050,7 +1056,7 @@ class SupportAcademicOrchestrator
         ) {
             $intents[] = 'SCHEDULE';
         }
-        if (preg_match('/(diem so|bang diem|diem cua|xem diem|diem bao nhieu|diem mon|diem (?:cac|tung|nhung) mon|ket qua hoc tap cua|duoc may diem|cham chua|co diem chua|diem thi|diem bai)/', $norm)) {
+        if (preg_match('/(diem so|bang diem|diem cua|xem diem|diem bao nhieu|diem mon|diem (?:cac|tung|nhung) mon|ket qua hoc tap cua|(?:em|toi|minh) (?:da )?(?:qua|dat|truot|rot) mon|(?:qua|dat) mon chua|(?:truot|rot) mon nao|em co (?:truot|rot) mon|duoc may diem|cham chua|co diem chua|diem thi|diem bai)/', $norm)) {
             $intents[] = 'GRADES';
         }
         if (preg_match('/(neu nghi them|neu mai nghi|nghi them \d+|nghi them mot|nghi them 1|nghi them 2|neu vang them|gia su nghi|nghi buoi mai)/', $norm)) {
@@ -1413,7 +1419,7 @@ class SupportAcademicOrchestrator
 
     private function hasOtherUserPrivateRequest(string $norm): bool
     {
-        return (bool) preg_match('/(cua ban\s+[a-z0-9]+|va ban\s+[a-z0-9]+|cung ban\s+[a-z0-9]+|ban khac|sinh vien khac|nguoi khac|chua cong bo cua|ho so cua\s+[a-z0-9]+|diem cua\s+(?!em\b|toi\b|minh\b|lop\b|mon\b)[a-z]+|mo bai cua ban)/', $norm);
+        return (bool) preg_match('/(cua ban\s+[a-z0-9]+|va ban\s+[a-z0-9]+|cung ban\s+[a-z0-9]+|ban khac|sinh vien khac|nguoi khac|chua cong bo cua|ho so cua\s+[a-z0-9]+|diem cua\s+(?!em\b|toi\b|minh\b|lop\b|mon\b|truong\b|nha truong\b|btec\b|fpt\b|pearson\b|he thong\b|chuong trinh\b|cac mon\b|tung mon\b|bai\b|ky thi\b|assignment\b)[a-z]+|mo bai cua ban)/', $norm);
     }
 
     private function hasOwnPartAlongsideOther(string $norm): bool
