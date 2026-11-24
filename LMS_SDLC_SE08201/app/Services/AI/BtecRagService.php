@@ -22,6 +22,18 @@ class BtecRagService
     private array $faqs = [];
     private array $appFeatures = [];
 
+    /** Ngưỡng điểm từ khóa để coi là "tìm đúng tài liệu" (đã hiệu chỉnh trên bộ 30 FAQ + câu ngoài phạm vi). */
+    private const LEXICAL_CONFIDENT = 30;
+
+    /** T01 = phạm vi & cách đọc tài liệu, T22 = danh mục nguồn: chỉ dùng để tham chiếu. */
+    private const META_TOPICS = ['T01', 'T22'];
+
+    /** Chỉ mục từ khóa theo chunk: tokens, bigrams, tiêu đề/nhãn mục. */
+    private array $lexIndex = [];
+    private array $df = [];
+    private int $nSections = 1;
+    private ?array $lastFaq = null;
+
     /** Cách truy xuất dùng ở lần search gần nhất: VECTOR_HYBRID hoặc LEXICAL. */
     private string $lastRetrievalMethod = 'LEXICAL';
     private float $lastTopScore = 0.0;
@@ -331,6 +343,10 @@ class BtecRagService
             'citations' => $this->lastIsConfident ? $citations : [],
             'actions' => $actions,
             'needs_escalation' => $needsTicket,
+            // FAQ đã biên soạn khớp với câu hỏi (kèm hướng dẫn trả lời an toàn) hoặc null
+            'faq' => $this->lastFaq,
+            // Các đoạn (mục) sát câu hỏi nhất trong các chunk đã chọn — dùng cho câu trả lời dự phòng
+            'top_passages' => $this->bestPassages($query, $topChunks, 3),
         ];
     }
 
@@ -345,46 +361,39 @@ class BtecRagService
      */
     private function retrieveChunks(string $rawQuery, string $cleanQuery, string $intent, array $terms): array
     {
-        // Bước 2a: Tính điểm từ khóa (Lexical Score) đã lọc stopword tiếng Việt + Điểm cộng chủ đề
-        $stopWords = [
-            'em', 'anh', 'chị', 'mình', 'tôi', 'bạn', 'có', 'không', 'là', 'của', 'cho', 'với', 'và', 'hay',
-            'hoặc', 'như', 'thế', 'nào', 'sao', 'được', 'chưa', 'rồi', 'ạ', 'nhé', 'ơi', 'vậy', 'này', 'đó',
-            'kia', 'bị', 'ở', 'tại', 'khi', 'nếu', 'thì', 'về', 'các', 'những', 'một', 'hai', 'ba', 'gì', 'ai',
-        ];
-        $meaningfulTerms = array_values(array_filter(
-            $terms,
-            fn ($t) => mb_strlen($t) >= 2 && ! in_array($t, $stopWords, true)
-        ));
+        // Bước 2a: Điểm từ khóa (Lexical) theo cụm từ + độ hiếm (IDF) + tiêu đề mục, không phân biệt dấu.
+        $this->buildLexicalIndex();
+        $q = $this->queryFeatures($rawQuery);
+        $faq = $this->matchFaq($q);
+        $this->lastFaq = $faq;
 
         $byId = [];
         $lexical = [];
         $pureLexical = [];
         foreach ($this->chunks as $c) {
             $id = $c['chunk_id'] ?? null;
-            if ($id === null) {
+            if ($id === null || ! isset($this->lexIndex[$id])) {
                 continue;
             }
             $byId[$id] = $c;
 
-            $kwScore = 0;
-            $text = mb_strtolower(($c['title'] ?? '') . ' ' . ($c['text'] ?? ''));
-            if ($cleanQuery !== '' && mb_strlen($cleanQuery) >= 6 && str_contains($text, $cleanQuery)) {
-                $kwScore += 40; // Khớp chính xác cả cụm câu hỏi
-            }
-            foreach ($meaningfulTerms as $term) {
-                if (str_contains($text, $term)) {
-                    $kwScore += 6; // Khớp từng từ có nghĩa
-                }
-            }
+            $kwScore = $this->chunkLexicalScore($q, $id, (string) ($c['topic_id'] ?? ''));
             $pureLexical[$id] = $kwScore;
-            $lexical[$id] = $kwScore + ($kwScore > 0 ? $this->intentBoost($intent, (string) ($c['topic_id'] ?? '')) : 0);
+
+            $topicId = (string) ($c['topic_id'] ?? '');
+            $boost = $kwScore > 0 ? $this->intentBoost($intent, $topicId) : 0;
+            // Câu hỏi trùng một câu FAQ đã biên soạn -> ưu tiên đúng chủ đề FAQ đó.
+            if ($faq !== null && $faq['topic_id'] === $topicId) {
+                $boost += 30;
+            }
+            $lexical[$id] = $kwScore + $boost;
         }
 
         // Bước 2b: Chỉ gọi Vector Embedding mạng khi điểm từ khóa (Lexical) chưa đủ rõ (< 18đ) -> cắt ngay 1.5-4s cho 90% câu hỏi quy chế
         $maxPureLexical = ! empty($pureLexical) ? max($pureLexical) : 0;
         $vecSim = [];
         $useVector = false;
-        $queryVector = ($maxPureLexical < 18 && $this->embeddingService?->isConfigured())
+        $queryVector = ($maxPureLexical < self::LEXICAL_CONFIDENT && $faq === null && $this->embeddingService?->isConfigured())
             ? $this->embeddingService->embed($rawQuery, 'RETRIEVAL_QUERY')
             : null;
 
@@ -423,9 +432,9 @@ class BtecRagService
         if ($topId === null) {
             $this->lastIsConfident = false;
         } elseif ($useVector && isset($vecSim[$topId])) {
-            $this->lastIsConfident = ($vecSim[$topId] >= 0.48) || (($pureLexical[$topId] ?? 0) >= 18);
+            $this->lastIsConfident = ($vecSim[$topId] >= 0.48) || (($pureLexical[$topId] ?? 0) >= self::LEXICAL_CONFIDENT) || $faq !== null;
         } else {
-            $this->lastIsConfident = ($pureLexical[$topId] ?? 0) >= 18;
+            $this->lastIsConfident = (($pureLexical[$topId] ?? 0) >= self::LEXICAL_CONFIDENT) || $faq !== null;
         }
 
         $topChunks = [];
@@ -445,6 +454,385 @@ class BtecRagService
         }
 
         return $topChunks;
+    }
+
+    // =========================================================================
+    // CHẤM ĐIỂM TỪ KHÓA TIẾNG VIỆT
+    // - Câu hỏi có dấu: so khớp CÓ dấu (tránh "bảo lưu" khớp nhầm "bao nhiêu").
+    // - Câu hỏi gõ không dấu: so khớp trên bản đã bỏ dấu ("hoc phi" khớp "học phí").
+    // - Chấm theo từ + cụm 2 từ, trọng số IDF (từ hiếm quan trọng hơn), khớp nhãn mục được nhân 1.6.
+    // - Từ đồng nghĩa cách sinh viên hay nói ("nghỉ" ~ "vắng", "phúc khảo" ~ "phúc tra").
+    // =========================================================================
+
+    /** Từ dừng — không mang nghĩa phân biệt chủ đề. */
+    private const STOP_WORDS = [
+        'em', 'anh', 'chị', 'mình', 'tôi', 'bạn', 'có', 'không', 'ko', 'k', 'là', 'của', 'cho', 'với', 'và', 'hay',
+        'hoặc', 'như', 'thế', 'nào', 'sao', 'được', 'chưa', 'rồi', 'ạ', 'nhé', 'ơi', 'vậy', 'này', 'đó', 'kia',
+        'bị', 'ở', 'tại', 'khi', 'nếu', 'thì', 'về', 'các', 'những', 'một', 'gì', 'ai', 'muốn', 'cần', 'phải',
+        'làm', 'nhiều', 'ít', 'rất', 'quá', 'cũng', 'đã', 'đang', 'sẽ', 'mà', 'nên', 'để', 'từ', 'đến', 'trong',
+        'ra', 'vào', 'hiện', 'nhỉ', 'hả', 'bao', 'nhiêu', 'giờ', 'đâu', 'ạ', 'luôn', 'giúp', 'xin', 'cách',
+    ];
+
+    /** Từ dừng khi gõ không dấu (bỏ các từ dễ trùng nghĩa quan trọng như "co" = cơ sở). */
+    private const STOP_WORDS_PLAIN = [
+        'em', 'anh', 'chi', 'minh', 'toi', 'ban', 'khong', 'ko', 'k', 'la', 'cua', 'cho', 'voi', 'va', 'hay',
+        'hoac', 'nhu', 'the', 'nao', 'sao', 'duoc', 'chua', 'roi', 'a', 'nhe', 'oi', 'vay', 'nay', 'kia',
+        'bi', 'o', 'tai', 'khi', 'neu', 'thi', 've', 'cac', 'nhung', 'mot', 'gi', 'ai', 'muon', 'can', 'phai',
+        'lam', 'nhieu', 'it', 'rat', 'qua', 'cung', 'da', 'dang', 'se', 'ma', 'nen', 'de', 'tu', 'den', 'trong',
+        'ra', 'vao', 'hien', 'nhi', 'ha', 'nhieu', 'gio', 'dau', 'luon', 'giup', 'xin', 'cach',
+    ];
+
+    /** Cách nói của sinh viên -> thuật ngữ trong sổ tay (có dấu). */
+    private const SYNONYMS = [
+        'nghỉ học' => ['vắng', 'chuyên cần'], 'nghỉ' => ['vắng'], 'vắng' => ['nghỉ'],
+        'cấm thi' => ['điều kiện thi', 'dự thi'], 'phần trăm' => ['20%', 'tỷ lệ'],
+        'phúc khảo' => ['phúc tra'], 'phúc tra' => ['phúc khảo'],
+        'trượt' => ['không đạt', 'học lại'], 'thi lại' => ['học lại', 'đánh giá lại'],
+        'refer' => ['không đạt', 'resubmission', 'second chance'],
+        'hoàn tiền' => ['hoàn phí', 'hoàn trả', 'hoàn số dư'], 'hoàn học phí' => ['hoàn phí', 'hoàn trả'],
+        'đóng' => ['nộp', 'thanh toán'], 'trễ hạn' => ['quá hạn', 'muộn'], 'trễ' => ['muộn'],
+        'ký túc xá' => ['nhà ở', 'ký túc'], 'ktx' => ['nhà ở', 'ký túc'],
+        'gian lận' => ['trung thực', 'đạo văn'], 'chatgpt' => ['công cụ ai', 'sử dụng ai'],
+        'mật khẩu' => ['đăng nhập', 'tài khoản'], 'việc làm' => ['tuyển dụng', 'doanh nghiệp'],
+        'thời khóa biểu' => ['lịch học'], 'lịch học' => ['thời khóa biểu'],
+        'giấy tờ' => ['hồ sơ'], 'đồng phục' => ['trang phục'], 'mất thẻ' => ['làm lại thẻ', 'cấp lại thẻ'],
+        'số điện thoại' => ['tổng đài', 'hotline', 'danh bạ'], 'sđt' => ['tổng đài', 'hotline', 'danh bạ'],
+        'liên hệ' => ['tổng đài', 'danh bạ', 'đầu mối'], 'email' => ['email hỗ trợ', 'danh bạ'],
+        'quên mật khẩu' => ['lỗi tài khoản', 'báo lỗi'], 'không đăng nhập' => ['lỗi tài khoản', 'báo lỗi'],
+        'không cho' => ['báo lỗi'], 'bị lỗi' => ['báo lỗi'],
+    ];
+
+    /** Chữ thường + bỏ dấu tiếng Việt. */
+    public static function fold(string $s): string
+    {
+        $s = mb_strtolower($s, 'UTF-8');
+        $map = [
+            'a' => '/[àáạảãâầấậẩẫăằắặẳẵ]/u', 'e' => '/[èéẹẻẽêềếệểễ]/u', 'i' => '/[ìíịỉĩ]/u',
+            'o' => '/[òóọỏõôồốộổỗơờớợởỡ]/u', 'u' => '/[ùúụủũưừứựửữ]/u', 'y' => '/[ỳýỵỷỹ]/u', 'd' => '/đ/u',
+        ];
+        foreach ($map as $plain => $re) {
+            $s = preg_replace($re, $plain, $s) ?? $s;
+        }
+
+        return $s;
+    }
+
+    /** Câu không có ký tự tiếng Việt có dấu nào -> người dùng gõ không dấu. */
+    private static function isPlain(string $s): bool
+    {
+        $lower = mb_strtolower($s, 'UTF-8');
+
+        return self::fold($lower) === $lower;
+    }
+
+    /** Tách âm tiết: chế độ 'a' giữ dấu, chế độ 'f' bỏ dấu. Giữ "20%" thành "20". */
+    private static function tokens(string $s, string $mode): array
+    {
+        $s = mb_strtolower($s, 'UTF-8');
+        if ($mode === 'f') {
+            $s = self::fold($s);
+        }
+
+        return array_values(array_filter(preg_split('/[^\p{L}\p{N}]+/u', $s) ?: [], fn ($t) => $t !== ''));
+    }
+
+    private static function bigrams(array $tokens): array
+    {
+        $out = [];
+        for ($i = 0, $n = count($tokens) - 1; $i < $n; $i++) {
+            $out[$tokens[$i] . ' ' . $tokens[$i + 1]] = true;
+        }
+
+        return $out;
+    }
+
+    /** Tiêu đề chunk + nhãn các mục "[4.1. Hồ sơ ...]" + dòng tiêu đề "4.1. Hồ sơ ...". */
+    private static function headings(array $chunk): string
+    {
+        $text = (string) ($chunk['text'] ?? '');
+        preg_match_all('/^\[([^\]\n]+)\]|^(\d+(?:\.\d+)+\.?\s[^\n]{3,120})$/mu', $text, $m);
+        $labels = array_unique(array_filter(array_merge($m[1], $m[2])));
+
+        return ($chunk['title'] ?? '') . "\n" . implode("\n", $labels);
+    }
+
+    /**
+     * Tách một chunk thành các MỤC: nhãn "[4.1. Hồ sơ ...]" + nội dung các đoạn cùng nhãn.
+     * Bỏ dòng chỉ là tiêu đề mục và dòng "Nguồn đối chiếu".
+     */
+    private static function sectionsOf(array $chunk): array
+    {
+        $sections = [];
+        foreach (preg_split('/\R{2,}/u', (string) ($chunk['text'] ?? '')) ?: [] as $i => $para) {
+            $para = trim($para);
+            if ($para === '') {
+                continue;
+            }
+            if (preg_match('/^\[([^\]\n]+)\]\s*\R?(.*)$/su', $para, $m)) {
+                $label = trim($m[1]);
+                $body = trim($m[2]);
+            } else {
+                $label = '';
+                $body = $para;
+            }
+            if ($body === '' || (! str_contains($body, "\n") && mb_strlen($body) < 90 && preg_match('/^\d+\.\d+(\.\d+)*\.?\s/u', $body))
+                || preg_match('/^(Nguồn đối chiếu|Căn cứ)\s*:/u', $body)) {
+                continue;
+            }
+            $key = $label !== '' ? $label : ('_' . $i);
+            $sections[$key]['label'] = $label;
+            $sections[$key]['parts'][] = $body;
+        }
+
+        return array_values(array_map(fn ($s) => ['label' => $s['label'], 'text' => implode("\n", $s['parts'])], $sections));
+    }
+
+    /** Đặc trưng của một đoạn ở cả 2 chế độ (có dấu 'a' / bỏ dấu 'f'). */
+    private static function features(string $body, string $head): array
+    {
+        $out = [];
+        foreach (['a', 'f'] as $mode) {
+            $tokens = self::tokens($head . "\n" . $body, $mode);
+            $headTokens = self::tokens($head, $mode);
+            $out[$mode] = [
+                'uni' => array_fill_keys($tokens, true),
+                'bi' => self::bigrams($tokens),
+                'head_uni' => array_fill_keys($headTokens, true),
+                'head_bi' => self::bigrams($headTokens),
+            ];
+        }
+
+        return $out;
+    }
+
+    /** Chỉ mục 2 tầng: toàn chunk + từng mục. IDF tính trên các mục (chi tiết hơn chunk). */
+    private function buildLexicalIndex(): void
+    {
+        if (! empty($this->lexIndex)) {
+            return;
+        }
+
+        $df = ['a' => [], 'f' => []];
+        $nSections = 0;
+        foreach ($this->chunks as $c) {
+            $id = $c['chunk_id'] ?? null;
+            if ($id === null) {
+                continue;
+            }
+            $sections = [];
+            foreach (self::sectionsOf($c) as $sec) {
+                // Nhãn mục là "tiêu đề" của mục; tiêu đề chunk chỉ tính ở tầng chunk (tránh mọi mục cùng điểm)
+                $f = self::features($sec['text'], $sec['label']);
+                $sections[] = $sec + ['f' => $f];
+                $nSections++;
+                foreach (['a', 'f'] as $mode) {
+                    foreach (array_keys($f[$mode]['uni'] + $f[$mode]['bi']) as $term) {
+                        $df[$mode][$term] = ($df[$mode][$term] ?? 0) + 1;
+                    }
+                }
+            }
+            $this->lexIndex[$id] = [
+                'chunk' => self::features(($c['text'] ?? ''), self::headings($c)),
+                'title' => self::features('', (string) ($c['title'] ?? '')),
+                'sections' => $sections,
+            ];
+        }
+        $this->df = $df;
+        $this->nSections = max(1, $nSections);
+    }
+
+    private function idf(string $term, string $mode): float
+    {
+        $df = $this->df[$mode][$term] ?? 0;
+
+        return $df === 0 ? 0.0 : log(1 + $this->nSections / $df);
+    }
+
+    /** Đặc trưng câu hỏi: từ có nghĩa + cụm 2 từ (ít nhất 1 từ có nghĩa) + từ đồng nghĩa. */
+    private function queryFeatures(string $query): array
+    {
+        $mode = self::isPlain($query) ? 'f' : 'a';
+        $stop = $mode === 'f' ? self::STOP_WORDS_PLAIN : self::STOP_WORDS;
+        // Từ dừng, âm tiết 1 ký tự, số 1 chữ số ("1 kỳ") đều không mang nghĩa chủ đề; giữ số như "20" (20%)
+        $isStop = fn (string $t) => in_array($t, $stop, true) || mb_strlen($t) < 2;
+
+        $build = function (string $text) use ($mode, $isStop) {
+            $tokens = self::tokens($text, $mode);
+            $uni = [];
+            foreach ($tokens as $t) {
+                if (! $isStop($t)) {
+                    $uni[$t] = true;
+                }
+            }
+            $bi = [];
+            foreach (array_keys(self::bigrams($tokens)) as $b) {
+                [$x, $y] = explode(' ', $b);
+                if (! $isStop($x) && ! $isStop($y)) {
+                    $bi[$b] = true;
+                }
+            }
+
+            return [array_keys($uni), array_keys($bi)];
+        };
+
+        [$uni, $bi] = $build($query);
+
+        // Từ đồng nghĩa (so khớp trên câu hỏi; chế độ không dấu thì so khớp bản bỏ dấu)
+        $synUni = [];
+        $synBi = [];
+        $haystack = ' ' . implode(' ', self::tokens($query, $mode)) . ' ';
+        foreach (self::SYNONYMS as $key => $alts) {
+            $keyNorm = implode(' ', self::tokens($key, $mode));
+            if ($keyNorm === '' || ! str_contains($haystack, ' ' . $keyNorm . ' ')) {
+                continue;
+            }
+            foreach ($alts as $alt) {
+                [$u, $b] = $build($alt);
+                $synUni = array_merge($synUni, $u);
+                $synBi = array_merge($synBi, $b);
+            }
+        }
+
+        return [
+            'mode' => $mode,
+            'uni' => $uni,
+            'bi' => $bi,
+            'syn_uni' => array_values(array_diff(array_unique($synUni), $uni)),
+            'syn_bi' => array_values(array_diff(array_unique($synBi), $bi)),
+        ];
+    }
+
+    /**
+     * Điểm = Σ IDF(từ) + 2×Σ IDF(cụm 2 từ) (+ 0.7× cho từ đồng nghĩa); khớp trong nhãn mục được nhân 1.6.
+     * Hệ số 3 đưa về thang điểm của ngưỡng tin cậy LEXICAL_CONFIDENT.
+     */
+    private function lexicalScore(array $q, array $entry): float
+    {
+        $mode = $q['mode'];
+        $e = $entry[$mode];
+        $score = 0.0;
+        $sets = [
+            ['uni', $q['uni'], 1.0], ['bi', $q['bi'], 2.0],
+            ['uni', $q['syn_uni'], 0.7], ['bi', $q['syn_bi'], 1.4],
+        ];
+        foreach ($sets as [$kind, $terms, $weight]) {
+            foreach ($terms as $t) {
+                if (isset($e[$kind][$t])) {
+                    $score += $weight * $this->idf($t, $mode) * (isset($e['head_' . $kind][$t]) ? 1.6 : 1.0);
+                }
+            }
+        }
+
+        return round($score * 3, 2);
+    }
+
+    /**
+     * Điểm từ khóa của 1 chunk = mục khớp nhất + 50% tiêu đề chủ đề + 15% toàn chunk
+     * (tránh chunk dài thắng chỉ vì nhiều chữ); chủ đề tham chiếu (T01, T22) bị giảm điểm.
+     */
+    private function chunkLexicalScore(array $q, string $id, string $topicId): float
+    {
+        $bestSection = 0.0;
+        foreach ($this->lexIndex[$id]['sections'] as $sec) {
+            $bestSection = max($bestSection, $this->lexicalScore($q, $sec['f']));
+        }
+        $score = $bestSection
+            + 0.5 * $this->lexicalScore($q, $this->lexIndex[$id]['title'])
+            + 0.15 * $this->lexicalScore($q, $this->lexIndex[$id]['chunk']);
+        if (in_array($topicId, self::META_TOPICS, true)) {
+            $score *= 0.4;
+        }
+
+        return round($score, 2);
+    }
+
+    /**
+     * Kiểm tra NHANH (chỉ từ khóa, không gọi mạng) câu hỏi có khớp chắc chắn với sổ tay quy chế / FAQ không.
+     * Dùng để chuyển thẳng câu hỏi quy chế sang RAG, bỏ qua LLM Intent Router chậm.
+     */
+    public function isConfidentHandbookMatch(string $query): bool
+    {
+        $this->buildLexicalIndex();
+        $q = $this->queryFeatures($query);
+        if ($this->matchFaq($q) !== null) {
+            return true;
+        }
+        foreach ($this->chunks as $c) {
+            $id = $c['chunk_id'] ?? null;
+            if ($id !== null && isset($this->lexIndex[$id])
+                && $this->chunkLexicalScore($q, $id, (string) ($c['topic_id'] ?? '')) >= self::LEXICAL_CONFIDENT) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** Khớp câu hỏi với bộ FAQ đã biên soạn (độ trùng từ/cụm từ >= 0.6). */
+    private function matchFaq(array $q): ?array
+    {
+        if (count($q['uni']) < 2) {
+            return null;
+        }
+        $qSet = array_fill_keys(array_merge($q['uni'], $q['bi']), true);
+
+        $best = null;
+        $bestSim = 0.0;
+        foreach ($this->faqs as $f) {
+            $question = (string) ($f['student_question'] ?? '');
+            $fq = $this->queryFeatures($q['mode'] === 'f' ? self::fold($question) : $question);
+            $fSet = array_fill_keys(array_merge($fq['uni'], $fq['bi']), true);
+            if (empty($fSet)) {
+                continue;
+            }
+            $inter = count(array_intersect_key($qSet, $fSet));
+            $union = count($qSet + $fSet);
+            $sim = $union > 0 ? $inter / $union : 0.0;
+            if ($sim > $bestSim) {
+                $bestSim = $sim;
+                $best = $f;
+            }
+        }
+
+        if ($best === null || $bestSim < 0.6) {
+            return null;
+        }
+
+        return [
+            'faq_id' => $best['faq_id'] ?? null,
+            'topic_id' => (string) ($best['topic_id'] ?? ''),
+            'question' => (string) ($best['student_question'] ?? ''),
+            'guidance' => (string) ($best['answer_guidance'] ?? ''),
+            'similarity' => round($bestSim, 2),
+        ];
+    }
+
+    /**
+     * Các MỤC sát câu hỏi nhất trong các chunk đã chọn — dùng cho câu trả lời dự phòng khi AI không phản hồi.
+     * Mỗi phần tử: ['label' => '4.1. Hồ sơ ...', 'text' => '...', 'chunk_title' => ..., 'score' => float].
+     */
+    public function bestPassages(string $query, array $chunks, int $limit = 3): array
+    {
+        $this->buildLexicalIndex();
+        $q = $this->queryFeatures($query);
+        $passages = [];
+
+        foreach ($chunks as $ci => $chunk) {
+            $sections = $this->lexIndex[$chunk['chunk_id'] ?? '']['sections'] ?? [];
+            foreach ($sections as $sec) {
+                $passages[] = [
+                    'label' => $sec['label'],
+                    'text' => $sec['text'],
+                    'chunk_title' => (string) ($chunk['title'] ?? ''),
+                    // Ưu tiên nhẹ chunk xếp hạng cao hơn khi điểm mục bằng nhau
+                    'score' => $this->lexicalScore($q, $sec['f']) - $ci * 0.5,
+                ];
+            }
+        }
+
+        usort($passages, fn ($a, $b) => $b['score'] <=> $a['score']);
+
+        return array_slice(array_values(array_filter($passages, fn ($p) => $p['score'] > 0)), 0, $limit);
     }
 
     /** Điểm cộng khi topic của chunk khớp với intent của câu hỏi. */

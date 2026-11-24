@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Log;
  */
 class SupportIntentRouterService
 {
+    private const DOWN_CACHE_KEY = 'support_intent_router_down';
+
     public const VALID_ACADEMIC_INTENTS = [
         'SCHEDULE',
         'INSTRUCTOR',
@@ -46,6 +48,12 @@ class SupportIntentRouterService
 
         $providers = $this->resolveProviders();
         if (empty($providers)) {
+            return null;
+        }
+
+        // Ngắt mạch: lần gần nhất mọi nhà cung cấp đều lỗi/quá hạn -> bỏ qua router 5 phút,
+        // tránh mỗi câu hỏi phải chờ thêm vài giây timeout vô ích (orchestrator vẫn có bộ nhận diện quy tắc).
+        if (! app()->runningUnitTests() && cache()->get(self::DOWN_CACHE_KEY)) {
             return null;
         }
 
@@ -117,6 +125,10 @@ PROMPT;
             } catch (\Throwable $e) {
                 Log::info('SupportIntentRouter fallback: ' . $e->getMessage());
             }
+        }
+
+        if (! app()->runningUnitTests()) {
+            cache()->put(self::DOWN_CACHE_KEY, true, 300);
         }
 
         return null;

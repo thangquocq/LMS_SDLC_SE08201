@@ -91,6 +91,10 @@ class SupportAcademicOrchestrator
         if (preg_match('/\b(phuc khao|phuc tra|khieu nai diem|o dau trong app|o dau tren app|trong app lms|tren app lms|nam o dau|vao dau de)\b/u', $norm)) {
             return ['handled' => false, 'context_state' => $state];
         }
+        // Hỏi "xem thời khóa biểu / lịch thi / bảng điểm Ở ĐÂU" là hỏi cách tra cứu, không phải đọc dữ liệu cá nhân
+        if (preg_match('/\b(xem|tra|tim)\b.*\b(thoi khoa bieu|tkb|lich hoc|lich thi|bang diem|diem danh)\b.*\bo dau\b/u', $norm)) {
+            return ['handled' => false, 'context_state' => $state];
+        }
 
         // Nhận diện các ý định học vụ nội bộ (hỗ trợ đa ý định trong cùng 1 câu)
         $intents = $this->detectAcademicIntents($norm, $state);
@@ -107,6 +111,15 @@ class SupportAcademicOrchestrator
             }
             if ($this->isObviousPublicPolicyQuestion($norm)) {
                 return ['handled' => false, 'context_state' => $state];
+            }
+            // Khớp chắc chắn với sổ tay quy chế / FAQ (chỉ so khớp từ khóa, không gọi mạng)
+            // -> chuyển thẳng RAG, không tốn 3–6 giây chờ LLM Intent Router.
+            try {
+                if (app(BtecRagService::class)->isConfidentHandbookMatch($text)) {
+                    return ['handled' => false, 'context_state' => $state];
+                }
+            } catch (\Throwable $e) {
+                Log::info('Handbook pre-check skipped: ' . $e->getMessage());
             }
         }
 
@@ -1025,18 +1038,19 @@ class SupportAcademicOrchestrator
         if (preg_match('/(doi phong|chuyen phong|doi lich|thay doi lich|co doi phong|co doi lich|lich co thay doi)/', $norm)) {
             $intents[] = 'SCHEDULE_CHANGE';
         }
-        if (preg_match('/(lich hoc|thoi khoa bieu|tkb|hoc phong nao|phong nao|may gio hoc|hom nay hoc|mai hoc|ngay mai hoc|tuan nay hoc|co tiet|co ca)/', $norm)) {
+        // \b bắt buộc: không có ranh giới từ thì "có cần" (co can) bị bắt nhầm "co ca" -> lịch học
+        if (preg_match('/\b(lich hoc|thoi khoa bieu|tkb|hoc phong nao|phong nao|may gio hoc|hom nay hoc|mai hoc|ngay mai hoc|tuan nay hoc|co tiet|co ca)\b/', $norm)) {
             $intents[] = 'SCHEDULE';
         } elseif (
             // Câu hỏi lịch theo mốc thời gian: "Tuần này em có mấy buổi học?", "Thứ 5 em học gì?", "Mai có học không?"
             // (không phụ thuộc thứ tự: "Em có mấy buổi học tuần này?" cũng khớp)
             preg_match('/^(?=.*\b(hom nay|ngay mai|mai|tuan nay|tuan sau|tuan toi|thu [2-7]|thu (?:hai|ba|tu|nam|sau|bay)|t[2-7]|chu nhat)\b)(?=.*\b(hoc|buoi|tiet|ca hoc|lich|lop nao|mon nao)\b)/', $norm)
             // Loại trừ câu hỏi chuyên cần / học phí / bài tập / điểm để không bắt nhầm sang lịch học
-            && ! preg_match('/\b(nghi|vang|hoc phi|hoc bong|hoc lai|thi lai|nop|deadline|bai tap|assignment|diem)\b/', $norm)
+            && ! preg_match('/\b(nghi|vang|hoc phi|hoc bong|hoc lai|thi lai|nop|deadline|bai tap|assignment|diem|thoi tiet)\b/', $norm)
         ) {
             $intents[] = 'SCHEDULE';
         }
-        if (preg_match('/(diem so|bang diem|diem cua|xem diem|diem bao nhieu|diem mon|duoc may diem|cham chua|co diem chua|diem thi|diem bai)/', $norm)) {
+        if (preg_match('/(diem so|bang diem|diem cua|xem diem|diem bao nhieu|diem mon|diem (?:cac|tung|nhung) mon|ket qua hoc tap cua|duoc may diem|cham chua|co diem chua|diem thi|diem bai)/', $norm)) {
             $intents[] = 'GRADES';
         }
         if (preg_match('/(neu nghi them|neu mai nghi|nghi them \d+|nghi them mot|nghi them 1|nghi them 2|neu vang them|gia su nghi|nghi buoi mai)/', $norm)) {

@@ -53,7 +53,7 @@ class BtecSupportAiService
 VAI TRÒ VÀ TÁC PHONG:
 - Xưng hô: Xưng là \"mình\" (hoặc \"thầy\") và gọi người dùng là \"em\" một cách tự nhiên, thân thiết.
 - KHÔNG CHÀO LẶP LẠI: Chỉ chào ngắn gọn ở tin nhắn đầu tiên của phiên; từ tin nhắn thứ 2 trở đi tuyệt đối KHÔNG mở đầu bằng \"Chào em\", \"Chào bạn\" hay \"Xin chào\", đi thẳng vào câu trả lời ngay.
-- Trả lời: NGẮN GỌN TRONG 2–4 CÂU TRỌN VẸN, đi thẳng vào đúng trọng tâm câu hỏi của sinh viên. Tuyệt đối KHÔNG chép lan man các ý phụ trong tài liệu mà sinh viên không hỏi tới, và không bao giờ viết câu quá dài gây cắt cụt chữ.
+- Trả lời: NGẮN GỌN TRONG 2–4 CÂU TRỌN VẸN, đi thẳng vào đúng trọng tâm câu hỏi của sinh viên. Riêng câu hỏi \"gồm những gì / các bước / thủ tục\" thì liệt kê gọn tối đa 6 gạch đầu dòng lấy đúng từ tài liệu. Tuyệt đối KHÔNG chép lan man các ý phụ trong tài liệu mà sinh viên không hỏi tới, và không bao giờ viết câu quá dài gây cắt cụt chữ.
 
 QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG SAI):
 1. ĐÚNG TRỌNG TÂM 100%: Sinh viên hỏi về vấn đề gì thì chỉ trả lời đúng vấn đề đó. Không liệt kê các quy định râu ria không liên quan.
@@ -63,11 +63,46 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
 3. KHI HỎI CHỨC NĂNG CHƯA HỖ TRỢ TRỰC TIẾP TRÊN LMS (ví dụ: thanh toán học phí trực tiếp trên LMS, đăng ký bảo lưu tự động):
    - Nói rõ: \"Chức năng này trên hệ thống LMS hiện **đang được cập nhật và cải tiến**. Em vui lòng bấm nút **Tạo Ticket** bên dưới để gửi phiếu trực tiếp tới **Phòng Đào tạo** hỗ trợ nhé!\"
 4. KHÔNG ĐIỀU HƯỚNG LUNG TUNG: Tuyệt đối không dẫn sang màn hình Điểm danh, Bảng điểm hay Bài tập nếu câu hỏi đang hỏi về Học phí, Bảo lưu hoặc Thủ tục hành chính.
-5. ĐỊNH DẠNG GỌN SẠCH: In đậm **từ khóa quan trọng**, không dùng ký tự thô ### hay dấu sao *.";
+5. ĐỊNH DẠNG GỌN SẠCH: In đậm **từ khóa quan trọng**, không dùng ký tự thô ### hay dấu sao *.
+6. CHỈ DÙNG TÀI LIỆU BÊN DƯỚI: Mọi con số, tỷ lệ, thời hạn, mức phí, số tài khoản, địa chỉ, số điện thoại PHẢI có nguyên văn trong tài liệu. Không có thì nói rõ tài liệu chưa nêu và hướng dẫn liên hệ đầu mối — TUYỆT ĐỐI không tự suy ra hay bịa. Cũng KHÔNG suy diễn hệ quả/chế tài (vd \"không được tính điểm\", \"bị trừ điểm\") hay đường dẫn menu/thao tác mà tài liệu không ghi.
+7. THÔNG TIN CÓ THỜI HIỆU (học phí, học bổng, hoàn phí, danh bạ, tỷ lệ chuyên cần...): khi trích, ghi rõ nguồn/phiên bản (ví dụ \"theo sổ tay 09/2024\", \"theo website tại thời điểm rà soát\") và nhắc em đối chiếu thông báo mới nhất của cơ sở. Nếu tài liệu có ghi \"LƯU Ý KIỂM CHỨNG\" cho thông tin đang trích (vd email theo sổ tay 2024 có thể đã đổi), PHẢI nói rõ lưu ý đó và ưu tiên kênh đã được kiểm chứng gần nhất.
+8. KHÔNG CAM KẾT THAY NHÀ TRƯỜNG: không hứa được duyệt đơn, được gia hạn, được nộp muộn, được hoàn tiền, được miễn tiếng Anh hay thời hạn xử lý. Chỉ nêu điều kiện/thủ tục và đầu mối quyết định.
+9. BẢO MẬT: không yêu cầu sinh viên gửi mật khẩu, mã OTP, số tài khoản/thẻ ngân hàng cá nhân, CCCD hay dữ liệu nhạy cảm vào khung chat.
+10. PHÂN BIỆT NGUỒN: không đồng nhất chính sách Pearson với quy chế riêng của BTEC FPT; nói rõ nội dung nào thuộc nguồn nào.
+11. TRÍCH NGUỒN: cuối câu trả lời ghi mã nguồn tương ứng trong tài liệu (ví dụ [S01]) nếu tài liệu có nêu.";
+
+        // Hướng dẫn trả lời đã được biên soạn cho câu hỏi thường gặp tương ứng (faq_seed.json)
+        if (! empty($ragContext['faq']['guidance'])) {
+            $instruction .= "\n\n================ HƯỚNG DẪN TRẢ LỜI BẮT BUỘC CHO CÂU HỎI NÀY ================\n"
+                . "Câu hỏi thường gặp tương ứng: \"{$ragContext['faq']['question']}\"\n"
+                . "Yêu cầu khi trả lời: {$ragContext['faq']['guidance']}\n"
+                . "(Yêu cầu này do cán bộ học vụ biên soạn, BẮT BUỘC tuân thủ và ưu tiên hơn mọi cách diễn đạt khác; câu trả lời vi phạm bị coi là sai.)\n";
+        }
+
+        // Các mục sát câu hỏi nhất (đọc trước), sau đó là toàn văn chủ đề để đủ ngữ cảnh
+        if (! empty($ragContext['top_passages'])) {
+            $instruction .= "\n\n================ CÁC MỤC SÁT CÂU HỎI NHẤT ================\n";
+            foreach ($ragContext['top_passages'] as $p) {
+                $label = $p['label'] !== '' ? $p['label'] : $p['chunk_title'];
+                $instruction .= "--- [{$label}] ---\n" . $p['text'] . "\n\n";
+            }
+        }
 
         $instruction .= "\n\n================ TÀI LIỆU NỘI QUY & QUY CHẾ BTEC FPT (RAG EVIDENCE) ================\n";
         foreach ($ragContext['top_chunks'] as $chunk) {
             $instruction .= "--- [CHỦ ĐỀ: {$chunk['title']}] ---\n" . $chunk['text'] . "\n\n";
+        }
+        if (empty($ragContext['top_chunks']) || empty($ragContext['is_confident'])) {
+            $instruction .= "(Không tìm thấy mục tài liệu đủ liên quan. Nếu câu hỏi thuộc học vụ/quy chế: nói rõ sổ tay chưa có thông tin và hướng dẫn Tạo Ticket. Nếu câu hỏi ngoài phạm vi học tập: từ chối lịch sự, giới thiệu những việc trợ lý hỗ trợ được.)\n";
+        }
+
+        // Bảng tra mã nguồn [Sxx] -> tên văn bản + đường dẫn chính thức (sources.json),
+        // để AI đưa đúng link công khai (vd trang đăng ký trực tuyến) thay vì nói "chưa có link".
+        $sourceMap = $this->sourceMapFor($ragContext);
+        if ($sourceMap !== '') {
+            $instruction .= "================ DANH MỤC NGUỒN CHÍNH THỨC (MÃ -> TÊN VĂN BẢN -> ĐƯỜNG DẪN) ================\n"
+                . $sourceMap
+                . "(Khi sinh viên hỏi link/trang/biểu mẫu/nộp online: chỉ đưa đúng đường dẫn có trong danh mục này, ghi rõ \"theo website tại thời điểm rà soát\"; không tự tạo đường dẫn khác.)\n\n";
         }
 
         if (!empty($ragContext['top_procedures'])) {
@@ -87,6 +122,52 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
         }
 
         return $instruction;
+    }
+
+    /**
+     * Liệt kê các nguồn [Sxx] được nhắc trong tài liệu đã truy xuất, kèm tên văn bản và URL chính thức.
+     */
+    private function sourceMapFor(array $ragContext): string
+    {
+        static $sources = null, $topicRefs = null;
+        if ($sources === null) {
+            $load = static function (string $file): array {
+                $path = storage_path('btec_ai_kb/' . $file);
+                $decoded = is_file($path) ? json_decode((string) file_get_contents($path), true) : null;
+                return is_array($decoded) ? $decoded : [];
+            };
+            $sources = $load('sources.json');
+            $topicRefs = [];
+            foreach ($load('topics.json') as $topic) {
+                $topicRefs[$topic['topic_id'] ?? ''] = (array) ($topic['source_refs'] ?? []);
+            }
+        }
+
+        // Nguồn được nhắc trực tiếp trong đoạn tài liệu + nguồn gắn với chủ đề (topics.json)
+        $wanted = [];
+        foreach ($ragContext['top_chunks'] ?? [] as $chunk) {
+            if (preg_match_all('/\bS\d{2}\b/', (string) ($chunk['text'] ?? ''), $m)) {
+                foreach ($m[0] as $id) {
+                    $wanted[$id] = true;
+                }
+            }
+            foreach ($topicRefs[$chunk['topic_id'] ?? ''] ?? [] as $id) {
+                $wanted[$id] = true;
+            }
+        }
+        if ($wanted === []) {
+            return '';
+        }
+
+        $lines = '';
+        foreach ($sources as $src) {
+            $id = $src['source_id'] ?? '';
+            if (isset($wanted[$id]) && ! empty($src['url'])) {
+                $lines .= "[{$id}] " . ($src['title'] ?? '') . " — " . $src['url'] . "\n";
+            }
+        }
+
+        return $lines;
     }
 
     /**
@@ -185,7 +266,7 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
         $ragResult = $this->ragService->search($userMessage, null);
 
         // 1. SMART CACHE: Chỉ áp dụng cho câu hỏi quy chế/hướng dẫn CÔNG KHAI
-        $cacheKey = 'btec_ai_faq_' . md5(mb_strtolower(preg_replace('/[^\p{L}\p{N}]/u', '', $userMessage)));
+        $cacheKey = 'btec_ai_faq_v3_' . md5(mb_strtolower(preg_replace('/[^\p{L}\p{N}]/u', '', $userMessage)));
         $cached = cache()->get($cacheKey);
         if ($cached && !empty($cached['message'])) {
             $assistantMsgRecord = BtecSupportMessage::create([
@@ -431,7 +512,7 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
         }
 
         // Kiểm tra Cache FAQ TRƯỚC khi gọi RAG/Embedding để trả về tức thì (<50ms)
-        $cacheKey = 'btec_ai_faq_v2_' . md5(mb_strtolower(preg_replace('/[^\p{L}\p{N}]/u', '', $userMessage)));
+        $cacheKey = 'btec_ai_faq_v3_' . md5(mb_strtolower(preg_replace('/[^\p{L}\p{N}]/u', '', $userMessage)));
         $cached = cache()->get($cacheKey);
         if (is_array($cached) && !empty($cached['message'])) {
             if ($onChunk) {
@@ -886,7 +967,24 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
         $feat = $ragResult['top_app_feature'] ?? null;
 
         $body = '';
-        if ($chunk && $isConfident) {
+        $passages = $ragResult['top_passages'] ?? [];
+        if ($chunk && $isConfident && ! empty($passages)) {
+            // Lấy đúng MỤC sát câu hỏi nhất (vd "4.1. Hồ sơ ..."), thêm mục thứ 2 nếu điểm đủ gần
+            $picked = [$passages[0]];
+            if (isset($passages[1]) && $passages[1]['score'] >= 0.6 * $passages[0]['score']) {
+                $picked[] = $passages[1];
+            }
+            $parts = [];
+            foreach ($picked as $p) {
+                $lines = array_values(array_filter(array_map('trim', preg_split('/\R/u', $p['text']) ?: [])));
+                $text = count($lines) > 1 ? '- ' . implode("\n- ", $lines) : ($lines[0] ?? '');
+                $parts[] = ($p['label'] !== '' ? "**{$p['label']}**\n" : '') . $text;
+            }
+            $body = trim(implode("\n\n", $parts));
+            if (mb_strlen($body) > 1100) {
+                $body = rtrim(mb_substr($body, 0, 1100)) . '…';
+            }
+        } elseif ($chunk && $isConfident) {
             $text = (string) ($chunk['text'] ?? '');
             // Mỗi đoạn nội dung trong kho tri thức có dạng "[6.1. Tiêu đề]\nNội dung...":
             // gỡ dòng nhãn [..] đầu đoạn (trước đây cả đoạn bị bỏ nên chỉ còn lại tiêu đề),
@@ -894,7 +992,7 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
             $paragraphs = [];
             foreach (preg_split('/\R{2,}/', $text) ?: [] as $p) {
                 $p = trim((string) preg_replace('/^\[[^\]\n]*\]\s*\R?/u', '', trim($p)));
-                $isHeadingOnly = ! str_contains($p, "\n") && mb_strlen($p) < 90 && preg_match('/^\d+(\.\d+)*\.?\s/u', $p);
+                $isHeadingOnly = ! str_contains($p, "\n") && mb_strlen($p) < 90 && preg_match('/^\d+\.\d+(\.\d+)*\.?\s/u', $p);
                 if (mb_strlen($p) > 15 && ! $isHeadingOnly) {
                     $paragraphs[] = $p;
                 }
@@ -910,13 +1008,26 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
 
         // Chốt chặn chống trả lời linh tinh: nếu không đủ độ tin cậy hoặc nội dung trích xuất rỗng
         if (! $isConfident || mb_strlen($body) < 20) {
-            $fallback = "Hiện sổ tay quy chế trên hệ thống chưa có thông tin chi tiết cho câu hỏi **\"{$query}\"** (hoặc chức năng này đang được cập nhật và cải tiến trên LMS).\n\n"
-                . "👉 Em hãy bấm nút **Tạo Ticket** ngay bên dưới để lập phiếu liên hệ trực tiếp với **Phòng Đào tạo** hỗ trợ giải đáp và xử lý cho em nhé!";
+            if (($ragResult['intent'] ?? '') === 'GENERAL_QUESTION') {
+                // Câu hỏi không mang dấu hiệu học vụ (thời tiết, giải trí...) -> nêu phạm vi hỗ trợ, không đẩy Ticket
+                $fallback = "Mình là **Trợ lý Học vụ LMS**, chỉ hỗ trợ các câu hỏi về **quy chế, thủ tục, lịch học, điểm, chuyên cần** và cách dùng Smart LMS nên chưa trả lời được câu **\"{$query}\"**.\n\n"
+                    . "💡 Nếu em đang hỏi về học vụ, em thử diễn đạt cụ thể hơn (ví dụ: *\"Thủ tục bảo lưu học kỳ thế nào?\"*) hoặc bấm **Tạo Ticket** để hỏi trực tiếp **Phòng Đào tạo** nhé!";
+            } else {
+                $fallback = "Hiện sổ tay quy chế trên hệ thống chưa có thông tin chi tiết cho câu hỏi **\"{$query}\"** (hoặc chức năng này đang được cập nhật và cải tiến trên LMS).\n\n"
+                    . "👉 Em hãy bấm nút **Tạo Ticket** ngay bên dưới để lập phiếu liên hệ trực tiếp với **Phòng Đào tạo** hỗ trợ giải đáp và xử lý cho em nhé!";
+            }
 
             return $this->cleanAiReply($fallback);
         }
 
-        $reply = "📌 **Căn cứ quy định BTEC FPT [{$chunk['title']}]:**\n\n" . $body . "\n\n";
+        $title = $passages[0]['chunk_title'] ?? $chunk['title'];
+        $reply = "📌 **Căn cứ tài liệu BTEC FPT [{$title}]:**\n\n" . $body . "\n\n";
+
+        // Thông tin có thời hiệu (học phí, học bổng, hoàn phí, danh bạ, tuyển sinh) -> nhắc đối chiếu bản mới
+        $topicId = (string) ($chunk['topic_id'] ?? '');
+        if (in_array($topicId, ['T03', 'T04', 'T05', 'T06', 'T08', 'T12', 'T20'], true) || ! empty($ragResult['faq'])) {
+            $reply .= "⚠️ Thông tin trên trích từ tài liệu tại thời điểm biên soạn và có thể đã thay đổi; em vui lòng đối chiếu thông báo mới nhất của cơ sở trước khi thực hiện.\n\n";
+        }
 
         if ($feat) {
             $reply .= "👉 **Đường dẫn thao tác trên Smart LMS:** [{$feat['name']}]({$feat['route']})\n\n";
