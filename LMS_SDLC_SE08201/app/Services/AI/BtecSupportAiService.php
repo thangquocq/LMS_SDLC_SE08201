@@ -683,23 +683,41 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
     /**
      * Gọi Vilao AI (OpenAI-compatible: DeepSeek / GPT) cho BTEC AI Support.
      */
+    private function vilaoBaseUrl(): string
+    {
+        return rtrim((string) (env('OPENAI_BASE_URL') ?: env('VILAO_BASE_URL') ?: 'https://api.vilao.ai/v1'), '/');
+    }
+
+    /**
+     * Danh sách key/model Vilao theo thứ tự ưu tiên: DEEPSEEK_KEY_MAIN → OPENAI_API_KEY → VILAO_API_KEY.
+     * Bỏ trùng key để không gọi lại cùng một key hai lần khi một key bị lỗi/quá chậm.
+     */
+    private function vilaoProviders(): array
+    {
+        $candidates = [
+            [env('DEEPSEEK_KEY_MAIN'), env('DEEPSEEK_MODEL_MAIN') ?: env('DEEPSEEK_MODEL') ?: 'vgpt/gpt-6-sol'],
+            [env('OPENAI_API_KEY'), env('OPENAI_MODEL') ?: 'vgpt/gpt-6.1-sol'],
+            [env('VILAO_API_KEY'), env('VILAO_MODEL') ?: 'vgpt/gpt-6.1-sol'],
+        ];
+
+        $providers = [];
+        $seenKeys = [];
+        foreach ($candidates as [$key, $model]) {
+            $key = trim((string) $key);
+            if ($key === '' || in_array($key, $seenKeys, true)) {
+                continue;
+            }
+            $seenKeys[] = $key;
+            $providers[] = ['key' => $key, 'model' => (string) $model];
+        }
+
+        return $providers;
+    }
+
     private function callVilaoChat(string $systemInstruction, $recentMessages, string $userMessage): ?string
     {
-        $baseUrl = rtrim((string) env('OPENAI_BASE_URL', 'https://api.vilao.ai/v1'), '/');
-        $providers = [];
-
-        if (! empty(env('DEEPSEEK_KEY_MAIN'))) {
-            $providers[] = [
-                'key' => env('DEEPSEEK_KEY_MAIN'),
-                'model' => env('DEEPSEEK_MODEL_MAIN', 'deepseek-v4.1-flash'),
-            ];
-        }
-        if (! empty(env('OPENAI_API_KEY'))) {
-            $providers[] = [
-                'key' => env('OPENAI_API_KEY'),
-                'model' => env('OPENAI_MODEL', 'vgpt/gpt-6.1-sol'),
-            ];
-        }
+        $baseUrl = $this->vilaoBaseUrl();
+        $providers = $this->vilaoProviders();
 
         if (empty($providers)) {
             return null;
@@ -718,7 +736,7 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
 
         foreach ($providers as $provider) {
             try {
-                $response = Http::timeout(8)
+                $response = Http::connectTimeout(10)->timeout(40)
                     ->withHeaders([
                         'Authorization' => 'Bearer ' . $provider['key'],
                         'Content-Type' => 'application/json',
@@ -757,21 +775,8 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
             return $reply;
         }
 
-        $baseUrl = rtrim((string) env('OPENAI_BASE_URL', 'https://api.vilao.ai/v1'), '/');
-        $providers = [];
-
-        if (! empty(env('DEEPSEEK_KEY_MAIN'))) {
-            $providers[] = [
-                'key' => env('DEEPSEEK_KEY_MAIN'),
-                'model' => env('DEEPSEEK_MODEL_MAIN', env('DEEPSEEK_MODEL', 'vgpt/gpt-6-sol')),
-            ];
-        }
-        if (! empty(env('OPENAI_API_KEY'))) {
-            $providers[] = [
-                'key' => env('OPENAI_API_KEY'),
-                'model' => env('OPENAI_MODEL', 'vgpt/gpt-6.1-sol'),
-            ];
-        }
+        $baseUrl = $this->vilaoBaseUrl();
+        $providers = $this->vilaoProviders();
 
         if (empty($providers)) {
             return null;
@@ -807,8 +812,10 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
                 'Content-Type: application/json',
             ]);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $payloadJson);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+            // Vilao thường mất ~10s mới trả token đầu (đo thực tế), nên cho tối đa 45s;
+            // đã stream nên người dùng thấy chữ hiện dần chứ không phải chờ trắng.
+            curl_setopt($ch, CURLOPT_TIMEOUT, 45);
             curl_setopt($ch, CURLOPT_WRITEFUNCTION, function ($ch, $data) use (&$fullText, &$lineBuf, $onChunk) {
                 $lineBuf .= $data;
                 while (($pos = strpos($lineBuf, "\n")) !== false) {
@@ -854,11 +861,21 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
         $body = '';
         if ($chunk && $isConfident) {
             $text = (string) ($chunk['text'] ?? '');
-            $paragraphs = array_filter(
-                preg_split('/\R{2,}/', $text) ?: [],
-                fn ($p) => mb_strlen(trim($p)) > 15 && ! str_starts_with(trim($p), '[')
-            );
-            $body = trim(implode("\n\n", array_slice($paragraphs, 0, 3)));
+            // Mỗi đoạn nội dung trong kho tri thức có dạng "[6.1. Tiêu đề]\nNội dung...":
+            // gỡ dòng nhãn [..] đầu đoạn (trước đây cả đoạn bị bỏ nên chỉ còn lại tiêu đề),
+            // và bỏ các đoạn chỉ là tiêu đề mục ("6.1. Chính sách ...") không có nội dung.
+            $paragraphs = [];
+            foreach (preg_split('/\R{2,}/', $text) ?: [] as $p) {
+                $p = trim((string) preg_replace('/^\[[^\]\n]*\]\s*\R?/u', '', trim($p)));
+                $isHeadingOnly = ! str_contains($p, "\n") && mb_strlen($p) < 90 && preg_match('/^\d+(\.\d+)*\.?\s/u', $p);
+                if (mb_strlen($p) > 15 && ! $isHeadingOnly) {
+                    $paragraphs[] = $p;
+                }
+            }
+            $body = trim(implode("\n\n", array_slice($paragraphs, 0, 2)));
+            if (mb_strlen($body) > 900) {
+                $body = rtrim(mb_substr($body, 0, 900)) . '…';
+            }
             if ($body === '') {
                 $body = trim(mb_substr($text, 0, 600));
             }
