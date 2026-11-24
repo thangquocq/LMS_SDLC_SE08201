@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\BtecKbEmbedding;
 use App\Services\AI\GeminiEmbeddingService;
+use App\Services\AI\KbChunkStore;
 use Illuminate\Console\Command;
 
 /**
@@ -76,7 +77,6 @@ class IndexBtecKnowledgeBase extends Command
             $this->info("  ✓ {$chunk['chunk_id']} ({$chunk['topic_id']}) — " . count($vector) . ' chiều');
         }
 
-        fclose($handle);
 
         $this->newLine();
         $this->info("Hoàn tất: {$indexed} đoạn đã nhúng, {$skipped} bỏ qua, {$failed} lỗi. Model: {$model}");
