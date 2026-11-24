@@ -754,6 +754,8 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
                         return trim($text);
                     }
                 }
+                Log::warning('BTEC AI Vilao chat that bai: model=' . $provider['model'] . ' HTTP=' . $response->status()
+                    . ' body="' . mb_substr((string) $response->body(), 0, 300) . '"');
             } catch (\Throwable $e) {
                 Log::warning('BTEC AI Support Vilao attempt failed: ' . $e->getMessage());
             }
@@ -779,6 +781,7 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
         $providers = $this->vilaoProviders();
 
         if (empty($providers)) {
+            Log::warning('BTEC AI Vilao stream: khong co key nao (DEEPSEEK_KEY_MAIN / OPENAI_API_KEY / VILAO_API_KEY deu trong).');
             return null;
         }
 
@@ -796,6 +799,8 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
         foreach ($providers as $provider) {
             $fullText = '';
             $lineBuf = '';
+            $rawErrorBody = '';
+            $startedAt = microtime(true);
             $payloadJson = json_encode([
                 'model' => $provider['model'],
                 'temperature' => 0.2,
@@ -816,12 +821,16 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
             // Vilao thường mất ~10s mới trả token đầu (đo thực tế), nên cho tối đa 45s;
             // đã stream nên người dùng thấy chữ hiện dần chứ không phải chờ trắng.
             curl_setopt($ch, CURLOPT_TIMEOUT, 45);
-            curl_setopt($ch, CURLOPT_WRITEFUNCTION, function ($ch, $data) use (&$fullText, &$lineBuf, $onChunk) {
+            curl_setopt($ch, CURLOPT_WRITEFUNCTION, function ($ch, $data) use (&$fullText, &$lineBuf, &$rawErrorBody, $onChunk) {
                 $lineBuf .= $data;
                 while (($pos = strpos($lineBuf, "\n")) !== false) {
                     $line = trim(substr($lineBuf, 0, $pos));
                     $lineBuf = substr($lineBuf, $pos + 1);
                     if ($line === '' || $line === 'data: [DONE]' || ! str_starts_with($line, 'data: ')) {
+                        // Giữ lại nội dung không phải SSE (thường là JSON báo lỗi) để ghi log
+                        if ($line !== '' && $line !== 'data: [DONE]' && strlen($rawErrorBody) < 400) {
+                            $rawErrorBody .= $line . ' ';
+                        }
                         continue;
                     }
                     $json = json_decode(substr($line, 6), true);
@@ -838,11 +847,23 @@ QUY TẮC BẮT BUỘC (KHÔNG TRẢ LỜI CHUNG CHUNG, KHÔNG ĐIỀU HƯỚNG 
 
             curl_exec($ch);
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $curlError = curl_error($ch);
             curl_close($ch);
 
             if ($httpCode === 200 && trim($fullText) !== '') {
                 return trim($fullText);
             }
+
+            // Ghi rõ lý do thất bại (không ghi key) để xem trong Render Logs
+            Log::warning(sprintf(
+                'BTEC AI Vilao stream that bai: model=%s HTTP=%s sau %.1fs, curl="%s", body="%s", so ky tu nhan=%d',
+                $provider['model'],
+                $httpCode,
+                microtime(true) - $startedAt,
+                $curlError,
+                mb_substr(trim($rawErrorBody . $lineBuf), 0, 300),
+                mb_strlen($fullText)
+            ));
         }
 
         return null;
