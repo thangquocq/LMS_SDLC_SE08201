@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 
 /**
  * Đánh chỉ mục vector cho kho tri thức BTEC (RAG).
- * Đọc storage/btec_ai_kb/kb_chunks.jsonl, nhúng từng đoạn bằng Gemini Embedding
+ * Đọc kho tri thức trong MySQL (bảng btec_kb_chunks, qua KbChunkStore), nhúng từng đoạn bằng Gemini Embedding
  * và lưu vector vào bảng btec_kb_embeddings trong MySQL.
  *
  * Dùng: php artisan btec:index-kb [--fresh]
@@ -19,16 +19,16 @@ class IndexBtecKnowledgeBase extends Command
 
     protected $description = 'Nhúng (embedding) kho tri thức BTEC và lưu vector vào MySQL phục vụ RAG';
 
-    public function handle(GeminiEmbeddingService $embeddings): int
+    public function handle(GeminiEmbeddingService $embeddings, KbChunkStore $store): int
     {
         if (! $embeddings->isConfigured()) {
             $this->error('Chưa cấu hình GEMINI_API_KEY trong .env — không thể tạo embedding.');
             return self::FAILURE;
         }
 
-        $path = storage_path('btec_ai_kb/kb_chunks.jsonl');
-        if (! file_exists($path)) {
-            $this->error("Không tìm thấy file KB: {$path}");
+        $chunks = $store->all();
+        if (empty($chunks)) {
+            $this->error('Kho tri thức đang trống (cả bảng btec_kb_chunks lẫn file gốc).');
             return self::FAILURE;
         }
 
@@ -37,24 +37,12 @@ class IndexBtecKnowledgeBase extends Command
             $this->warn('Đã xóa toàn bộ chỉ mục embedding cũ.');
         }
 
-        $handle = fopen($path, 'r');
-        if (! $handle) {
-            $this->error('Không mở được file KB.');
-            return self::FAILURE;
-        }
-
         $model = $embeddings->model();
         $indexed = 0;
         $skipped = 0;
         $failed = 0;
 
-        while (($line = fgets($handle)) !== false) {
-            $line = trim($line);
-            if ($line === '') {
-                continue;
-            }
-
-            $chunk = json_decode($line, true);
+        foreach ($chunks as $chunk) {
             if (! is_array($chunk) || empty($chunk['chunk_id'])) {
                 $skipped++;
                 continue;

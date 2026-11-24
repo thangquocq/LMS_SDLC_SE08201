@@ -54,19 +54,9 @@ class BtecRagService
             }
         }
 
-        // 2. Tải các đoạn tri thức (kb_chunks.jsonl)
-        if (file_exists("$kbDir/kb_chunks.jsonl")) {
-            $handle = fopen("$kbDir/kb_chunks.jsonl", "r");
-            if ($handle) {
-                while (($line = fgets($handle)) !== false) {
-                    $c = json_decode($line, true);
-                    if ($c) {
-                        $this->chunks[] = $c;
-                    }
-                }
-                fclose($handle);
-            }
-        }
+        // 2. Tải các đoạn tri thức: đọc từ MySQL (bảng btec_kb_chunks do Admin quản lý),
+        //    bảng trống thì tự nạp từ file kb_chunks.jsonl; lỗi DB thì đọc tạm từ file.
+        $this->chunks = app(KbChunkStore::class)->all();
 
         // 3. Tải quy trình thủ tục (procedures.json)
         if (file_exists("$kbDir/procedures.json")) {

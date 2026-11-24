@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 // =========================================================================
 use App\Http\Controllers\Controller;
 use App\Models\BtecKbEmbedding;              // Bảng MySQL lưu vector embedding của các chunk tri thức RAG
+use App\Services\AI\KbChunkStore;            // Kho tri thức lưu trong MySQL (dùng chung với Trợ lý Học vụ)
 use App\Services\AI\GeminiEmbeddingService;  // Động cơ nhúng vector 3 tầng (AITeamVN/Vietnamese_Embedding_v2 -> HF -> Gemini)
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,46 +22,16 @@ class RagKnowledgeController extends Controller
     ) {
     }
 
-    private function kbChunksPath(): string
-    {
-        return storage_path('btec_ai_kb/kb_chunks.jsonl');
-    }
-
-    /** Đọc toàn bộ chunks từ storage/btec_ai_kb/kb_chunks.jsonl */
+    /** Đọc toàn bộ chunks từ MySQL (bảng btec_kb_chunks; tự nạp từ file gốc khi bảng trống) */
     private function readChunks(): array
     {
-        $path = $this->kbChunksPath();
-        if (! file_exists($path)) {
-            return [];
-        }
-
-        $chunks = [];
-        $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [];
-        foreach ($lines as $line) {
-            $decoded = json_decode($line, true);
-            if (is_array($decoded) && ! empty($decoded['chunk_id'])) {
-                $chunks[] = $decoded;
-            }
-        }
-
-        return $chunks;
+        return app(KbChunkStore::class)->all();
     }
 
-    /** Ghi lại toàn bộ chunks ra file kb_chunks.jsonl (định dạng JSONL UTF-8) */
+    /** Ghi lại toàn bộ chunks vào MySQL để không bị mất khi Render deploy / khởi động lại */
     private function writeChunks(array $chunks): void
     {
-        $path = $this->kbChunksPath();
-        $dir = dirname($path);
-        if (! is_dir($dir)) {
-            mkdir($dir, 0755, true);
-        }
-
-        $lines = array_map(
-            fn (array $c) => json_encode($c, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-            array_values($chunks)
-        );
-
-        file_put_contents($path, implode("\n", $lines) . "\n");
+        app(KbChunkStore::class)->replaceAll($chunks);
     }
 
     /** Nhúng vector cho 1 chunk đơn lẻ và lưu vào MySQL `btec_kb_embeddings` */
