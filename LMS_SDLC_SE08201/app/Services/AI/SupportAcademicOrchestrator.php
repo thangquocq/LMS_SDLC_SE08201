@@ -1055,6 +1055,14 @@ class SupportAcademicOrchestrator
             && ! preg_match('/\b(nghi|vang|hoc phi|hoc bong|hoc lai|thi lai|nop|deadline|bai tap|assignment|diem|thoi tiet)\b/', $norm)
         ) {
             $intents[] = 'SCHEDULE';
+        } elseif (
+            // Câu hỏi lịch theo mốc thời gian: "Tuần này em có mấy buổi học?", "Thứ 5 em học gì?", "Mai có học không?"
+            // (không phụ thuộc thứ tự: "Em có mấy buổi học tuần này?" cũng khớp)
+            preg_match('/^(?=.*\b(hom nay|ngay mai|mai|tuan nay|tuan sau|tuan toi|thu [2-7]|thu (?:hai|ba|tu|nam|sau|bay)|t[2-7]|chu nhat)\b)(?=.*\b(hoc|buoi|tiet|ca hoc|lich|lop nao|mon nao)\b)/', $norm)
+            // Loại trừ câu hỏi chuyên cần / học phí / bài tập / điểm để không bắt nhầm sang lịch học
+            && ! preg_match('/\b(nghi|vang|hoc phi|hoc bong|hoc lai|thi lai|nop|deadline|bai tap|assignment|diem)\b/', $norm)
+        ) {
+            $intents[] = 'SCHEDULE';
         }
         if (preg_match('/(diem so|bang diem|diem cua|xem diem|diem bao nhieu|diem mon|diem (?:cac|tung|nhung) mon|ket qua hoc tap cua|(?:em|toi|minh) (?:da )?(?:qua|dat|truot|rot) mon|(?:qua|dat) mon chua|(?:truot|rot) mon nao|em co (?:truot|rot) mon|duoc may diem|cham chua|co diem chua|diem thi|diem bai)/', $norm)) {
             $intents[] = 'GRADES';
